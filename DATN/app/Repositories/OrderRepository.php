@@ -2,22 +2,20 @@
 
 namespace App\Repositories;
 
-use App\Models\UserCatalogue;
-use App\Repositories\Interfaces\UserCatalogueRepositoryInterface;
+use App\Models\Order;
 use App\Repositories\BaseRepository;
 
 /**
  * Class UserService
  * @package App\Services
  */
-class UserCatalogueRepository extends BaseRepository implements UserCatalogueRepositoryInterface
+class OrderRepository extends BaseRepository 
 {
     protected $model;
 
     public function __construct(
-        UserCatalogue $model
+        Order $model
     ){
         $this->model = $model;
     }
-    
 }

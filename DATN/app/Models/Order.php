@@ -2,12 +2,13 @@
 
 namespace App\Models;
 
+use App\Traits\QueryScopes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
 {
-    use HasFactory;
+    use HasFactory, QueryScopes;
 
     protected $table = 'orders';
 
@@ -18,7 +19,7 @@ class Order extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function items()
+    public function order_items()
     {
         return $this->hasMany(OrderItem::class);
     }

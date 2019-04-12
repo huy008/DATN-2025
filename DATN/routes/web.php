@@ -7,6 +7,7 @@ use App\Http\Controllers\Backend\ProductCatalogueController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Backend\AuthController as AdminAuthController;
 use App\Http\Controllers\Backend\DashboardController;
+use App\Http\Controllers\Backend\OrderController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\UserController;
@@ -56,6 +57,15 @@ Route::group(['prefix' => 'user'], function () {
     Route::post('{id}/update', [UserController::class, 'update'])->where(['id' => '[0-9]+'])->name('user.update');
     Route::get('{id}/delete', [UserController::class, 'delete'])->where(['id' => '[0-9]+'])->name('user.delete');
     Route::delete('{id}/destroy', [UserController::class, 'destroy'])->where(['id' => '[0-9]+'])->name('user.destroy');
+});
+
+Route::group(['prefix' => 'order'], function () {
+    Route::get('index', [OrderController::class, 'index'])->name('order.index');
+    Route::get('create', [OrderController::class, 'create'])->name('order.create');
+    Route::post('store', [OrderController::class, 'store'])->name('order.store');
+    Route::get('{id}/edit', [OrderController::class, 'edit'])->where(['id' => '[0-9]+'])->name('order.edit');
+    Route::post('{id}/update', [OrderController::class, 'update'])->where(['id' => '[0-9]+'])->name('order.update');
+    Route::post('{id}/destroy', [OrderController::class, 'destroy'])->where(['id' => '[0-9]+'])->name('order.destroy');
 });
 
 Route::group(['prefix' => 'attribute/value'], function () {
