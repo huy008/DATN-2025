@@ -15,18 +15,6 @@
             </div>
             <div class="action">
                 <div class="uk-flex uk-flex-middle">
-                    @php
-                        $publish = request('publish') ?: old('publish');
-                    @endphp
-                    <select name="publish" class="form-control setupSelect2 ml10">
-                        @foreach(config('apps.general.publish') as $key => $val)
-                        <option {{ ($publish == $key)  ? 'selected' : '' }} value="{{ $key }}">{{ $val }}</option>
-                        @endforeach
-                    </select>
-                    <select name="user_catalogue_id" class="form-control mr10 setupSelect2">
-                        <option value="0" selected="selected">Chọn Nhóm Thành Viên</option>
-                        <option value="1">Quản trị viên</option>
-                    </select>
                     <div class="uk-search uk-flex uk-flex-middle mr10">
                         <div class="input-group">
                             <input 

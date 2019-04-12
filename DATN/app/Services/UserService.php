@@ -2,10 +2,8 @@
 
 namespace App\Services;
 
-use App\Services\Interfaces\UserServiceInterface;
-use App\Repositories\Interfaces\UserRepositoryInterface as UserRepository;
+use App\Repositories\UserRepository;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Hash;
 
@@ -13,7 +11,7 @@ use Illuminate\Support\Facades\Hash;
  * Class UserService
  * @package App\Services
  */
-class UserService implements UserServiceInterface
+class UserService 
 {
     protected $userRepository;
     
@@ -28,7 +26,6 @@ class UserService implements UserServiceInterface
 
     public function paginate($request){
         $condition['keyword'] = addslashes($request->input('keyword'));
-        $condition['publish'] = $request->integer('publish');
         $perPage = $request->integer('perpage');
         $users = $this->userRepository->userPagination(
             $this->paginateSelect(), 
@@ -36,10 +33,6 @@ class UserService implements UserServiceInterface
             $perPage,
             ['path' => 'user/index'], 
         );
-        
-        // dd($users);
-
-        
         return $users;
     }
 
@@ -48,9 +41,6 @@ class UserService implements UserServiceInterface
         try{
 
             $payload = $request->except(['_token','send','re_password']);
-            if($payload['birthday'] != null){
-                $payload['birthday'] = $this->convertBirthdayDate($payload['birthday']);
-            }
             $payload['password'] = Hash::make($payload['password']);
             $user = $this->userRepository->create($payload);
             DB::commit();
@@ -69,9 +59,6 @@ class UserService implements UserServiceInterface
         try{
 
             $payload = $request->except(['_token','send']);
-            if($payload['birthday'] != null){
-                $payload['birthday'] = $this->convertBirthdayDate($payload['birthday']);
-            }
             $user = $this->userRepository->update($id, $payload);
             DB::commit();
             return true;
@@ -98,38 +85,6 @@ class UserService implements UserServiceInterface
         }
     }
 
-    public function updateStatus($post = []){
-        DB::beginTransaction();
-        try{
-            $payload[$post['field']] = (($post['value'] == 1)?2:1);
-            $user = $this->userRepository->update($post['modelId'], $payload);
-
-            DB::commit();
-            return true;
-        }catch(\Exception $e ){
-            DB::rollBack();
-            // Log::error($e->getMessage());
-            echo $e->getMessage();die();
-            return false;
-        }
-    }
-
-    public function updateStatusAll($post){
-        DB::beginTransaction();
-        try{
-            $payload[$post['field']] = $post['value'];
-            $flag = $this->userRepository->updateByWhereIn('id', $post['id'], $payload);
-
-            DB::commit();
-            return true;
-        }catch(\Exception $e ){
-            DB::rollBack();
-            // Log::error($e->getMessage());
-            echo $e->getMessage();die();
-            return false;
-        }
-    }
-
     private function convertBirthdayDate($birthday = ''){
         $carbonDate = Carbon::createFromFormat('Y-m-d', $birthday);
         $birthday = $carbonDate->format('Y-m-d H:i:s');
@@ -143,10 +98,6 @@ class UserService implements UserServiceInterface
             'phone',
             'address', 
             'name',
-            'publish',
-            'user_catalogue_id'
         ];
     }
-
-
 }

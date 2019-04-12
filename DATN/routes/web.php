@@ -9,6 +9,7 @@ use App\Http\Controllers\Backend\AuthController as AdminAuthController;
 use App\Http\Controllers\Backend\DashboardController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Backend\ProductController;
+use App\Http\Controllers\Backend\UserController;
 use App\Http\Controllers\DashboardClientController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
@@ -45,6 +46,16 @@ Route::group(['prefix' => 'product'], function () {
     Route::post('{id}/update', [ProductController::class, 'update'])->where(['id' => '[0-9]+'])->name('product.update');
     Route::get('{id}/delete', [ProductController::class, 'delete'])->where(['id' => '[0-9]+'])->name('product.delete');
     Route::delete('{id}/destroy', [ProductController::class, 'destroy'])->where(['id' => '[0-9]+'])->name('product.destroy');
+});
+
+Route::group(['prefix' => 'user'], function () {
+    Route::get('index', [UserController::class, 'index'])->name('user.index');
+    Route::get('create', [UserController::class, 'create'])->name('user.create');
+    Route::post('store', [UserController::class, 'store'])->name('user.store');
+    Route::get('{id}/edit', [UserController::class, 'edit'])->where(['id' => '[0-9]+'])->name('user.edit');
+    Route::post('{id}/update', [UserController::class, 'update'])->where(['id' => '[0-9]+'])->name('user.update');
+    Route::get('{id}/delete', [UserController::class, 'delete'])->where(['id' => '[0-9]+'])->name('user.delete');
+    Route::delete('{id}/destroy', [UserController::class, 'destroy'])->where(['id' => '[0-9]+'])->name('user.destroy');
 });
 
 Route::group(['prefix' => 'attribute/value'], function () {
