@@ -47,7 +47,7 @@
                                 class="fa fa-edit"></i></a>
                         @if ($order->status == 'pending')
                             <form action="{{ route('order.destroy', $order->id) }}" method="post"
-                                onsubmit="return confirm('Bạn có chắc chắn hủy đơn hamfg không ?');">
+                                onsubmit="return confirm('Bạn có chắc chắn hủy đơn hàng không ?');">
                                 @csrf
                                 <button class="btn btn-danger"><i class="fa fa-trash"></i></button>
                             </form>

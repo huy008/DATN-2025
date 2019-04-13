@@ -79,7 +79,7 @@ class ProductController extends Controller
                 ];
             }
             $variantImages = ProductVariant::where('product_id',$id)
-                ->get('image_url')->toArray();
+                ->get(['image_url', 'id'])->toArray();
         }
         return view('detail', compact(
             'product',

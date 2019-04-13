@@ -26,35 +26,32 @@
                                  <div class="bb-product-gallery-wrapper">
                                      <div class="bb-product-gallery bb-product-gallery-vertical">
                                          <div class="bb-product-gallery-images">
-                                             @if (!isset($variantImages))
+                                             @if (!empty($variantImages))
                                                  @foreach ($variantImages as $variantImage)
                                                      <a href="{{ asset($variantImage['image_url']) }}"
                                                          data-variant-id="{{ $variantImage['id'] }}" class="variant-image">
-                                                         <img src="{{ asset('client/storage/main/general/placeholder.png') }}"
-                                                             data-bb-lazy="true" loading="lazy"
-                                                             data-src="{{ asset($variantImage['image_url']) }}"
+                                                         <img src="{{ asset($variantImage['image_url']) }}"
                                                              alt="{{ $product->name }}"></a>
                                                  @endForEach
                                              @else
-                                                 <a href="{{ asset($product->image_url) }}" class="variant-image">
-                                                     <img src="{{ asset('client/storage/main/general/placeholder.png') }}"
-                                                         data-bb-lazy="true" loading="lazy"
-                                                         data-src="{{ asset($product->image_url) }}"
+                                                 <a href="{{ asset($product->img_thumbnail) }}">
+                                                     <img src="{{ asset($product->img_thumbnail) }}" data-bb-lazy="true"
+                                                         loading="lazy" data-src="{{ asset($product->img_thumbnail) }}"
                                                          alt="{{ $product->name }}"></a>
                                              @endif
                                          </div>
                                          <div class="bb-product-gallery-thumbnails" data-vertical="1">
-                                             @if (!isset($variantImages))
+                                             @if (!empty($variantImages))
                                                  @foreach ($variantImages as $variantImage)
                                                      <div data-variant-id="{{ $variantImage['id'] }}"
                                                          class="variant-thumbnail">
                                                          <img src='{{ asset($variantImage['image_url']) }}'
-                                                             data-bb-lazy="true" loading="lazy" alt="{{ $product->name }}">
+                                                             alt="{{ $product->name }}">
                                                      </div>
                                                  @endForeach
                                              @else
                                                  <div class="variant-thumbnail">
-                                                     <img src='{{ asset($product->image_url) }}' data-bb-lazy="true"
+                                                     <img src='{{ asset($product->img_thumbnail) }}' data-bb-lazy="true"
                                                          loading="lazy" alt="{{ $product->name }}">
                                                  </div>
                                              @endif
@@ -79,16 +76,31 @@
                                      </div>
                                      <div class="tp-product-details-rating-wrapper d-flex align-items-center mb-10">
                                          <div class="tp-product-details-rating">
-                                             <a href="apple-watch-series-7.html#product-review"
-                                                 data-bb-toggle="scroll-to-review">
-                                                 <div class="bb-product-rating page_speed_1348734562">
-                                                     <span class="page_speed_213792111"></span>
-                                                 </div>
-                                             </a>
+                                             @php
+                                                 $reviewCount = $product->reviews->count();
+                                                 $rating = $product->average_rating;
+                                                 $fullStars = floor($rating);
+                                                 $halfStar = $rating - $fullStars >= 0.5;
+                                             @endphp
+
+                                             {{-- Sao đầy --}}
+                                             @for ($i = 0; $i < $fullStars; $i++)
+                                                 <i class="fa fa-star" style="color: gold; font-size: 20px;"></i>
+                                             @endfor
+
+                                             {{-- Sao nửa --}}
+                                             @if ($halfStar)
+                                                 <i class="fa fa-star-half-o" style="color: gold; font-size: 20px;"></i>
+                                             @endif
+
+                                             {{-- Sao rỗng --}}
+                                             @for ($i = 0; $i < 5 - $fullStars - ($halfStar ? 1 : 0); $i++)
+                                                 <i class="fa fa-star-o" style="color: gold; font-size: 20px;"></i>
+                                             @endfor
                                          </div>
                                          <div class="tp-product-details-reviews">
                                              <a href="apple-watch-series-7.html#product-review"
-                                                 data-bb-toggle="scroll-to-review">(9
+                                                 data-bb-toggle="scroll-to-review">({{ $reviewCount }}
                                                  reviews)</a>
                                          </div>
                                      </div>
@@ -195,7 +207,7 @@
                                                  </button>
                                              </div>
                                          </div>
-                                         <input type="hidden" name="variant_id" class="variant_id" >
+                                         <input type="hidden" name="variant_id" class="variant_id">
                                          <button type="submit" formaction="{{ route('cart.checkout') }}"
                                              name="checkout" class="tp-product-details-buy-now-btn w-100">
                                              Buy Now
@@ -762,7 +774,11 @@
                                                              </div>
                                                              <script type=text/x-custom-template id="review-image-template">
                                                                  <span class="image-viewer__item" data-id="__id__"><img src=https://shofy.botble.com/vendor/core/core/base/images/placeholder.png alt="Preview" class="img-responsive d-block"><span class="image-viewer__icon-remove"><svg class="icon svg-icon-ti-ti-x" xmlns="http://www.w3.org/2000/svg" width=24 height=24 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M18 6l-12 12" /><path d="M6 6l12 12" /></svg></span></span>
-                                                                                                                          </script>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+                                                                                                                                                                                                                                                                                                                                                                                                                                           
+                                                                                                                                                                                                                                                                                                                 
+                                                                                                                                                                                       
+                                                             </script>
                                                              <div class="image-upload__viewer d-flex">
                                                                  <div class="image-viewer__list position-relative">
                                                                      <div class="image-upload__uploader-container">
@@ -1463,22 +1479,34 @@
              let selectedColor = null;
              let selectedCapacity = null;
 
-             // Lắng nghe sự kiện click trên các nút màu sắc
-             document.querySelectorAll('input[name="attribute_color"]').forEach(input => {
+             const colorInputs = document.querySelectorAll('input[name="attribute_color"]');
+             const capacityInputs = document.querySelectorAll('input[name="attribute_capacity"]');
+
+             // 👉 Hàm chọn ngẫu nhiên 1 radio
+             function selectFirst(inputs) {
+                 if (inputs.length > 0) {
+                     const firstInput = inputs[0];
+                     firstInput.checked = true;
+                     firstInput.dispatchEvent(new Event('change'));
+                     return firstInput.value;
+                 }
+                 return null;
+             }
+             // Lắng nghe sự kiện chọn màu sắc
+             colorInputs.forEach(input => {
                  input.addEventListener('change', function() {
                      selectedColor = this.value;
                      checkAndFetchVariant();
                  });
              });
 
-             // Lắng nghe sự kiện click trên các nút dung lượng
-             document.querySelectorAll('input[name="attribute_capacity"]').forEach(input => {
+             // Lắng nghe sự kiện chọn dung lượng
+             capacityInputs.forEach(input => {
                  input.addEventListener('change', function() {
                      selectedCapacity = this.value;
                      checkAndFetchVariant();
                  });
              });
-
              // Hàm kiểm tra và gọi API tìm biến thể
              function checkAndFetchVariant() {
                  if (selectedColor && selectedCapacity) {
@@ -1515,6 +1543,9 @@
                      .catch(error => console.error('Error:', error));
              }
 
+             selectedColor = selectFirst(colorInputs);
+             selectedCapacity = selectFirst(capacityInputs);
+
              // Hàm cập nhật thông tin biến thể lên giao diện
              function updateVariantDetails(variant) {
                  // Ví dụ: Cập nhật giá, SKU, hình ảnh...
@@ -1522,161 +1553,8 @@
                  //  document.querySelector('[data-bb-value="product-sku"]') = variant.sku;
                  document.querySelector('.text-success').textContent = variant.stock_quantity;
 
-                    document.querySelector('.variant_id').value = variant.id;
-                 // Cập nhật hình ảnh (nếu có)
-                 if (variant.id && variant.image_url) {
-                     // 1. Ẩn tất cả ảnh trong gallery và thumbnail trước
-                     document.querySelectorAll('.variant-image, .variant-thumbnail').forEach(el => {
-                         el.style.display = 'none';
-                     });
-
-                     // 2. Chỉ hiển thị ảnh thuộc variant được chọn
-                     const variantId = variant.id;
-
-                     // Cập nhật gallery images
-                     document.querySelectorAll(`.variant-image[data-variant-id="${variantId}"]`).forEach(img => {
-                         img.style.display = 'block';
-                         img.querySelector('img').src = variant.image_url; // Cập nhật URL ảnh nếu cần
-                     });
-
-                     // Cập nhật thumbnails
-                     document.querySelectorAll(`.variant-thumbnail[data-variant-id="${variantId}"]`).forEach(
-                         thumb => {
-                             thumb.style.display = 'block';
-                             thumb.querySelector('img').src = variant.image_url;
-                         });
-
-                     // 3. Cập nhật ảnh chính (main image)
-                     document.getElementById('product-image').src = variant.image_url;
-                 }
+                 document.querySelector('.variant_id').value = variant.id;
              }
          });
      </script>
-
-
-     {{-- <div class="cartmini__area cartmini-opened">
-         <div class="cartmini__wrapper d-flex justify-content-between flex-column">
-             <div class="cartmini__top-wrapper">
-                 <div class="cartmini__top p-relative">
-                     <div class="cartmini__top-title">
-                         <h4>Shopping cart</h4>
-                     </div>
-                     <div class="cartmini__close" title="Close">
-                         <button type="button" class="cartmini__close-btn cartmini-close-btn" title="Close">
-                             <svg class="icon  svg-icon-ti-ti-x" xmlns="http://www.w3.org/2000/svg" width="24"
-                                 height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                 <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                 <path d="M18 6l-12 12"></path>
-                                 <path d="M6 6l12 12"></path>
-                             </svg> </button>
-                     </div>
-                 </div>
-
-                 <form method="POST" action="https://shofy.botble.com/cart/update" accept-charset="UTF-8"
-                     class="cart-form"><input name="_token" type="hidden"
-                         value="GUIG3EPcm2z7lWgM3HLIULUu5EEQY9rI5raD9tto">
-                     <div class="cartmini__widget">
-                         <input type="hidden" name="items[673589a7850f5b0d42594b44f20f3d35][rowId]"
-                             value="673589a7850f5b0d42594b44f20f3d35">
-
-                         <div class="cartmini__widget-item">
-                             <div class="cartmini__thumb">
-                                 <a href="https://shofy.botble.com/products/sony-x950h-4k-ultra-hd-smart-led-tv">
-                                     <img src="https://shofy.botble.com/storage/main/products/product-16-150x150.jpg"
-                                         data-bb-lazy="true" loading="lazy"
-                                         data-src="https://shofy.botble.com/storage/main/products/product-16-150x150.jpg"
-                                         alt="Sony X950H 4K Ultra HD Smart LED TV" data-ll-status="loaded"
-                                         class="entered loaded">
-                                 </a>
-                             </div>
-                             <div class="cartmini__content">
-
-
-                                 <h5 class="cartmini__title">
-                                     <a href="https://shofy.botble.com/products/sony-x950h-4k-ultra-hd-smart-led-tv">Sony
-                                         X950H 4K Ultra HD Smart LED TV</a>
-                                 </h5>
-                                 <div class="tp-product-quantity mt-10 mb-10">
-                                     <span class="tp-cart-minus" data-bb-toggle="decrease-qty">
-                                         <svg width="10" height="2" viewBox="0 0 10 2" fill="none"
-                                             xmlns="http://www.w3.org/2000/svg">
-                                             <path d="M1 1H9" stroke="currentColor" stroke-width="1.5"
-                                                 stroke-linecap="round" stroke-linejoin="round"></path>
-                                         </svg>
-                                     </span>
-                                     <input class="tp-cart-input" type="number"
-                                         name="items[673589a7850f5b0d42594b44f20f3d35][values][qty]" value="8"
-                                         min="1" max="11" data-bb-toggle="update-cart">
-                                     <span class="tp-cart-plus" data-bb-toggle="increase-qty">
-                                         <svg width="10" height="10" viewBox="0 0 10 10" fill="none"
-                                             xmlns="http://www.w3.org/2000/svg">
-                                             <path d="M5 1V9" stroke="currentColor" stroke-width="1.5"
-                                                 stroke-linecap="round" stroke-linejoin="round"></path>
-                                             <path d="M1 5H9" stroke="currentColor" stroke-width="1.5"
-                                                 stroke-linecap="round" stroke-linejoin="round"></path>
-                                         </svg>
-                                     </span>
-                                 </div>
-                                 <div class="cartmini__price-wrapper">
-                                     <div class="cartmini__price">
-                                         <span class="" data-bb-value="product-price">$2,250.00</span>
-
-                                     </div>
-
-                                 </div>
-                                 <div class="small">(Color: Black, Size: M)</div>
-
-
-
-
-                             </div>
-                             <a href="https://shofy.botble.com/cart/remove/673589a7850f5b0d42594b44f20f3d35"
-                                 class="cartmini__del" title="Remove this item" data-bb-toggle="remove-from-cart"
-                                 data-product-id="74" data-product-name="Sony X950H 4K Ultra HD Smart LED TV"
-                                 data-product-price="2250" data-product-sku="9W-196-A1" data-product-brand="Shofy"
-                                 data-product-categories="Weekly Best Selling,TWS Earphones,Smartphones &amp; Tablets,Backpack"
-                                 data-product-quantity="8">
-                                 <svg class="icon  svg-icon-ti-ti-x" xmlns="http://www.w3.org/2000/svg" width="24"
-                                     height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                     <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                     <path d="M18 6l-12 12"></path>
-                                     <path d="M6 6l12 12"></path>
-                                 </svg> </a>
-                         </div>
-                     </div>
-                 </form>
-
-             </div>
-
-             <div class="cartmini__checkout">
-                 <div class="d-flex flex-column gap-2 cartmini__checkout-title mb-30">
-                     <div>
-                         <h4>Subtotal:</h4>
-                         <span>$18,000.00</span>
-                     </div>
-                     <div>
-                         <h4>Tax:</h4>
-                         <span>$2,700.00</span>
-                     </div>
-                     <div>
-                         <h4>Total:</h4>
-                         <span>$20,700.00</span>
-                     </div>
-                 </div>
-                 <div class="cartmini__checkout-btn">
-                     <a href="https://shofy.botble.com/checkout/9303019639eac2a820f5ed4e87c94520"
-                         class="mb-10 tp-btn w-100">
-                         Checkout
-                     </a>
-
-                     <a href="https://shofy.botble.com/cart" class="tp-btn tp-btn-border w-100">
-                         View Cart
-                     </a>
-                 </div>
-             </div>
-
-         </div>
-     </div> --}}
  @endsection

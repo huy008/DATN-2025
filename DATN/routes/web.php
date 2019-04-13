@@ -10,6 +10,7 @@ use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Backend\OrderController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Backend\ProductController;
+use App\Http\Controllers\Backend\ReviewAdminController;
 use App\Http\Controllers\Backend\UserController;
 use App\Http\Controllers\DashboardClientController;
 use App\Http\Controllers\CartController;
@@ -47,6 +48,11 @@ Route::group(['prefix' => 'product'], function () {
     Route::post('{id}/update', [ProductController::class, 'update'])->where(['id' => '[0-9]+'])->name('product.update');
     Route::get('{id}/delete', [ProductController::class, 'delete'])->where(['id' => '[0-9]+'])->name('product.delete');
     Route::delete('{id}/destroy', [ProductController::class, 'destroy'])->where(['id' => '[0-9]+'])->name('product.destroy');
+});
+
+Route::group(['prefix' => 'review'], function () {
+    Route::get('index', [ReviewAdminController::class, 'index'])->name('review.index');
+    Route::post('{id}/destroy', [ReviewAdminController::class, 'destroy'])->where(['id' => '[0-9]+'])->name('review.destroy');
 });
 
 Route::group(['prefix' => 'user'], function () {

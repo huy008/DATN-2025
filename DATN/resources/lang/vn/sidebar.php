@@ -61,6 +61,17 @@ return [
                     'route' => 'order/index'
                 ]    
             ]
+                ],
+         [
+            'title' => 'Quản lý đánh giá',
+            'icon' => 'fa fa-file',
+            'name' => ['language','generate'],
+            'subModule' => [
+                [
+                    'title' => 'Quản lý đánh giá',
+                    'route' => 'review/index'
+                ]    
+            ]
         ]
     ],
 ];

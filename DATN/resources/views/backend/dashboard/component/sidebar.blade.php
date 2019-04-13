@@ -24,6 +24,9 @@
                     IN+
                 </div>
             </li>
+                <li class="{{ (in_array($segment, ["Quản lý báo cáo"])) ? 'active' : '' }}">
+                <a href="{{route('dashboard.index')}}"><i class="fa fa-file"></i> <span class="nav-label">Quản lý báo cáo</span></a>
+            </li>
             @foreach(__('sidebar.module') as $key => $val)
             <li class="{{ (in_array($segment, $val['name'])) ? 'active' : '' }}">
                 <a href=""><i class="{{ $val['icon'] }}"></i> <span class="nav-label">{{ $val['title'] }}</span> <span class="fa arrow"></span></a>
