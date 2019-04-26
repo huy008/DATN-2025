@@ -6,9 +6,9 @@
              <div class="container">
                  <div class="breadcrumb__content p-relative z-index-1">
                      <div class="breadcrumb__list js_breadcrumb_reduce_length_on_mobile">
-                         <span><a href="{{route('index')}}">Trang chủ</a></span><span><a
-                                 href="{{route('category.show',$product->category->id)}}">{{$product->category->name}}</a></span>
-                                 <span>
+                         <span><a href="{{ route('index') }}">Trang chủ</a></span><span><a
+                                 href="{{ route('category.show', $product->category->id) }}">{{ $product->category->name }}</a></span>
+                         <span>
                              {{ $product->name }}
                          </span>
                      </div>
@@ -65,7 +65,8 @@
                                      {{ $product->name }}</h1>
                                  <div class="tp-product-details-inventory d-flex align-items-center mb-10">
                                      <div class="tp-product-details-stock mb-10">
-                                         <span><a href="{{route('category.show',$product->category->id)}}">{{$product->category->name}}</a></span>
+                                         <span><a
+                                                 href="{{ route('category.show', $product->category->id) }}">{{ $product->category->name }}</a></span>
                                      </div>
                                      <div class="tp-product-details-rating-wrapper d-flex align-items-center mb-10">
                                          <div class="tp-product-details-rating">
@@ -96,7 +97,7 @@
                                      </div>
                                  </div>
                                  <div class="tp-product-details-description mb-20">
-                                     {!!$product->short_description!!}
+                                     {!! $product->short_description !!}
                                  </div>
                                  <div class="tp-product-details-price-wrapper mb-20">
                                      <span class="tp-product-details-price new-price"
@@ -160,7 +161,7 @@
                                      <div class="number-items-available">
                                          <span class="text-success">
                                              {{ $product->quantity }}
-                                            sản phẩm có sẵn
+                                             sản phẩm có sẵn
                                          </span>
                                      </div>
                                      <div class="tp-product-details-action-wrapper mt-3">
@@ -204,18 +205,102 @@
                                      </div>
 
                                  </form>
-
-
-
                              </div>
                          </div>
                      </div>
                  </div>
              </div>
+
+
+             <section class="tp-product-category  pb-15" style="text-align:center">
+                 <h1 class="pb-50">Sản phẩm liên quan</h1>
+                 <div class="container">
+
+                     <div class="tp-product-categories-slider swiper-container" data-items="5">
+                         <div class="swiper-wrapper">
+                             @foreach ($productRelated as $product)
+                                 <div class="swiper-slide">
+                                     <div class="tp-product-item transition-3 mb-25 ">
+                                         <div class="tp-product-thumb p-relative fix m-img">
+                                             <a href="{{ route('product.detail', $product->id) }}">
+                                                 <img src="{{ asset($product->img_thumbnail) }}" data-bb-lazy="true"
+                                                     loading="lazy" data-src="{{ $product->img_thumbnail }}"
+                                                     alt="{{ $product->name }}" data-ll-status="loaded"
+                                                     class="entered loaded">
+                                             </a>
+                                         </div>
+                                         <div class="tp-product-content">
+                                             <div class="tp-product-category">
+                                                 <a href="https://shofy.botble.com/stores/global-office">Global
+                                                     Office</a>
+                                             </div>
+                                             <h3 class="text-truncate tp-product-title">
+                                                 <a href="{{ route('product.detail', $product->id) }}"
+                                                     title="{{ $product->name }}">
+                                                     {{ $product->name }}
+                                                 </a>
+                                             </h3>
+                                             <div class="">
+                                                 <div
+                                                     class="tp-product-details-rating-wrapper d-flex align-items-center mb-10">
+                                                     <div class="tp-product-details-rating">
+                                                         @php
+                                                             $reviewCount = $product->reviews->count();
+                                                             $rating = $product->average_rating;
+                                                             $fullStars = floor($rating);
+                                                             $halfStar = $rating - $fullStars >= 0.5;
+                                                         @endphp
+
+                                                         @for ($i = 0; $i < $fullStars; $i++)
+                                                             <i class="fa fa-star"
+                                                                 style="color: gold; font-size: 15px;"></i>
+                                                         @endfor
+
+                                                         @if ($halfStar)
+                                                             <i class="fa fa-star-half-o"
+                                                                 style="color: gold; font-size: 15px;"></i>
+                                                         @endif
+
+                                                         @for ($i = 0; $i < 5 - $fullStars - ($halfStar ? 1 : 0); $i++)
+                                                             <i class="fa fa-star-o"
+                                                                 style="color: gold; font-size: 15px;"></i>
+                                                         @endfor
+                                                     </div>
+                                                     <div class="tp-product-details-reviews">
+                                                         <a href="apple-watch-series-7.html#product-review"
+                                                             data-bb-toggle="scroll-to-review">({{ $reviewCount }}
+                                                             đánh giá)</a>
+                                                     </div>
+                                                 </div>
+
+                                                 <div class="tp-product-price-wrapper" style="text-align:left">
+                                                     <span class="tp-product-price new-price"
+                                                         data-bb-value="product-price">{{ format_currency($product->final_price ?? $product->base_price) }}</span>
+
+                                                     <span class="">
+                                                         <small>
+                                                             <del class="tp-product-price old-price"
+                                                                 data-bb-value="product-original-price">{{ format_currency($product->base_price) }}</del>
+                                                         </small>
+                                                     </span>
+                                                 </div>
+                                             </div>
+
+
+
+                                         </div>
+                                     </div>
+                                 </div>
+                             @endforeach
+                         </div>
+                     </div>
+                 </div>
+             </section>
+
              {{-- <div data-bb-toggle="block-lazy-loading" data-url="https://shofy.botble.com/ajax/cross-sale-products/15"
                  class="position-relative page_speed_156113627">
              </div> --}}
-             <div class="tp-product-details-bottom">
+             {{-- <div class="tp-product-details-bottom">
                  <div class="container">
                      <div class="row">
                          <div class="col-xl-12">
@@ -1363,15 +1448,15 @@
                          </div>
                      </div>
                  </div>
-             </div>
-             <div class="tp-product-details-sticky-actions">
+             </div> --}}
+             {{-- <div class="tp-product-details-sticky-actions">
                  <div class="container">
                      <div class="d-flex justify-content-between align-items-center">
                          <div class="d-none d-lg-flex align-items-center gap-3">
                              <div class="sticky-actions-img">
-                                 <img src={{ asset('client/storage/main/general/placeholder.png') }} data-bb-lazy="true"
+                                 <img src={{ asset($product->img_thumbnail) }} data-bb-lazy="true"
                                      loading="lazy"
-                                     data-src="https://shofy.botble.com/storage/main/products/product-9.jpg"
+                                     data-src="{{ asset($product->img_thumbnail) }}"
                                      alt="{{ $product->name }}">
                              </div>
                              <div class="sticky-actions-content">
@@ -1386,19 +1471,18 @@
                              </div>
                          </div>
                          <div class="sticky-actions-button d-flex align-items-center gap-2">
-                             <button type=submit name=add-to-cart class="tp-product-details-add-to-cart-btn"
+                             <a type=submit name=add-to-cart class="tp-product-details-add-to-cart-btn"
                                  data-bb-toggle="add-to-cart-in-form" data-product-id="15"
                                  data-product-name="{{ $product->name }}" data-product-price="1373"
                                  data-product-sku="JZ-187-A1" data-product-category="Electronics Gadgets &gt; Backpack"
                                  data-product-brand="Soda Brand"
                                  data-product-categories="New Arrivals,Computers &amp; Laptops,Monitor,Backpack">
-                                 Add To Cart
-                             </button><button type=submit name=checkout class="tp-product-details-buy-now-btn">Buy
-                                 Now</button>
+                                 Thêm vào giỏ hàng
+                             </a><a type=submit name=checkout class="tp-product-details-buy-now-btn">Mua ngay</a>
                          </div>
                      </div>
                  </div>
-             </div>
+             </div> --}}
          </section>
      </main>
 
@@ -1480,42 +1564,42 @@
                  // Ví dụ: Cập nhật giá, SKU, hình ảnh...
                  document.querySelector('[data-bb-value="product-price"]').textContent = variant.price;
                  //  document.querySelector('[data-bb-value="product-sku"]') = variant.sku;
-                 document.querySelector('.text-success').textContent = variant.stock_quantity+" sản phẩm có sẵn";
+                 document.querySelector('.text-success').textContent = variant.stock_quantity + " sản phẩm có sẵn";
 
                  document.querySelector('.variant_id').value = variant.id;
              }
          });
      </script>
      <script>
-    document.addEventListener("DOMContentLoaded", function () {
-        // Nút tăng số lượng
-        document.querySelectorAll('[data-bb-toggle="increase-qty"]').forEach(function (btn) {
-            btn.addEventListener('click', function () {
-                let input = this.parentElement.querySelector('.tp-cart-input');
-                let current = parseInt(input.value) || 1;
-                let max = parseInt(input.getAttribute('max')) || 99;
+         document.addEventListener("DOMContentLoaded", function() {
+             // Nút tăng số lượng
+             document.querySelectorAll('[data-bb-toggle="increase-qty"]').forEach(function(btn) {
+                 btn.addEventListener('click', function() {
+                     let input = this.parentElement.querySelector('.tp-cart-input');
+                     let current = parseInt(input.value) || 1;
+                     let max = parseInt(input.getAttribute('max')) || 99;
 
-                if (current < max) {
-                    input.value = current + 1;
-                    input.dispatchEvent(new Event('change')); // nếu cần trigger change
-                }
-            });
-        });
+                     if (current < max) {
+                         input.value = current + 1;
+                         input.dispatchEvent(new Event('change')); // nếu cần trigger change
+                     }
+                 });
+             });
 
-        // Nút giảm số lượng
-        document.querySelectorAll('[data-bb-toggle="decrease-qty"]').forEach(function (btn) {
-            btn.addEventListener('click', function () {
-                let input = this.parentElement.querySelector('.tp-cart-input');
-                let current = parseInt(input.value) || 1;
-                let min = parseInt(input.getAttribute('min')) || 1;
+             // Nút giảm số lượng
+             document.querySelectorAll('[data-bb-toggle="decrease-qty"]').forEach(function(btn) {
+                 btn.addEventListener('click', function() {
+                     let input = this.parentElement.querySelector('.tp-cart-input');
+                     let current = parseInt(input.value) || 1;
+                     let min = parseInt(input.getAttribute('min')) || 1;
 
-                if (current > min) {
-                    input.value = current - 1;
-                    input.dispatchEvent(new Event('change')); // nếu cần trigger change
-                }
-            });
-        });
-    });
-</script>
-    
+                     if (current > min) {
+                         input.value = current - 1;
+                         input.dispatchEvent(new Event('change')); // nếu cần trigger change
+                     }
+                 });
+             });
+         });
+     </script>
+
  @endsection

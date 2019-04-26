@@ -57,8 +57,9 @@
                 <div class="col-md-3">
                     <select name="status" class="form-control">
                         <option value="">-- Trạng thái --</option>
-                        <option value="pending" {{ request('status') == 'pending' ? 'selected' : '' }}>Đang xử lý</option>
-                        <option value="shipped" {{ request('status') == 'shipped' ? 'selected' : '' }}>Đã giao</option>
+                        <option value="pending" {{ request('status') == 'pending' ? 'selected' : '' }}>Chờ xác nhận</option>
+                        <option value="processing" {{ request('status') == 'processing' ? 'selected' : '' }}>Đang giao</option>
+                        <option value="completed" {{ request('status') == 'completed' ? 'selected' : '' }}>Đã giao</option>
                         <option value="cancelled" {{ request('status') == 'cancelled' ? 'selected' : '' }}>Đã hủy</option>
                     </select>
                 </div>

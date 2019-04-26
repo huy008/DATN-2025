@@ -100,231 +100,204 @@
                  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
              }
          </style>
-         <section class="tp-slider-area p-relative z-index-1">
-             <div class="tp-slider-active tp-slider-variation swiper-container " data-loop="" data-autoplay="1"
-                 data-autoplay-speed="5000">
-                 <div class="swiper-wrapper">
-                     <div
-                         class="tp-slider-item tp-slider-height d-flex align-items-center swiper-slide page_speed_234370733">
-                         <div class="tp-slider-shape d-none d-sm-block">
-                             <img src=storage/main/general/placeholder.png data-bb-lazy="true" class="tp-slider-shape-1"
-                                 loading="lazy" data-src="https://shofy.botble.com/storage/main/sliders/shape-1.png"
-                                 alt="The best tablet Collection 2023"><img src=storage/main/general/placeholder.png
-                                 data-bb-lazy="true" class="tp-slider-shape-2" loading="lazy"
-                                 data-src="https://shofy.botble.com/storage/main/sliders/shape-2.png"
-                                 alt="The best tablet Collection 2023"><img src=storage/main/general/placeholder.png
-                                 data-bb-lazy="true" class="tp-slider-shape-3" loading="lazy"
-                                 data-src="https://shofy.botble.com/storage/main/sliders/shape-3.png"
-                                 alt="The best tablet Collection 2023"><img src=storage/main/general/placeholder.png
-                                 data-bb-lazy="true" class="tp-slider-shape-4" loading="lazy"
-                                 data-src="https://shofy.botble.com/storage/main/sliders/shape-4.png"
-                                 alt="The best tablet Collection 2023">
-                         </div>
-                         <div class="container">
-                             <div class="row align-items-center">
-                                 <div class="col-xl-5 col-lg-6 col-md-6">
-                                     <div class="tp-slider-content p-relative z-index-1">
-                                         <span>Starting
-                                             at
-                                             <b>$274.00</b></span>
-                                         <h3 class="tp-slider-title page_speed_12458825">
-                                             The
-                                             best
-                                             tablet
-                                             Collection
-                                             2023
-                                         </h3>
-                                         <p class="page_speed_873799895">
-                                             Exclusive
-                                             offer
-                                             <span>-35%</span>
-                                             off
-                                             this
-                                             week
-                                         </p>
-                                         <div class="tp-slider-btn">
-                                             <a href="products.html" class="tp-btn tp-btn-2 tp-btn-white">
-                                                 Shop
-                                                 Now
-                                             </a>
-                                         </div>
-                                     </div>
-                                 </div>
-                                 <div class="col-xl-7 col-lg-6 col-md-6">
-                                     <div class="tp-slider-thumb text-end">
-                                         <a href="products.html">
-                                             <picture>
-                                                 <source srcset="https://shofy.botble.com/storage/main/sliders/slider-1.png"
-                                                     media="(min-width: 1200px)">
-                                                 <source srcset="https://shofy.botble.com/storage/main/sliders/slider-1.png"
-                                                     media="(min-width: 768px)">
-                                                 <source srcset="https://shofy.botble.com/storage/main/sliders/slider-1.png"
-                                                     media="(max-width: 767px)">
-                                                 <img src=storage/main/general/placeholder.png data-bb-lazy="true"
-                                                     loading="eager"
-                                                     data-src="https://shofy.botble.com/storage/main/sliders/slider-1.png"
-                                                     alt="The best tablet Collection 2023">
-                                             </picture>
-                                         </a>
-                                     </div>
-                                 </div>
-                             </div>
-                         </div>
-                     </div>
-                     <div
-                         class="tp-slider-item tp-slider-height d-flex align-items-center swiper-slide page_speed_234370733">
-                         <div class="tp-slider-shape d-none d-sm-block">
-                             <img src=storage/main/general/placeholder.png data-bb-lazy="true" class="tp-slider-shape-1"
-                                 loading="lazy" data-src="https://shofy.botble.com/storage/main/sliders/shape-1.png"
-                                 alt="The best note book collection 2023"><img src=storage/main/general/placeholder.png
-                                 data-bb-lazy="true" class="tp-slider-shape-2" loading="lazy"
-                                 data-src="https://shofy.botble.com/storage/main/sliders/shape-2.png"
-                                 alt="The best note book collection 2023"><img src=storage/main/general/placeholder.png
-                                 data-bb-lazy="true" class="tp-slider-shape-3" loading="lazy"
-                                 data-src="https://shofy.botble.com/storage/main/sliders/shape-3.png"
-                                 alt="The best note book collection 2023"><img src=storage/main/general/placeholder.png
-                                 data-bb-lazy="true" class="tp-slider-shape-4" loading="lazy"
-                                 data-src="https://shofy.botble.com/storage/main/sliders/shape-4.png"
-                                 alt="The best note book collection 2023">
-                         </div>
-                         <div class="container">
-                             <div class="row align-items-center">
-                                 <div class="col-xl-5 col-lg-6 col-md-6">
-                                     <div class="tp-slider-content p-relative z-index-1">
-                                         <span>Starting
-                                             at
-                                             <b>$999.00</b></span>
-                                         <h3 class="tp-slider-title page_speed_12458825">
-                                             The
-                                             best
-                                             note
-                                             book
-                                             collection
-                                             2023
-                                         </h3>
-                                         <p class="page_speed_873799895">
-                                             Exclusive
-                                             offer
-                                             <span>-10%</span>
-                                             off
-                                             this
-                                             week
-                                         </p>
-                                         <div class="tp-slider-btn">
-                                             <a href="products.html" class="tp-btn tp-btn-2 tp-btn-white">
-                                                 Shop
-                                                 Now
-                                             </a>
-                                         </div>
-                                     </div>
-                                 </div>
-                                 <div class="col-xl-7 col-lg-6 col-md-6">
-                                     <div class="tp-slider-thumb text-end">
-                                         <a href="products.html">
-                                             <picture>
-                                                 <source srcset="https://shofy.botble.com/storage/main/sliders/slider-3.png"
-                                                     media="(min-width: 1200px)">
-                                                 <source srcset="https://shofy.botble.com/storage/main/sliders/slider-3.png"
-                                                     media="(min-width: 768px)">
-                                                 <source srcset="https://shofy.botble.com/storage/main/sliders/slider-3.png"
-                                                     media="(max-width: 767px)">
-                                                 <img src=storage/main/general/placeholder.png data-bb-lazy="true"
-                                                     loading="eager"
-                                                     data-src="https://shofy.botble.com/storage/main/sliders/slider-3.png"
-                                                     alt="The best note book collection 2023">
-                                             </picture>
-                                         </a>
-                                     </div>
-                                 </div>
-                             </div>
-                         </div>
-                     </div>
-                     <div
-                         class="tp-slider-item tp-slider-height d-flex align-items-center swiper-slide is-light page_speed_315843806">
-                         <div class="tp-slider-shape d-none d-sm-block">
-                             <img src=storage/main/general/placeholder.png data-bb-lazy="true" class="tp-slider-shape-1"
-                                 loading="lazy" data-src="https://shofy.botble.com/storage/main/sliders/shape-1.png"
-                                 alt="The best phone collection 2023"><img src=storage/main/general/placeholder.png
-                                 data-bb-lazy="true" class="tp-slider-shape-2" loading="lazy"
-                                 data-src="https://shofy.botble.com/storage/main/sliders/shape-2.png"
-                                 alt="The best phone collection 2023"><img src=storage/main/general/placeholder.png
-                                 data-bb-lazy="true" class="tp-slider-shape-3" loading="lazy"
-                                 data-src="https://shofy.botble.com/storage/main/sliders/shape-3.png"
-                                 alt="The best phone collection 2023"><img src=storage/main/general/placeholder.png
-                                 data-bb-lazy="true" class="tp-slider-shape-4" loading="lazy"
-                                 data-src="https://shofy.botble.com/storage/main/sliders/shape-4.png"
-                                 alt="The best phone collection 2023">
-                         </div>
-                         <div class="container">
-                             <div class="row align-items-center">
-                                 <div class="col-xl-5 col-lg-6 col-md-6">
-                                     <div class="tp-slider-content p-relative z-index-1">
-                                         <span>Starting
-                                             at
-                                             <b>$999.00</b></span>
-                                         <h3 class="tp-slider-title page_speed_12458825">
-                                             The
-                                             best
-                                             phone
-                                             collection
-                                             2023
-                                         </h3>
-                                         <p class="page_speed_873799895">
-                                             Exclusive
-                                             offer
-                                             <span>-10%</span>
-                                             off
-                                             this
-                                             week
-                                         </p>
-                                         <div class="tp-slider-btn">
-                                             <a href="products.html" class="tp-btn tp-btn-2 tp-btn-white">
-                                                 Shop
-                                                 Now
-                                             </a>
-                                         </div>
-                                     </div>
-                                 </div>
-                                 <div class="col-xl-7 col-lg-6 col-md-6">
-                                     <div class="tp-slider-thumb text-end">
-                                         <a href="products.html">
-                                             <picture>
-                                                 <source
-                                                     srcset="https://shofy.botble.com/storage/main/sliders/slider-2.png"
-                                                     media="(min-width: 1200px)">
-                                                 <source
-                                                     srcset="https://shofy.botble.com/storage/main/sliders/slider-2.png"
-                                                     media="(min-width: 768px)">
-                                                 <source
-                                                     srcset="https://shofy.botble.com/storage/main/sliders/slider-2.png"
-                                                     media="(max-width: 767px)">
-                                                 <img src=storage/main/general/placeholder.png data-bb-lazy="true"
-                                                     loading="eager"
-                                                     data-src="https://shofy.botble.com/storage/main/sliders/slider-2.png"
-                                                     alt="The best phone collection 2023">
-                                             </picture>
-                                         </a>
-                                     </div>
-                                 </div>
-                             </div>
-                         </div>
-                     </div>
-                 </div>
-                 <div class="tp-slider-arrow tp-swiper-arrow d-none d-lg-block">
-                     <button type=button class="tp-slider-button-prev"><svg width=8 height=14 viewBox="0 0 8 14"
-                             fill="none" xmlns="http://www.w3.org/2000/svg">
-                             <path d="M7 13L1 7L7 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
-                                 stroke-linejoin="round" />
-                         </svg></button><button type=button class="tp-slider-button-next"><svg width=8 height=14
-                             viewBox="0 0 8 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                             <path d="M1 13L7 7L1 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
-                                 stroke-linejoin="round" />
-                         </svg></button>
-                 </div>
-                 <div class="tp-slider-dot tp-swiper-dot">
-                 </div>
-             </div>
-         </section>
+       <section class="tp-slider-area p-relative z-index-1">
+    <div class="tp-slider-active tp-slider-variation swiper-container" data-loop="" data-autoplay="1"
+        data-autoplay-speed="5000">
+        <div class="swiper-wrapper">
+            <div class="tp-slider-item tp-slider-height d-flex align-items-center swiper-slide page_speed_234370733">
+                <div class="tp-slider-shape d-none d-sm-block">
+                    <img src=storage/main/general/placeholder.png data-bb-lazy="true" class="tp-slider-shape-1"
+                        loading="lazy" data-src="https://shofy.botble.com/storage/main/sliders/shape-1.png"
+                        alt="Bộ sưu tập máy tính bảng tốt nhất 2025"><img src=storage/main/general/placeholder.png
+                        data-bb-lazy="true" class="tp-slider-shape-2" loading="lazy"
+                        data-src="https://shofy.botble.com/storage/main/sliders/shape-2.png"
+                        alt="Bộ sưu tập máy tính bảng tốt nhất 2025"><img src=storage/main/general/placeholder.png
+                        data-bb-lazy="true" class="tp-slider-shape-3" loading="lazy"
+                        data-src="https://shofy.botble.com/storage/main/sliders/shape-3.png"
+                        alt="Bộ sưu tập máy tính bảng tốt nhất 2025"><img src=storage/main/general/placeholder.png
+                        data-bb-lazy="true" class="tp-slider-shape-4" loading="lazy"
+                        data-src="https://shofy.botble.com/storage/main/sliders/shape-4.png"
+                        alt="Bộ sưu tập máy tính bảng tốt nhất 2025">
+                </div>
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-xl-5 col-lg-6 col-md-6">
+                            <div class="tp-slider-content p-relative z-index-1">
+                                <span>Bắt đầu từ
+                                    <b>274.000₫</b></span>
+                                <h3 class="tp-slider-title page_speed_12458825">
+                                    Bộ sưu tập máy tính bảng tốt nhất 2025
+                                </h3>
+                                <p class="page_speed_873799895">
+                                    Ưu đãi đặc biệt
+                                    <span>-35%</span>
+                                    giảm giá
+                                    tuần này
+                                </p>
+                                <div class="tp-slider-btn">
+                                    <a href="products.html" class="tp-btn tp-btn-2 tp-btn-white">
+                                        Mua ngay
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-7 col-lg-6 col-md-6">
+                            <div class="tp-slider-thumb text-end">
+                                <a href="products.html">
+                                    <picture>
+                                        <source srcset="https://shofy.botble.com/storage/main/sliders/slider-1.png"
+                                            media="(min-width: 1200px)">
+                                        <source srcset="https://shofy.botble.com/storage/main/sliders/slider-1.png"
+                                            media="(min-width: 768px)">
+                                        <source srcset="https://shofy.botble.com/storage/main/sliders/slider-1.png"
+                                            media="(max-width: 767px)">
+                                        <img src=storage/main/general/placeholder.png data-bb-lazy="true"
+                                            loading="eager"
+                                            data-src="https://shofy.botble.com/storage/main/sliders/slider-1.png"
+                                            alt="Bộ sưu tập máy tính bảng tốt nhất 2025">
+                                    </picture>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tp-slider-item tp-slider-height d-flex align-items-center swiper-slide page_speed_234370733">
+                <div class="tp-slider-shape d-none d-sm-block">
+                    <img src=storage/main/general/placeholder.png data-bb-lazy="true" class="tp-slider-shape-1"
+                        loading="lazy" data-src="https://shofy.botble.com/storage/main/sliders/shape-1.png"
+                        alt="Bộ sưu tập sổ tay tốt nhất 2025"><img src=storage/main/general/placeholder.png
+                        data-bb-lazy="true" class="tp-slider-shape-2" loading="lazy"
+                        data-src="https://shofy.botble.com/storage/main/sliders/shape-2.png"
+                        alt="Bộ sưu tập sổ tay tốt nhất 2025"><img src=storage/main/general/placeholder.png
+                        data-bb-lazy="true" class="tp-slider-shape-3" loading="lazy"
+                        data-src="https://shofy.botble.com/storage/main/sliders/shape-3.png"
+                        alt="Bộ sưu tập sổ tay tốt nhất 2025"><img src=storage/main/general/placeholder.png
+                        data-bb-lazy="true" class="tp-slider-shape-4" loading="lazy"
+                        data-src="https://shofy.botble.com/storage/main/sliders/shape-4.png"
+                        alt="Bộ sưu tập sổ tay tốt nhất 2025">
+                </div>
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-xl-5 col-lg-6 col-md-6">
+                            <div class="tp-slider-content p-relative z-index-1">
+                                <span>Bắt đầu từ
+                                    <b>999.000₫</b></span>
+                                <h3 class="tp-slider-title page_speed_12458825">
+                                    Bộ sưu tập sổ tay tốt nhất 2025
+                                </h3>
+                                <p class="page_speed_873799895">
+                                    Ưu đãi đặc biệt
+                                    <span>-10%</span>
+                                    giảm giá
+                                    tuần này
+                                </p>
+                                <div class="tp-slider-btn">
+                                    <a href="products.html" class="tp-btn tp-btn-2 tp-btn-white">
+                                        Mua ngay
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-7 col-lg-6 col-md-6">
+                            <div class="tp-slider-thumb text-end">
+                                <a href="products.html">
+                                    <picture>
+                                        <source srcset="https://shofy.botble.com/storage/main/sliders/slider-3.png"
+                                            media="(min-width: 1200px)">
+                                        <source srcset="https://shofy.botble.com/storage/main/sliders/slider-3.png"
+                                            media="(min-width: 768px)">
+                                        <source srcset="https://shofy.botble.com/storage/main/sliders/slider-3.png"
+                                            media="(max-width: 767px)">
+                                        <img src=storage/main/general/placeholder.png data-bb-lazy="true"
+                                            loading="eager"
+                                            data-src="https://shofy.botble.com/storage/main/sliders/slider-3.png"
+                                            alt="Bộ sưu tập sổ tay tốt nhất 2025">
+                                    </picture>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tp-slider-item tp-slider-height d-flex align-items-center swiper-slide is-light page_speed_315843806">
+                <div class="tp-slider-shape d-none d-sm-block">
+                    <img src=storage/main/general/placeholder.png data-bb-lazy="true" class="tp-slider-shape-1"
+                        loading="lazy" data-src="https://shofy.botble.com/storage/main/sliders/shape-1.png"
+                        alt="Bộ sưu tập điện thoại tốt nhất 2025"><img src=storage/main/general/placeholder.png
+                        data-bb-lazy="true" class="tp-slider-shape-2" loading="lazy"
+                        data-src="https://shofy.botble.com/storage/main/sliders/shape-2.png"
+                        alt="Bộ sưu tập điện thoại tốt nhất 2025"><img src=storage/main/general/placeholder.png
+                        data-bb-lazy="true" class="tp-slider-shape-3" loading="lazy"
+                        data-src="https://shofy.botble.com/storage/main/sliders/shape-3.png"
+                        alt="Bộ sưu tập điện thoại tốt nhất 2025"><img src=storage/main/general/placeholder.png
+                        data-bb-lazy="true" class="tp-slider-shape-4" loading="lazy"
+                        data-src="https://shofy.botble.com/storage/main/sliders/shape-4.png"
+                        alt="Bộ sưu tập điện thoại tốt nhất 2025">
+                </div>
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-xl-5 col-lg-6 col-md-6">
+                            <div class="tp-slider-content p-relative z-index-1">
+                                <span>Bắt đầu từ
+                                    <b>999.000₫</b></span>
+                                <h3 class="tp-slider-title page_speed_12458825">
+                                    Bộ sưu tập điện thoại tốt nhất 2025
+                                </h3>
+                                <p class="page_speed_873799895">
+                                    Ưu đãi đặc biệt
+                                    <span>-10%</span>
+                                    giảm giá
+                                    tuần này
+                                </p>
+                                <div class="tp-slider-btn">
+                                    <a href="products.html" class="tp-btn tp-btn-2 tp-btn-white">
+                                        Mua ngay
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-7 col-lg-6 col-md-6">
+                            <div class="tp-slider-thumb text-end">
+                                <a href="products.html">
+                                    <picture>
+                                        <source
+                                            srcset="https://shofy.botble.com/storage/main/sliders/slider-2.png"
+                                            media="(min-width: 1200px)">
+                                        <source
+                                            srcset="https://shofy.botble.com/storage/main/sliders/slider-2.png"
+                                            media="(min-width: 768px)">
+                                        <source
+                                            srcset="https://shofy.botble.com/storage/main/sliders/slider-2.png"
+                                            media="(max-width: 767px)">
+                                        <img src=storage/main/general/placeholder.png data-bb-lazy="true"
+                                            loading="eager"
+                                            data-src="https://shofy.botble.com/storage/main/sliders/slider-2.png"
+                                            alt="Bộ sưu tập điện thoại tốt nhất 2025">
+                                    </picture>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tp-slider-arrow tp-swiper-arrow d-none d-lg-block">
+            <button type=button class="tp-slider-button-prev"><svg width=8 height=14 viewBox="0 0 8 14"
+                    fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M7 13L1 7L7 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                </svg></button><button type=button class="tp-slider-button-next"><svg width=8 height=14
+                    viewBox="0 0 8 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M1 13L7 7L1 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                </svg></button>
+        </div>
+        <div class="tp-slider-dot tp-swiper-dot">
+        </div>
+    </div>
+</section>
+
          <section class="tp-product-category pt-60 pb-15 page_speed_1476740769">
              <div class="container">
                  <div class="tp-product-categories-slider swiper-container" data-items="5">
@@ -404,7 +377,7 @@
                      <div class="col-xl-5 col-lg-6 col-md-5">
                          <div class="tp-section-title-wrapper ">
                              <h3 class="section-title tp-section-title">
-                                 <span>Trending</span> Products
+                                 Sản phẩm <span>Mới</span>
                              </h3>
                          </div>
 
@@ -499,7 +472,7 @@
                      <div class="col-xl-5 col-lg-6 col-md-5">
                          <div class="tp-section-title-wrapper ">
                              <h3 class="section-title tp-section-title">
-                                 <span>Trending</span> Products
+                                Sản phẩm <span>được đánh giá cao</span>
                              </h3>
                          </div>
 

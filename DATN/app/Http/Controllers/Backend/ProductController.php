@@ -89,10 +89,12 @@ class ProductController extends Controller
             $variantImages = ProductVariant::where('product_id', $id)
                 ->get(['image_url', 'id'])->toArray();
         }
+        $productRelated = Product::where('category_id', $product->category_id)->limit(8)->get();
         return view('detail', compact(
             'product',
             'groupedAttributes',
-            'variantImages'
+            'variantImages',
+            'productRelated'
         ));
     }
 
