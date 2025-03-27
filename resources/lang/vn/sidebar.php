@@ -16,11 +16,11 @@ return [
                 ],
                 [
                     'title' => 'QL Loại thuộc tính',
-                    'route' => 'attribute/catalogue/index'
+                    'route' => 'attribute/index'
                 ],
                 [
                     'title' => 'QL thuộc tính',
-                    'route' => 'attribute/index'
+                    'route' => 'attribute/value/index'
                 ],
 
             ]

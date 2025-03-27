@@ -47,7 +47,7 @@ class ProductService
 
     public function create($request){
         $attribute = $request->attribute;
-        $result = $this->transformAttributeArray($attribute);
+        $result = $this->transformAttributes($attribute);
 
         DB::beginTransaction();
         try{

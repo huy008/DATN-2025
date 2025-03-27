@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\Backend\AttributeController;
 use App\Http\Controllers\Backend\AttributeValueController;
+
+use App\Http\Controllers\Backend\ProductCatalogueController;
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Backend\ProductController;
@@ -67,6 +69,16 @@ Route::group(['prefix' => 'attribute'], function () {
     Route::post('{id}/update', [AttributeController::class, 'update'])->where(['id' => '[0-9]+'])->name('attribute.update');
     Route::get('{id}/delete', [AttributeController::class, 'delete'])->where(['id' => '[0-9]+'])->name('attribute.delete');
     Route::delete('{id}/destroy', [AttributeController::class, 'destroy'])->where(['id' => '[0-9]+'])->name('attribute.destroy');
+});
+
+Route::group(['prefix' => 'product/catalogue'], function () {
+    Route::get('index', [ProductCatalogueController::class, 'index'])->name('product.catalogue.index');
+    Route::get('create', [ProductCatalogueController::class, 'create'])->name('product.catalogue.create');
+    Route::post('store', [ProductCatalogueController::class, 'store'])->name('product.catalogue.store');
+    Route::get('{id}/edit', [ProductCatalogueController::class, 'edit'])->where(['id' => '[0-9]+'])->name('product.catalogue.edit');
+    Route::post('{id}/update', [ProductCatalogueController::class, 'update'])->where(['id' => '[0-9]+'])->name('product.catalogue.update');
+    Route::get('{id}/delete', [ProductCatalogueController::class, 'delete'])->where(['id' => '[0-9]+'])->name('product.catalogue.delete');
+    Route::delete('{id}/destroy', [ProductCatalogueController::class, 'destroy'])->where(['id' => '[0-9]+'])->name('product.catalogue.destroy');
 });
 
 Route::get('ajax/attribute/getAttribute', [AttributeValueController::class, 'getAttribute'])->name('ajax.attribute.getAttribute');
