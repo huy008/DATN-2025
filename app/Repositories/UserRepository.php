@@ -10,7 +10,7 @@ use App\Repositories\BaseRepository;
  * Class UserService
  * @package App\Services
  */
-class UserRepository extends BaseRepository implements UserRepositoryInterface
+class UserRepository extends BaseRepository 
 {
     protected $model;
 

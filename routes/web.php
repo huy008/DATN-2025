@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Backend\AttributeController;
 use App\Http\Controllers\Backend\AttributeValueController;
+use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Backend\ProductController;
 
@@ -25,19 +26,19 @@ Route::get('/', function () {
 Route::get('/detail', [ProductController::class, 'detail'])->name('product.detail');
 Route::post('/find-variant', [ProductController::class, 'findVariant'])->name('product.findVariant');
 
-Route::get('/login', function () {
-    return view('login');
-});
+// Route::get('/login', function () {
+//     return view('login');
+// });
 
-Route::get('/register', function () {
-    return view('register');
-});
-Route::get('/cart', function () {
-    return view('cart');
-});
-Route::get('/checkout', function () {
-    return view('checkout');
-});
+// Route::get('/register', function () {
+//     return view('register');
+// });
+// Route::get('/cart', function () {
+//     return view('cart');
+// });
+// Route::get('/checkout', function () {
+//     return view('checkout');
+// });
 
 Route::group(['prefix' => 'product'], function () {
     Route::get('index', [ProductController::class, 'index'])->name('product.index');
@@ -69,3 +70,12 @@ Route::group(['prefix' => 'attribute'], function () {
 });
 
 Route::get('ajax/attribute/getAttribute', [AttributeValueController::class, 'getAttribute'])->name('ajax.attribute.getAttribute');
+
+// Route::middleware(['guest:web'])->group(
+//     function () {
+        Route::post('login', [AuthController::class, 'postLogin'])->name('login.post');
+        Route::get('/login', [AuthController::class, 'login'])->name('login');
+        Route::get('register', [AuthController::class, 'index'])->name('register');
+        Route::post('register', [AuthController::class, 'register'])->name('register.post');
+//     }
+// );

@@ -72,14 +72,15 @@
                                          </div>
                                      </div>
                                      <div class="auth-card__body">
-                                         <form method="POST" action="https://shofy.botble.com/register"
+                                         <form method="POST" action="{{route('register.post')}}"
                                              accept-charset="UTF-8" id="botble-ecommerce-forms-fronts-auth-register-form"
                                              class="js-base-form dirty-check" icon="ti ti-user-plus"
                                              heading="Register an account"
                                              description="Your personal data will be used to support your experience throughout this website, to manage access to your account."
                                              banner="main/general/auth-banner.png" bannerDirection="horizontal">
-                                             <input name=_token type=hidden
-                                                 value="SPz1qyncaKbdv25m6D9mAygMzUr373EJVS4dARKR">
+                                             @csrf
+                                             {{-- <input name=_token type=hidden
+                                                 value="SPz1qyncaKbdv25m6D9mAygMzUr373EJVS4dARKR"> --}}
                                              <div class="mb-3 position-relative">
                                                  <label class="form-label" for="name">
                                                      Full
@@ -137,7 +138,7 @@
                                                          </svg></span><input
                                                          class="form-control ps-5 js-phone-number-mask form-control"
                                                          data-counter="250" placeholder="Phone number" autocomplete="tel"
-                                                         name=phone type=text id="phone">
+                                                         name=phone_number type=text id="phone">
                                                  </div>
                                              </div>
                                              <div class="mb-3 position-relative">
@@ -245,76 +246,7 @@
                                                      </div>
                                                  </div>
                                              </div>
-                                             <div class="mb-3 position-relative">
-                                                 <label class="form-label" for="is_vendor">
-                                                     Register
-                                                     as
-                                                 </label>
-                                                 <div class="position-relative form-check-group">
-                                                     <label class="form-check form-check-inline"><input
-                                                             class="form-check-input" id="is_vendor_0" type=radio
-                                                             name=is_vendor value="0" checked><span
-                                                             class="form-check-label">I
-                                                             am
-                                                             a
-                                                             customer</span></label><label
-                                                         class="form-check form-check-inline"><input
-                                                             class="form-check-input" id="is_vendor_0_1" type=radio
-                                                             name=is_vendor value="1"><span
-                                                             class="form-check-label">I
-                                                             am
-                                                             a
-                                                             vendor</span></label>
-                                                 </div>
-                                             </div>
-                                             <div data-bb-toggle="vendor-info" class="page_speed_1148921326">
-                                                 <div class="mb-3 position-relative">
-                                                     <label class="form-label" for="shop_name">
-                                                         Shop
-                                                         Name
-                                                     </label><input class="form-control" data-counter="250"
-                                                         placeholder="Ex: My Shop" name=shop_name type=text
-                                                         id="shop_name">
-                                                 </div>
-                                                 <div class="mb-3 position-relative">
-                                                     <label class="form-label form-label required" for="shop_url">
-                                                         Shop
-                                                         URL
-                                                     </label><span
-                                                         class="position-absolute top-0 end-0 shop-url-status"></span>
-                                                     <div class="input-group">
-                                                         <span
-                                                             class="input-group-text">https://shofy.botble.com/stores</span><input
-                                                             class="form-control"
-                                                             data-url="https://shofy.botble.com/ajax/stores/check-store-url"
-                                                             required="required" name=shop_url type=text id="shop_url">
-                                                     </div>
-                                                 </div>
-                                                 <div class="mb-3 position-relative">
-                                                     <label class="form-label" for="shop_phone">
-                                                         Phone
-                                                         Number
-                                                     </label><input class="form-control" data-counter="250"
-                                                         placeholder="Ex: 0943243332" name=shop_phone type=tel
-                                                         id="shop_phone">
-                                                 </div>
-                                             </div>
-                                             <div class="mb-3 position-relative">
-                                                 <input type=hidden name=agree_terms_and_policy value="0"><label
-                                                     class="form-check"><input type=checkbox
-                                                         id="agree_terms_and_policy_243f28785407323f2c450d79cc588bc4"
-                                                         name=agree_terms_and_policy class="form-check-input"
-                                                         value="1"><span class="form-check-label">
-                                                         I
-                                                         agree
-                                                         to
-                                                         the
-                                                         <a href="privacy-policy.html" class="text-decoration-underline"
-                                                             target="_blank" rel="noreferrer noopener">Terms
-                                                             and
-                                                             Privacy
-                                                             Policy</a></span></label>
-                                             </div>
+                           
                                              <div class="d-grid">
                                                  <button class="btn btn-primary btn-auth-submit" type=submit>Register<svg
                                                          class="icon svg-icon-ti-ti-arrow-narrow-right"

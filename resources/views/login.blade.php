@@ -361,7 +361,7 @@
                   </div>
                   <div class="col-xl-5 col-lg-5">
                       <div class="tp-subscribe-form">
-                          <form method="POST" action="https://shofy.botble.com/newsletter/subscribe"
+                          <form method="POST" action="{{route('login')}}"
                               accept-charset="UTF-8" id="botble-newsletter-forms-fronts-newsletter-form"
                               class="subscribe-form dirty-check">
                               <input name=_token type=hidden value="SPz1qyncaKbdv25m6D9mAygMzUr373EJVS4dARKR">
