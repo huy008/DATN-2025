@@ -62,12 +62,10 @@ class ProductController extends Controller
                 });
             });
 
-            // Loại bỏ các bản ghi trùng lặp
             $uniqueAttributes = $attributes->unique(function ($item) {
                 return $item['attribute_name'] . '-' . $item['attribute_value_id'] . '-' . $item['attribute_value'];
             });
 
-            // Nhóm các giá trị theo tên thuộc tính
             $groupedAttributes = [];
             foreach ($uniqueAttributes as $attribute) {
                 $groupedAttributes[$attribute['attribute_name']][] = [
@@ -75,26 +73,7 @@ class ProductController extends Controller
                     'attribute_value' => $attribute['attribute_value'],
                 ];
             }
-            // dd($groupedAttributes);
         }
-        // if ($product) {
-        //     $formattedData = [
-        //         'product_name' => $product->name,
-        //         'variants' => $product->variants->map(function ($variant) {
-        //             return [
-        //                 'sku' => $variant->sku,
-        //                 'price' => $variant->price,
-        //                 'attributes' => $variant->attributes->map(function ($attribute) {
-        //                     return [
-        //                         'attribute_name' => $attribute->attribute->name,
-        //                         'attribute_value' => $attribute->attributeValue->value,
-        //                     ];
-        //                 })->toArray(), // Chuyển attributes thành mảng nếu cần
-        //             ];
-        //         })->toArray(), // Chuyển variants thành mảng nếu cần
-        //     ];
-        //     dd($formattedData);
-        // }
 
         $variantImages = ProductVariant::where('product_id', 12)
            ->get('image_url')->toArray();
@@ -111,7 +90,6 @@ class ProductController extends Controller
         $capacityId = $request->input('capacity_id');
         $productId = $request->input('product_id');
 
-        // Tìm biến thể có cả 2 thuộc tính: màu và dung lượng
         $variant = ProductVariant::where('product_id', $productId)
             ->whereHas('attributes', function ($query) use ($colorId) {
                 $query->where('attribute_value_id', $colorId);
@@ -179,9 +157,8 @@ class ProductController extends Controller
 
     public function delete($id)
     {
-        // $this->authorize('modules', 'product.destroy');
         $config['seo'] = __('messages.product');
-        $product = $this->productRepository->getProductById($id, $this->language);
+        $product = $this->productRepository->findById($id);
         $template = 'backend.product.product.delete';
         return view('backend.dashboard.layout', compact(
             'template',
@@ -192,7 +169,7 @@ class ProductController extends Controller
 
     public function destroy($id)
     {
-        if ($this->productService->destroy($id, $this->language)) {
+        if ($this->productService->destroy($id)) {
             return redirect()->route('product.index')->with('success', 'Xóa bản ghi thành công');
         }
         return redirect()->route('product.index')->with('error', 'Xóa bản ghi không thành công. Hãy thử lại');

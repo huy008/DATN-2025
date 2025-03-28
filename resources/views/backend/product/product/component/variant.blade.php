@@ -9,7 +9,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="variant-checkbox uk-flex uk-flex-middle">
-                    <input type="checkbox" value="" name="accept" id="variantCheckbox" class="variantInputCheckbox">
+                    <input type="checkbox" name="accept" value="1" id="variantCheckbox" class="variantInputCheckbox">
                     <label for="variantCheckbox" class="turnOnVariant">Sản phẩm này có nhiều biến thể. Ví dụ như khác nhau về màu sắc, kích thước</label>
                 </div>
             </div>

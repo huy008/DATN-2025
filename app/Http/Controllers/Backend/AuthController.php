@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Http\Requests\AuthRequest;
 use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
@@ -15,7 +14,7 @@ class AuthController extends Controller
 
     public function index(){
 
-        if(Auth::id() > 0){
+        if(Auth::guard('admin')->id() > 0){
             return redirect()->route('dashboard.index');
         }
         
@@ -27,7 +26,7 @@ class AuthController extends Controller
             'email' => $request->input('email'),
             'password' => $request->input('password')
         ];
-        if (Auth::attempt($credentials)) {
+        if (Auth::guard('admin')->attempt($credentials)) {
            return redirect()->route('dashboard.index')->with('success','Đăng nhập thành công');
         }
         return redirect()->route('auth.admin')->with('error','Email hoặc Mật khẩu không chính xác');
@@ -35,7 +34,7 @@ class AuthController extends Controller
     }
 
     public function logout(Request $request){
-        Auth::logout();
+        Auth::guard('admin')->logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
         return redirect()->route('auth.admin');

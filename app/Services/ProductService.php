@@ -47,8 +47,9 @@ class ProductService
 
     public function create($request){
         $attribute = $request->attribute;
+        $type = $request->has('accept') ? 1 : 0;
+        if($type == 1)
         $result = $this->transformAttributes($attribute);
-
         DB::beginTransaction();
         try{
             $product = Product::create([
@@ -59,19 +60,21 @@ class ProductService
                 'brand' => $request->branch,
                 'base_price' => $request->price,
                 'img_thumbnail' => $request->image,
+                'type' => $type,
             ]);
+            if ($type == 1){
 
-            foreach ($request->variant['price'] as $index => $price) {
-                $variant = $product->variants()->create([
-                    'price' => $price,
-                    'stock_quantity' => $request->variant['quantity'][$index],
-                    'image_url' => $request->variant['album'][$index],
-                    'sku' => $request->variant['sku'][$index],
-                ]);
-                $result[$index]['variantId'] = $variant->id;
-            }
-
-            foreach ($result as $keys => $values) {
+                foreach ($request->variant['price'] as $index => $price) {
+                    $variant = $product->variants()->create([
+                        'price' => $price,
+                        'stock_quantity' => $request->variant['quantity'][$index],
+                        'image_url' => $request->variant['album'][$index],
+                        'sku' => $request->variant['sku'][$index],
+                    ]);
+                    $result[$index]['variantId'] = $variant->id;
+                }
+                
+                foreach ($result as $keys => $values) {
                 foreach ($values as $key => $value) {
                     if ($key === "variantId") {
                         continue;
@@ -83,6 +86,7 @@ class ProductService
                     ]);
                 }
             }
+        }
             DB::commit();
             return true;
         }catch(\Exception $e ){

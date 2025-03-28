@@ -5,10 +5,11 @@
         <th style="width:50px;">
             <input type="checkbox" value="" id="checkAll" class="input-checkbox">
         </th>
-        <th>{{ __('messages.tableName') }}</th>
-        <th style="width:80px;" class="text-center">{{ __('messages.tableOrder') }}</th>
-        <th class="text-center" style="width:100px;">{{ __('messages.tableStatus') }}</th>
-        <th class="text-center" style="width:100px;">{{ __('messages.tableAction') }}</th>
+        <th>Ảnh sản phẩm</th>
+        <th>Tên sản phẩm</th>
+        <th>Mô tả</th>
+        <th>Giá</th>
+        <th text-align="right">Thao tác</th>
     </tr>
     </thead>
     <tbody>
@@ -23,7 +24,11 @@
                         <div class="image mr5">
                             <div class="img-cover image-product"><img src="{{ asset($product->img_thumbnail) }}" alt=""></div>
                         </div>
-                        <div class="main-info">
+                 
+                    </div>
+                </td>
+                <td>
+                           <div class="main-info">
                             <div class="name"><span class="maintitle">{{ $product->name }}</span></div>
                             <div class="catalogue">
                                 <span class="text-danger">{{ __('messages.tableGroup') }} </span>
@@ -35,11 +40,12 @@
                             </div>
                             
                         </div>
-                    </div>
                 </td>
-                {{-- @include('backend.dashboard.component.languageTd', ['model' => $product, 'modeling' => 'Product']) --}}
                 <td>
-                    <input type="text" name="order" value="{{ $product->order }}" class="form-control sort-order text-right" data-id="{{ $product->id }}" data-model="{{ $config['model'] }}">
+                    {!! $product->description!!}
+                </td>
+                              <td>
+                    {{ $product->base_price }}
                 </td>
                 <td class="text-center"> 
                     <a href="{{ route('product.edit', $product->id) }}" class="btn btn-success"><i class="fa fa-edit"></i></a>
