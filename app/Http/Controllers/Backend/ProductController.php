@@ -52,10 +52,10 @@ class ProductController extends Controller
         ));
     }
 
-    public function detail()
+    public function detail($id)
     {
         $product = Product::with(['variants.attributes.attribute', 'variants.attributes.attributeValue'])
-            ->find(12);
+            ->find($id);
         if ($product) {
             $attributes = $product->variants->flatMap(function ($variant) {
                 return $variant->attributes->map(function ($attribute) {
@@ -78,10 +78,9 @@ class ProductController extends Controller
                     'attribute_value' => $attribute['attribute_value'],
                 ];
             }
+            $variantImages = ProductVariant::where('product_id',$id)
+                ->get('image_url')->toArray();
         }
-
-        $variantImages = ProductVariant::where('product_id', 12)
-           ->get('image_url')->toArray();
         return view('detail', compact(
             'product',
             'groupedAttributes',

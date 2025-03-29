@@ -9,6 +9,9 @@ use App\Http\Controllers\Backend\AuthController as AdminAuthController;
 use App\Http\Controllers\Backend\DashboardController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Backend\ProductController;
+use App\Http\Controllers\DashboardClientController;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\CheckoutController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,12 +24,19 @@ use App\Http\Controllers\Backend\ProductController;
 |
 */
 
-Route::get('dashboard/index', [DashboardController::class, 'index'])->name('dashboard.index');
-Route::get('/', function () {
-    return view('home');
-});
-Route::get('/detail', [ProductController::class, 'detail'])->name('product.detail');
+Route::get('/', [DashboardClientController::class, 'index'])->name('index');
+Route::get('{id}/detail', [ProductController::class, 'detail'])->name('product.detail');
 Route::post('/find-variant', [ProductController::class, 'findVariant'])->name('product.findVariant');
+
+Route::get('/', [DashboardClientController::class, 'index'])->name('index');
+Route::get('{id}/detail', [ProductController::class, 'detail'])->name('product.detail');
+Route::post('/find-variant', [ProductController::class, 'findVariant'])->name('product.findVariant');
+
+Route::post('/cart/add-to-cart', [CartController::class, 'addToCart'])->name('cart.add');
+Route::post('/cart/checkout', [CartController::class, 'checkout'])->name('cart.checkout');
+Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout');
+Route::post('/checkout', [CheckoutController::class, 'store'])->name('checkout.store');
 
 Route::group(['prefix' => 'product'], function () {
     Route::get('index', [ProductController::class, 'index'])->name('product.index');
@@ -68,6 +78,8 @@ Route::group(['prefix' => 'product/catalogue'], function () {
 });
 
 Route::get('ajax/attribute/getAttribute', [AttributeValueController::class, 'getAttribute'])->name('ajax.attribute.getAttribute');
+
+Route::get('dashboard/index', [DashboardController::class, 'index'])->name('dashboard.index');
 
 // Route::middleware(['guest:web'])->group(
 //     function () {

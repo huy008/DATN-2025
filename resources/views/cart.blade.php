@@ -1,5 +1,5 @@
  @extends('layout.main')
-
+{{-- @dd($cart) --}}
  @section('content')
      <main>
          <section class="breadcrumb__area include-bg pt-60 pb-60 mb-50 mb-30 text-start pt-30 page_speed_1984785789">

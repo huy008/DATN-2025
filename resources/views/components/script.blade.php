@@ -81,7 +81,7 @@
 </script>
 <script src={{ asset('client/vendor/core/plugins/ecommerce/js/front-ecommerce8913.js?v=1.3.1.3') }}></script>
 <script src={{ asset('client/vendor/core/plugins/ecommerce/js/front-reviewc8c4.js?v=1.3.1') }}></script>
-<script defer src={{ asset('client/themes/shofy/js/ecommercec8c4.js?v=1.3.1') }}></script>
+
 <script async defer src='https://www.googletagmanager.com/gtag/js?id=G-76NX8HY29D'></script>
 <script>
     window.dataLayer = window.dataLayer || [];
