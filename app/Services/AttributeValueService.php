@@ -29,12 +29,12 @@ class  AttributeValueService
         $perPage = $request->integer('perpage');
         $condition = [
             'keyword' => addslashes($request->input('keyword')),
-            'publish' => $request->integer('publish'),
         ];
         $attributeCatalogues = $this->attributeCatalogueRepository->pagination(
             column: ['id', 'value', 'attribute_id'],
             perPage: $perPage,
-            extend: ['path' => 'attribute.value.index'],  
+            extend: ['path' => 'attribute/value/index'],
+            condition : $condition
         );
 
         return $attributeCatalogues;

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Product;
 use App\Models\ProductVariant;
 use App\Repositories\AttributeRepository;
+use App\Repositories\CategoryRepository;
 use App\Repositories\ProductRepository;
 use App\Services\ProductService;
 use Illuminate\Http\Request;
@@ -16,18 +17,21 @@ class ProductController extends Controller
     protected $productService;
     protected $productRepository;
     protected $attributeRepository;
+    protected $categoryRepository;
 
-    public function __construct(AttributeRepository $attributeRepository, ProductService $productService, ProductRepository $productRepository)
+    public function __construct(AttributeRepository $attributeRepository, ProductService $productService, ProductRepository $productRepository,CategoryRepository $categoryRepository)
     {
         $this->productService = $productService;
         $this->productRepository = $productRepository;
         $this->attributeRepository = $attributeRepository;
+        $this->categoryRepository = $categoryRepository;
     }
 
 
     public function index(Request $request)
     {
         $products = $this->productService->paginate($request);
+        $productCategories = $this->categoryRepository->all();
         $config = [
             'js' => [
                 'backend/js/plugins/switchery/switchery.js',
@@ -43,7 +47,8 @@ class ProductController extends Controller
         return view('backend.dashboard.layout', compact(
             'template',
             'config',
-            'products'
+            'products',
+            'productCategories'
         ));
     }
 
@@ -112,6 +117,7 @@ class ProductController extends Controller
 
     public function create()
     {
+        $productCategories = $this->categoryRepository->all();
         $attributes = $this->attributeRepository->all();
         $config = $this->configData();
         $config['seo'] = __('messages.product');
@@ -120,7 +126,8 @@ class ProductController extends Controller
         return view('backend.dashboard.layout', compact(
             'template',
             'config',
-            'attributes'
+            'attributes',
+            'productCategories'
         ));
     }
     // StoreProductRequest

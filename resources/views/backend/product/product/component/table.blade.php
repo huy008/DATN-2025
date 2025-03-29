@@ -9,7 +9,7 @@
         <th>Tên sản phẩm</th>
         <th>Mô tả</th>
         <th>Giá</th>
-        <th text-align="right">Thao tác</th>
+        <th class="text-center">Thao tác</th>
     </tr>
     </thead>
     <tbody>

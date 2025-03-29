@@ -28,15 +28,10 @@ class AttributeService
             'keyword' => addslashes($request->input('keyword')),
         ];
         $paginationConfig = [
-            'path' => 'attribute.index', 
-            'groupBy' => ['name']
+            'path' => 'attribute/index', 
         ];
         $orderBy = ['attributes.id', 'DESC'];
         $relations = ['attribute_values'];
-        // $joins = [
-        //     ['attribute_language as tb2', 'tb2.attribute_id', '=', 'attributes.id'],
-        //     ['attribute_catalogue_attribute as tb3', 'attributes.id', '=', 'tb3.attribute_id'],
-        // ];
 
         $attributes = $this->attributeRepository->pagination(
             column: ['id','name'],

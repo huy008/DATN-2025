@@ -30,7 +30,7 @@ class CategoryService
             $this->paginateSelect(), 
             $condition, 
             $perPage,
-            ['path' => 'product.catalogue.index'],  
+            ['path' => 'product/catalogue/index'],  
         );
 
         return $productCatalogues;

@@ -7,14 +7,12 @@
             <div class="col-lg-12">
                 <div class="form-row">
                     <select name="product_catalogue_id" class="form-control setupSelect2" id="">
-                        {{-- @foreach($dropdown as $key => $val)
+                        @foreach($productCategories as $val)
                         <option {{ 
-                            $key == old('product_catalogue_id', (isset($product->product_catalogue_id)) ? $product->product_catalogue_id : '') ? 'selected' : '' 
-                            }} value="{{ $key }}">{{ $val }}</option>
-                        @endforeach --}}
-                        @for($i = 0; $i < 6; $i++)
-                            <option value="{{ $i }}">Catalogue {{ $i }}</option>
-                        @endfor
+                            $val->id == old('product_catalogue_id', (isset($product->product_catalogue_id)) ? $product->product_catalogue_id : '') ? 'selected' : '' 
+                            }} value="{{ $val->id }}">{{ $val->name }}</option>
+                        @endforeach
+
                     </select>
                 </div>
             </div>

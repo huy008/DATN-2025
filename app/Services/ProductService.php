@@ -29,11 +29,9 @@ class ProductService
             'keyword' => addslashes($request->input('keyword')),
         ];
         $paginationConfig = [
-            'path' => 'product.index', 
-            // 'groupBy' => $this->paginateSelect()
+            'path' => 'product/index', 
         ];
         $orderBy = ['id', 'DESC'];
-        // $relations = ['category'];
 
         $products = $this->productRepository->pagination(
             column: $this->paginateSelect(),
@@ -304,7 +302,8 @@ class ProductService
             'name',
             'base_price',
             'img_thumbnail',
-            'short_description'
+            'short_description',
+            'description',
         ];
     }
 
