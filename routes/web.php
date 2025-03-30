@@ -24,9 +24,6 @@ use App\Http\Controllers\CheckoutController;
 |
 */
 
-Route::get('/', [DashboardClientController::class, 'index'])->name('index');
-Route::get('{id}/detail', [ProductController::class, 'detail'])->name('product.detail');
-Route::post('/find-variant', [ProductController::class, 'findVariant'])->name('product.findVariant');
 
 Route::get('/', [DashboardClientController::class, 'index'])->name('index');
 Route::get('{id}/detail', [ProductController::class, 'detail'])->name('product.detail');

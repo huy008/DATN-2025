@@ -140,6 +140,7 @@ class ProductController extends Controller
 
     public function edit($id)
     {
+        $productCategories = $this->categoryRepository->all();
         $attributes = $this->attributeRepository->all();
         $product = $this->productRepository->findById($id);
         $config = $this->configData();
@@ -149,7 +150,8 @@ class ProductController extends Controller
             'template',
             'config',
             'product',
-            'attributes'
+            'attributes',
+            'productCategories'
         ));
     }
 

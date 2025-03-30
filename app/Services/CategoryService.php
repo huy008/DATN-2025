@@ -17,123 +17,142 @@ class CategoryService
 
     public function __construct(
         CategoryRepository $productCatalogueRepository,
-    ){
+    ) {
         $this->productCatalogueRepository = $productCatalogueRepository;
     }
 
-    public function paginate($request){
+    public function paginate($request)
+    {
         $perPage = $request->integer('perpage');
         $condition = [
             'keyword' => addslashes($request->input('keyword')),
         ];
         $productCatalogues = $this->productCatalogueRepository->pagination(
-            $this->paginateSelect(), 
-            $condition, 
+            $this->paginateSelect(),
+            $condition,
             $perPage,
-            ['path' => 'product/catalogue/index'],  
+            ['path' => 'product/catalogue/index'],
         );
 
         return $productCatalogues;
     }
 
-    public function create($request){
+    public function create($request)
+    {
         DB::beginTransaction();
-        try{
+        try {
             $productCatalogue = $this->createCatalogue($request);
             DB::commit();
             return true;
-        }catch(\Exception $e ){
+        } catch (\Exception $e) {
             DB::rollBack();
             // Log::error($e->getMessage());
-            echo $e->getMessage();die();
+            echo $e->getMessage();
+            die();
             return false;
         }
     }
 
-    public function update($id, $request){
+    public function update($id, $request)
+    {
         DB::beginTransaction();
-        try{
+        try {
             $productCatalogue = $this->productCatalogueRepository->findById($id);
             $flag = $this->updateCatalogue($productCatalogue, $request);
             DB::commit();
             return true;
-        }catch(\Exception $e ){
+        } catch (\Exception $e) {
             DB::rollBack();
             // Log::error($e->getMessage());
-            echo $e->getMessage();die();
+            echo $e->getMessage();
+            die();
             return false;
         }
     }
 
-    public function destroy($id){
+    public function destroy($id)
+    {
         DB::beginTransaction();
-        try{
+        try {
             $productCatalogue = $this->productCatalogueRepository->delete($id);
             DB::commit();
             return true;
-        }catch(\Exception $e ){
+        } catch (\Exception $e) {
             DB::rollBack();
             // Log::error($e->getMessage());
-            echo $e->getMessage();die();
+            echo $e->getMessage();
+            die();
             return false;
         }
     }
 
-    private function createCatalogue($request){
+    private function createCatalogue($request)
+    {
         $payload = $request->only($this->payload());
         $productCatalogue = $this->productCatalogueRepository->create($payload);
         return $productCatalogue;
     }
 
-    private function updateCatalogue($productCatalogue, $request){
+    private function updateCatalogue($productCatalogue, $request)
+    {
         $payload = $request->only($this->payload());
         $flag = $this->productCatalogueRepository->update($productCatalogue->id, $payload);
         return $flag;
     }
 
 
-    public function updateStatus($post = []){
+    public function updateStatus($post = [])
+    {
         DB::beginTransaction();
-        try{
-            $payload[$post['field']] = (($post['value'] == 1)?2:1);
+        try {
+            $payload[$post['field']] = (($post['value'] == 1) ? 2 : 1);
             $postCatalogue = $this->productCatalogueRepository->update($post['modelId'], $payload);
             DB::commit();
             return true;
-        }catch(\Exception $e ){
+        } catch (\Exception $e) {
             DB::rollBack();
             // Log::error($e->getMessage());
-            echo $e->getMessage();die();
+            echo $e->getMessage();
+            die();
             return false;
         }
     }
 
-    public function updateStatusAll($post){
+    public function updateStatusAll($post)
+    {
         DB::beginTransaction();
-        try{
+        try {
             $payload[$post['field']] = $post['value'];
             $flag = $this->productCatalogueRepository->updateByWhereIn('id', $post['id'], $payload);
 
             DB::commit();
             return true;
-        }catch(\Exception $e ){
+        } catch (\Exception $e) {
             DB::rollBack();
             // Log::error($e->getMessage());
-            echo $e->getMessage();die();
+            echo $e->getMessage();
+            die();
             return false;
         }
     }
-    
 
-    private function paginateSelect(){
+
+    private function paginateSelect()
+    {
         return [
-           'id', 'name', 'description'
+            'id',
+            'name',
+            'description',
+            'img_thumbnail'
         ];
     }
 
-    private function payload(){
+    private function payload()
+    {
         return [
             'name',
-            'description'
+            'description',
+            'img_thumbnail'
         ];
     }
 }

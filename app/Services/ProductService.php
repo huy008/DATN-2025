@@ -13,23 +13,24 @@ use Illuminate\Support\Str;
  * Class ProductService
  * @package App\Services
  */
-class ProductService 
+class ProductService
 {
     protected $productRepository;
-    
+
     public function __construct(
         ProductRepository $productRepository,
-    ){
+    ) {
         $this->productRepository = $productRepository;
     }
 
-    public function paginate($request){
+    public function paginate($request)
+    {
         $perPage = $request->integer('perpage');
         $condition = [
             'keyword' => addslashes($request->input('keyword')),
         ];
         $paginationConfig = [
-            'path' => 'product/index', 
+            'path' => 'product/index',
         ];
         $orderBy = ['id', 'DESC'];
 
@@ -37,30 +38,32 @@ class ProductService
             column: $this->paginateSelect(),
             condition: $condition,
             perPage: $perPage,
-            extend:$paginationConfig,
+            extend: $paginationConfig,
             orderBy: $orderBy,
-        ); 
+        );
         return $products;
     }
 
-    public function create($request){
+    public function create($request)
+    {
         $attribute = $request->attribute;
         $type = $request->has('accept') ? 1 : 0;
-        if($type == 1)
-        $result = $this->transformAttributes($attribute);
+        if ($type == 1)
+            $result = $this->transformAttributes($attribute);
         DB::beginTransaction();
-        try{
+        try {
             $product = Product::create([
                 'category_id' => $request->product_catalogue_id,
                 'name' => $request->name,
                 'sku' => $request->sku,
                 'description' => $request->description,
-                'brand' => $request->branch,
                 'base_price' => $request->price,
                 'img_thumbnail' => $request->image,
+                'short_description' => $request->short_description,
+                'stock_quantity' => $request->stock_quantity,
                 'type' => $type,
             ]);
-            if ($type == 1){
+            if ($type == 1) {
 
                 foreach ($request->variant['price'] as $index => $price) {
                     $variant = $product->variants()->create([
@@ -71,50 +74,31 @@ class ProductService
                     ]);
                     $result[$index]['variantId'] = $variant->id;
                 }
-                
+
                 foreach ($result as $keys => $values) {
-                foreach ($values as $key => $value) {
-                    if ($key === "variantId") {
-                        continue;
+                    foreach ($values as $key => $value) {
+                        if ($key === "variantId") {
+                            continue;
+                        }
+                        ProductVariantAttribute::create([
+                            'variant_id' => $values['variantId'],
+                            'attribute_id' => $key,
+                            'attribute_value_id' => $value,
+                        ]);
                     }
-                    ProductVariantAttribute::create([
-                        'variant_id' => $values['variantId'],
-                        'attribute_id' => $key,
-                        'attribute_value_id' => $value,
-                    ]);
                 }
             }
-        }
             DB::commit();
             return true;
-        }catch(\Exception $e ){
+        } catch (\Exception $e) {
             DB::rollBack();
             // Log::error($e->getMessage());
-            echo $e->getMessage();die();
+            echo $e->getMessage();
+            die();
             return false;
         }
     }
 
-    // function transformAttributeArray($attribute)
-    // {
-    //     $result = [];
-
-    //     foreach ($attribute["id"] as $index => $idString) {
-    //         $temp = [];
-    //         foreach ($attribute as $key => $values) {
-    //             if ($key === "id") continue; 
-    //             if (isset($values[$index])) {
-    //                 $temp[$key] = $values[$index];
-    //             } else {
-    //                 $temp[$key] = $values[0];
-    //             }
-    //         }
-
-    //         $result[] = $temp; 
-    //     }
-
-    //     return $result;
-    // }
     function transformAttributes($attributes)
     {
         $result = [];
@@ -134,64 +118,73 @@ class ProductService
 
         return $result;
     }
-    public function update($id, $request){
+    public function update($id, $request)
+    {
         $attribute = $request->attribute;
-        $result = $this->transformAttributes($attribute);
+        $type = $request->has('accept') ? 1 : 0;
         DB::beginTransaction();
-        try{
+        try {
             $product = Product::with('variants.attributes')->find($id);
             $product->update([
                 'category_id' => $request->product_catalogue_id,
                 'name' => $request->name,
                 'sku' => $request->sku,
                 'description' => $request->description,
-                'brand' => $request->branch,
                 'base_price' => $request->price,
                 'img_thumbnail' => $request->image,
+                'short_description' => $request->short_description,
+                'stock_quantity' => $request->stock_quantity,
+                'type' => $type,
             ]);
-            foreach ($product->variants as $variant) {
-                $variant->attributes()->delete(); 
-                $variant->delete(); 
-            }
-            foreach ($request->variant['price'] as $index => $price) {
-                $variant = $product->variants()->create([
-                    'price' => $price,
-                    'stock_quantity' => $request->variant['quantity'][$index],
-                    'image_url' => $request->variant['album'][$index],
-                    'sku' => $request->variant['sku'][$index],
-                ]);
-                $result[$index]['variantId'] = $variant->id;
-            }
-            foreach ($result as $keys => $values) {
-                foreach ($values as $key => $value) {
-                    if($key === "variantId") {
-                        continue;
-                    }
-                    ProductVariantAttribute::create([
-                        'variant_id' => $values['variantId'],
-                        'attribute_id' => $key,
-                        'attribute_value_id' => $value,
+            if ($type == 1) {
+                $result = $this->transformAttributes($attribute);
+
+                foreach ($product->variants as $variant) {
+                    $variant->attributes()->delete();
+                    $variant->delete();
+                }
+                foreach ($request->variant['price'] as $index => $price) {
+                    $variant = $product->variants()->create([
+                        'price' => $price,
+                        'stock_quantity' => $request->variant['quantity'][$index],
+                        'image_url' => $request->variant['album'][$index],
+                        'sku' => $request->variant['sku'][$index],
                     ]);
+                    $result[$index]['variantId'] = $variant->id;
+                }
+                foreach ($result as $keys => $values) {
+                    foreach ($values as $key => $value) {
+                        if ($key === "variantId") {
+                            continue;
+                        }
+                        ProductVariantAttribute::create([
+                            'variant_id' => $values['variantId'],
+                            'attribute_id' => $key,
+                            'attribute_value_id' => $value,
+                        ]);
+                    }
                 }
             }
             DB::commit();
             return true;
-        }catch(\Exception $e ){
+        } catch (\Exception $e) {
             DB::rollBack();
             // Log::error($e->getMessage());
-            echo $e->getMessage();die();
+            echo $e->getMessage();
+            die();
             return false;
         }
     }
 
-    public function destroy($id){
+    public function destroy($id)
+    {
         DB::beginTransaction();
-        try{
+        try {
             $product = $this->productRepository->delete($id);
-            
+
             DB::commit();
             return true;
-        }catch(\Exception $e ){
+        } catch (\Exception $e) {
             DB::rollBack();
             // Log::error($e->getMessage());
             // echo $e->getMessage();die();
@@ -199,7 +192,8 @@ class ProductService
         }
     }
 
-    private function createProduct($request){
+    private function createProduct($request)
+    {
         $payload = $request->only($this->payload());
         $payload['user_id'] = Auth::id();
         // $payload['album'] = $this->formatAlbum($request);
@@ -208,25 +202,29 @@ class ProductService
         return $product;
     }
 
-    private function uploadProduct($product, $request){
+    private function uploadProduct($product, $request)
+    {
         $payload = $request->only($this->payload());
         // $payload['album'] = $this->formatAlbum($request);
         // $payload['price'] = convert_price($payload['price']);
         return $this->productRepository->update($product->id, $payload);
     }
 
-   
-    private function updateLanguageForProduct($product, $request, $languageId){
+
+    private function updateLanguageForProduct($product, $request, $languageId)
+    {
         $payload = $request->only($this->payloadLanguage());
         $payload = $this->formatLanguagePayload($payload, $product->id, $languageId);
         return $this->productRepository->createPivot($product, $payload, 'languages');
     }
 
-    private function updateCatalogueForProduct($product, $request){
+    private function updateCatalogueForProduct($product, $request)
+    {
         $product->product_catalogues()->sync($this->catalogue($request));
     }
 
-    private function formatLanguagePayload($payload, $productId, $languageId){
+    private function formatLanguagePayload($payload, $productId, $languageId)
+    {
         $payload['canonical'] = Str::slug($payload['canonical']);
         $payload['language_id'] =  $languageId;
         $payload['product_id'] = $productId;
@@ -234,50 +232,56 @@ class ProductService
     }
 
 
-    private function catalogue($request){
-        if($request->input('catalogue') != null){
+    private function catalogue($request)
+    {
+        if ($request->input('catalogue') != null) {
             return array_unique(array_merge($request->input('catalogue'), [$request->product_catalogue_id]));
         }
         return [$request->product_catalogue_id];
     }
-    
-    public function updateStatus($post = []){
+
+    public function updateStatus($post = [])
+    {
         DB::beginTransaction();
-        try{
-            $payload[$post['field']] = (($post['value'] == 1)?2:1);
+        try {
+            $payload[$post['field']] = (($post['value'] == 1) ? 2 : 1);
             $post = $this->productRepository->update($post['modelId'], $payload);
             // $this->changeUserStatus($post, $payload[$post['field']]);
 
             DB::commit();
             return true;
-        }catch(\Exception $e ){
+        } catch (\Exception $e) {
             DB::rollBack();
             // Log::error($e->getMessage());
-            echo $e->getMessage();die();
+            echo $e->getMessage();
+            die();
             return false;
         }
     }
 
-    public function updateStatusAll($post){
+    public function updateStatusAll($post)
+    {
         DB::beginTransaction();
-        try{
+        try {
             $payload[$post['field']] = $post['value'];
             $flag = $this->productRepository->updateByWhereIn('id', $post['id'], $payload);
             // $this->changeUserStatus($post, $post['value']);
 
             DB::commit();
             return true;
-        }catch(\Exception $e ){
+        } catch (\Exception $e) {
             DB::rollBack();
             // Log::error($e->getMessage());
-            echo $e->getMessage();die();
+            echo $e->getMessage();
+            die();
             return false;
         }
     }
 
-    private function whereRaw($request, $languageId){
+    private function whereRaw($request, $languageId)
+    {
         $rawCondition = [];
-        if($request->integer('product_catalogue_id') > 0){
+        if ($request->integer('product_catalogue_id') > 0) {
             $rawCondition['whereRaw'] =  [
                 [
                     'tb3.product_catalogue_id IN (
@@ -286,17 +290,17 @@ class ProductService
                         JOIN product_catalogue_language ON product_catalogues.id = product_catalogue_language.product_catalogue_id
                         WHERE lft >= (SELECT lft FROM product_catalogues as pc WHERE pc.id = ?)
                         AND rgt <= (SELECT rgt FROM product_catalogues as pc WHERE pc.id = ?)
-                        AND product_catalogue_language.language_id = '.$languageId.'
+                        AND product_catalogue_language.language_id = ' . $languageId . '
                     )',
                     [$request->integer('product_catalogue_id'), $request->integer('product_catalogue_id')]
                 ]
             ];
-            
         }
         return $rawCondition;
     }
 
-    private function paginateSelect(){
+    private function paginateSelect()
+    {
         return [
             'id',
             'name',
@@ -307,7 +311,8 @@ class ProductService
         ];
     }
 
-    private function payload(){
+    private function payload()
+    {
         return [
             'follow',
             'publish',
@@ -320,7 +325,8 @@ class ProductService
         ];
     }
 
-    private function payloadLanguage(){
+    private function payloadLanguage()
+    {
         return [
             'name',
             'description',
@@ -331,6 +337,4 @@ class ProductService
             'canonical'
         ];
     }
-
-
 }

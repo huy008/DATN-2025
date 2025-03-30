@@ -48,11 +48,11 @@
         <div class="row mb15">
             <div class="col-lg-12">
                 <div class="form-row">
-                    <label for="">Nhập tên chi nhánh</label>
+                    <label for="">Nhập số lượng</label>
                     <input 
                         type="text"
-                        name="branch"
-                        value="{{ old('branch', ($product->branch) ?? null) }}"
+                        name="stock_quantity"
+                        value="{{ old('stock_quantity', ($product->stock_quantity) ?? null) }}"
                         class="form-control "
                     >
                 </div>

@@ -12,7 +12,7 @@ class Product extends Model
 
     protected $table = 'products';
 
-    protected $fillable = ['category_id','sku', 'name', 'description', 'brand', 'base_price', 'img_thumbnail'];
+    protected $fillable = ['category_id', 'sku', 'name', 'description', 'stock_quantity', 'base_price', 'img_thumbnail', 'type', 'short_description'];
 
     public function category()
     {
@@ -47,5 +47,4 @@ class Product extends Model
         }
         return $this->price;
     }
-
 }

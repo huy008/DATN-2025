@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('discountables', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('discount_id');
-            $table->unsignedBigInteger('discountable_id'); // ID của product hoặc variant
-            $table->string('discountable_type'); // Kiểu: App\Models\Product hoặc App\Models\ProductVariant
+            $table->unsignedBigInteger('discountable_id'); 
+            $table->string('discountable_type'); 
             $table->timestamps();
         });
     }

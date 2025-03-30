@@ -73,14 +73,13 @@
                                           </div>
                                       </div>
                                       <div class="auth-card__body">
-                                          <form method="POST" action="https://shofy.botble.com/login"
+                                          <form method="POST" action="{{route('login.post')}}"
                                               accept-charset="UTF-8" id="botble-ecommerce-forms-fronts-auth-login-form"
                                               class="js-base-form dirty-check" icon="ti ti-lock"
                                               heading="Login to your account"
                                               description="Your personal data will be used to support your experience throughout this website, to manage access to your account."
                                               banner="main/general/auth-banner.png" bannerDirection="horizontal">
-                                              <input name=_token type=hidden
-                                                  value="SPz1qyncaKbdv25m6D9mAygMzUr373EJVS4dARKR">
+                                              @csrf
                                               <div class="mb-3 position-relative">
                                                   <label class="form-label" for="email">
                                                       Email
@@ -361,7 +360,7 @@
                   </div>
                   <div class="col-xl-5 col-lg-5">
                       <div class="tp-subscribe-form">
-                          <form method="POST" action="{{route('login')}}"
+                          <form method="POST" action="{{route('login.post')}}"
                               accept-charset="UTF-8" id="botble-newsletter-forms-fronts-newsletter-form"
                               class="subscribe-form dirty-check">
                               <input name=_token type=hidden value="SPz1qyncaKbdv25m6D9mAygMzUr373EJVS4dARKR">

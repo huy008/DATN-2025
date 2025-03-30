@@ -43,6 +43,26 @@
                     </div>
                 </div>
             </div>
+            <div class="col-lg-3">
+                <div class="ibox w">
+                    <div class="ibox-title">
+                        <h5>Chọn ảnh</h5>
+                    </div>
+                    <div class="ibox-content">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="form-row">
+                                    <span class="image img-cover image-target"><img
+                                            src="{{ old('img_thumbnail', $model->img_thumbnail ?? '') ? old('img_thumbnail', $model->img_thumbnail ?? '') : 'backend/img/not-found.jpg' }}"
+                                            alt=""></span>
+                                    <input type="hidden" name="img_thumbnail"
+                                        value="{{ old('img_thumbnail', $model->img_thumbnail ?? '') }}">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         @include('backend.dashboard.component.button')
     </div>

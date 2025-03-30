@@ -15,13 +15,13 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('category_id');
             $table->string('sku');
-            $table->string('img_thumbnail');
+            $table->string('img_thumbnail')->nullable();
             $table->boolean('type')->default(false)->comment("loại sản phẩm 1-variant|0-simple");
             $table->string('name');
             $table->text('short_description')->nullable();
             $table->text('description')->nullable();
-            $table->string('brand');
             $table->decimal('base_price', 10, 2);
+            $table->integer('stock_quantity')->default(0);
             $table->timestamps();
         });
     }

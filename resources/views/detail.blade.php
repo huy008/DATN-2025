@@ -11,7 +11,7 @@
                                  href="client/product-categories/electronics-gadgets.html">Electronics
                                  Gadgets</a></span><span><a
                                  href="client/product-categories/backpack.html">Backpack</a></span><span>
-                             {{$product->name}}
+                             {{ $product->name }}
                          </span>
                      </div>
                  </div>
@@ -26,22 +26,39 @@
                                  <div class="bb-product-gallery-wrapper">
                                      <div class="bb-product-gallery bb-product-gallery-vertical">
                                          <div class="bb-product-gallery-images">
-                                             @foreach ($variantImages as $variantImage)
-                                                 <a href="{{ asset($variantImage['image_url']) }}"
-                                                     data-variant-id="{{ $variantImage['id'] }}" class="variant-image">
+                                             @if (!isset($variantImages))
+                                                 @foreach ($variantImages as $variantImage)
+                                                     <a href="{{ asset($variantImage['image_url']) }}"
+                                                         data-variant-id="{{ $variantImage['id'] }}" class="variant-image">
+                                                         <img src="{{ asset('client/storage/main/general/placeholder.png') }}"
+                                                             data-bb-lazy="true" loading="lazy"
+                                                             data-src="{{ asset($variantImage['image_url']) }}"
+                                                             alt="{{ $product->name }}"></a>
+                                                 @endForEach
+                                             @else
+                                                 <a href="{{ asset($product->image_url) }}" class="variant-image">
                                                      <img src="{{ asset('client/storage/main/general/placeholder.png') }}"
                                                          data-bb-lazy="true" loading="lazy"
-                                                         data-src="{{ asset($variantImage['image_url']) }}"
+                                                         data-src="{{ asset($product->image_url) }}"
                                                          alt="{{ $product->name }}"></a>
-                                             @endForEach
+                                             @endif
                                          </div>
                                          <div class="bb-product-gallery-thumbnails" data-vertical="1">
-                                             @foreach ($variantImages as $variantImage)
-                                                 <div data-variant-id="{{ $variantImage['id'] }}" class="variant-thumbnail">
-                                                     <img src='{{ asset($variantImage['image_url']) }}' data-bb-lazy="true"
+                                             @if (!isset($variantImages))
+                                                 @foreach ($variantImages as $variantImage)
+                                                     <div data-variant-id="{{ $variantImage['id'] }}"
+                                                         class="variant-thumbnail">
+                                                         <img src='{{ asset($variantImage['image_url']) }}'
+                                                             data-bb-lazy="true" loading="lazy" alt="{{ $product->name }}">
+                                                     </div>
+                                                 @endForeach
+                                             @else
+                                                 <div class="variant-thumbnail">
+                                                     <img src='{{ asset($product->image_url) }}' data-bb-lazy="true"
                                                          loading="lazy" alt="{{ $product->name }}">
                                                  </div>
-                                             @endForeach
+                                             @endif
+
                                          </div>
                                      </div>
                                  </div>
@@ -54,7 +71,7 @@
                                              Brand</a></span>
                                  </div>
                                  <h1 class="tp-product-details-title">
-                                     {{$product->name}}</h1>
+                                     {{ $product->name }}</h1>
                                  <div class="tp-product-details-inventory d-flex align-items-center mb-10">
                                      <div class="tp-product-details-stock mb-10">
                                          <span><a href="stores/young-shop.html">Young
@@ -77,59 +94,61 @@
                                      </div>
                                  </div>
                                  <div class="tp-product-details-description mb-20">
-                                    {{$product->short_description}}
+                                     {{ $product->short_description }}
                                  </div>
                                  <div class="tp-product-details-price-wrapper mb-20">
                                      <span class="tp-product-details-price new-price"
-                                         data-bb-value="product-price">{{$product->base_price}}</span>
+                                         data-bb-value="product-price">{{ $product->base_price }}</span>
                                  </div>
-                                 <form method="POST" action="{{ route('cart.add') }}" 
-                                     class="product-form">
+                                 <form method="POST" action="{{ route('cart.add') }}" class="product-form">
                                      @csrf
                                      <input type="hidden" name="id" value="{{ $product->id }}">
-                            
+                                     <input type="hidden" name="price" value="{{ $product->base_price }}">
+
                                      <div class="product-attributes product-attribute-swatches" id="product-attributes-15">
                                          <div class="bb-product-attribute-swatch visual-swatches-wrapper attribute-swatches-wrapper"
                                              data-type="visual" data-slug="color">
-                                             <h4 class="bb-product-attribute-swatch-title">
-                                                 Màu sắc:
-                                             </h4>
-                                             <ul
-                                                 class="bb-product-attribute-swatch-list visual-swatch color-swatch attribute-swatch">
-                                                 @if(!empty($groupedAttributes['color'] ))
-                                                 @foreach ($groupedAttributes['color'] as $color)
-                                                     <li data-slug="green" data-id="{{ $color['attribute_value_id'] }}"
-                                                         data-bs-toggle="tooltip" data-bs-title="Disabled tooltip"
-                                                         class="bb-product-attribute-swatch-item attribute-swatch-item">
-                                                         <label><input type=radio name="attribute_color" data-slug="green"
-                                                                 value="{{ $color['attribute_value_id'] }}"
-                                                                 class="product-filter-item"><span
-                                                                 class="bb-product-attribute-swatch-display page_speed_{{ $color['attribute_value_id'] }}"></span><span
-                                                                 class="bb-product-attribute-swatch-item-tooltip">{{ $color['attribute_value'] }}</span></label>
-                                                     </li>
-                                                 @endForEach
-                                                 @endif
+                                             @if (!empty($groupedAttributes['color']))
+                                                 <h4 class="bb-product-attribute-swatch-title">
+                                                     Màu sắc:
+                                                 </h4>
+                                                 <ul
+                                                     class="bb-product-attribute-swatch-list visual-swatch color-swatch attribute-swatch">
+                                                     @foreach ($groupedAttributes['color'] as $color)
+                                                         <li data-slug="green" data-id="{{ $color['attribute_value_id'] }}"
+                                                             data-bs-toggle="tooltip" data-bs-title="Disabled tooltip"
+                                                             class="bb-product-attribute-swatch-item attribute-swatch-item">
+                                                             <label><input type=radio name="attribute_color"
+                                                                     data-slug="green"
+                                                                     value="{{ $color['attribute_value_id'] }}"
+                                                                     class="product-filter-item"><span
+                                                                     class="bb-product-attribute-swatch-display page_speed_{{ $color['attribute_value_id'] }}"></span><span
+                                                                     class="bb-product-attribute-swatch-item-tooltip">{{ $color['attribute_value'] }}</span></label>
+                                                         </li>
+                                                     @endForEach
+                                             @endif
                                              </ul>
                                          </div>
                                          <div class="bb-product-attribute-swatch text-swatches-wrapper attribute-swatches-wrapper"
                                              data-type="text" data-slug="capacity">
-                                             <h4 class="bb-product-attribute-swatch-title">
-                                                 Dung lượng :
-                                             </h4>
-                                             <ul class="bb-product-attribute-swatch-list text-swatch attribute-swatch">
-                                                 @if(!empty($groupedAttributes['capacity'] ))
-                                                 @foreach ($groupedAttributes['capacity'] as $capacity)
-                                                     <li data-slug="{{ $capacity['attribute_value'] }}"
-                                                         data-id="{{ $capacity['attribute_value_id'] }}"
-                                                         class="bb-product-attribute-swatch-item attribute-swatch-item">
-                                                         <label><input name="attribute_capacity"
-                                                                 data-slug="{{ $capacity['attribute_value'] }}" type=radio
-                                                                 value="{{ $capacity['attribute_value_id'] }}"
-                                                                 class="product-filter-item"><span
-                                                                 class="bb-product-attribute-text-display">{{ $capacity['attribute_value'] }}</span></label>
-                                                     </li>
-                                                 @endForEach
-                                                 @endif
+                                             @if (!empty($groupedAttributes['capacity']))
+                                                 <h4 class="bb-product-attribute-swatch-title">
+                                                     Dung lượng :
+                                                 </h4>
+                                                 <ul class="bb-product-attribute-swatch-list text-swatch attribute-swatch">
+                                                     @foreach ($groupedAttributes['capacity'] as $capacity)
+                                                         <li data-slug="{{ $capacity['attribute_value'] }}"
+                                                             data-id="{{ $capacity['attribute_value_id'] }}"
+                                                             class="bb-product-attribute-swatch-item attribute-swatch-item">
+                                                             <label><input name="attribute_capacity"
+                                                                     data-slug="{{ $capacity['attribute_value'] }}"
+                                                                     type=radio
+                                                                     value="{{ $capacity['attribute_value_id'] }}"
+                                                                     class="product-filter-item"><span
+                                                                     class="bb-product-attribute-text-display">{{ $capacity['attribute_value'] }}</span></label>
+                                                         </li>
+                                                     @endForEach
+                                             @endif
                                              </ul>
                                          </div>
 
@@ -138,7 +157,7 @@
                                      </div>
                                      <div class="number-items-available">
                                          <span class="text-success">
-                                             15
+                                             {{ $product->quantity }}
                                              products
                                              available
                                          </span>
@@ -169,6 +188,7 @@
                                                  </div>
                                              </div>
                                              <div class="tp-product-details-add-to-cart mb-15 w-100">
+                                                 <input type="hidden" name="redirect" value="1">
                                                  <button type="submit" name="add-to-cart"
                                                      class="tp-product-details-add-to-cart-btn w-100">
                                                      Add To Cart
@@ -741,13 +761,13 @@
                                                              </div>
                                                              <script type=text/x-custom-template id="review-image-template">
                                                                  <span class="image-viewer__item" data-id="__id__"><img src=https://shofy.botble.com/vendor/core/core/base/images/placeholder.png alt="Preview" class="img-responsive d-block"><span class="image-viewer__icon-remove"><svg class="icon svg-icon-ti-ti-x" xmlns="http://www.w3.org/2000/svg" width=24 height=24 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M18 6l-12 12" /><path d="M6 6l12 12" /></svg></span></span>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
-                                                                                                                                                                                                                                                                                                                                                                                                                                           
-                                                                                                                                                                                                                                                                                                                 
-                                                                                                                                                                                       
-                                                             </script>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+                                                                                                                                                                                                                                                                                                                                                                              
+                                                                                                                                                                                                                                                    
+                                                                                                                          </script>
                                                              <div class="image-upload__viewer d-flex">
                                                                  <div class="image-viewer__list position-relative">
                                                                      <div class="image-upload__uploader-container">
@@ -942,7 +962,7 @@
                                                              <span class="page_speed_385708504"></span>
                                                          </div>
                                                          <span class="small text-muted">
-                                                            1
+                                                             1
                                                          </span>
                                                      </div>
                                                      <time class="small text-muted" datetime="2025-01-08">
@@ -1356,10 +1376,12 @@
                              </div>
                              <div class="sticky-actions-content">
                                  <h4 class="fs-6 mb-1">
-                                     {{$product->name}}</h4>
+                                     {{ $product->name }}</h4>
                                  <div class="tp-product-price-wrapper">
                                      <span class="tp-product-price new-price"
-                                         data-bb-value="product-price">{{$product->base_price}}</span>
+                                         data-bb-value="product-price">{{ $product->base_price }}</span>
+                                     <input type="text" name="price" id="price"
+                                         value="{{ $product->base_price }}" hidden>
                                  </div>
                              </div>
                          </div>
@@ -1378,9 +1400,6 @@
                  </div>
              </div>
          </section>
-         {{-- <div data-bb-toggle="block-lazy-loading" data-url="https://shofy.botble.com/ajax/related-products/15"
-             class="position-relative page_speed_156113627">
-         </div> --}}
      </main>
      <section class="tp-subscribe-area pt-70 pb-65 theme-bg p-relative z-index-1">
          <div class="tp-subscribe-shape d-none d-sm-block">
@@ -1536,4 +1555,131 @@
              }
          });
      </script>
+
+
+     {{-- <div class="cartmini__area cartmini-opened">
+         <div class="cartmini__wrapper d-flex justify-content-between flex-column">
+             <div class="cartmini__top-wrapper">
+                 <div class="cartmini__top p-relative">
+                     <div class="cartmini__top-title">
+                         <h4>Shopping cart</h4>
+                     </div>
+                     <div class="cartmini__close" title="Close">
+                         <button type="button" class="cartmini__close-btn cartmini-close-btn" title="Close">
+                             <svg class="icon  svg-icon-ti-ti-x" xmlns="http://www.w3.org/2000/svg" width="24"
+                                 height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                 <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                 <path d="M18 6l-12 12"></path>
+                                 <path d="M6 6l12 12"></path>
+                             </svg> </button>
+                     </div>
+                 </div>
+
+                 <form method="POST" action="https://shofy.botble.com/cart/update" accept-charset="UTF-8"
+                     class="cart-form"><input name="_token" type="hidden"
+                         value="GUIG3EPcm2z7lWgM3HLIULUu5EEQY9rI5raD9tto">
+                     <div class="cartmini__widget">
+                         <input type="hidden" name="items[673589a7850f5b0d42594b44f20f3d35][rowId]"
+                             value="673589a7850f5b0d42594b44f20f3d35">
+
+                         <div class="cartmini__widget-item">
+                             <div class="cartmini__thumb">
+                                 <a href="https://shofy.botble.com/products/sony-x950h-4k-ultra-hd-smart-led-tv">
+                                     <img src="https://shofy.botble.com/storage/main/products/product-16-150x150.jpg"
+                                         data-bb-lazy="true" loading="lazy"
+                                         data-src="https://shofy.botble.com/storage/main/products/product-16-150x150.jpg"
+                                         alt="Sony X950H 4K Ultra HD Smart LED TV" data-ll-status="loaded"
+                                         class="entered loaded">
+                                 </a>
+                             </div>
+                             <div class="cartmini__content">
+
+
+                                 <h5 class="cartmini__title">
+                                     <a href="https://shofy.botble.com/products/sony-x950h-4k-ultra-hd-smart-led-tv">Sony
+                                         X950H 4K Ultra HD Smart LED TV</a>
+                                 </h5>
+                                 <div class="tp-product-quantity mt-10 mb-10">
+                                     <span class="tp-cart-minus" data-bb-toggle="decrease-qty">
+                                         <svg width="10" height="2" viewBox="0 0 10 2" fill="none"
+                                             xmlns="http://www.w3.org/2000/svg">
+                                             <path d="M1 1H9" stroke="currentColor" stroke-width="1.5"
+                                                 stroke-linecap="round" stroke-linejoin="round"></path>
+                                         </svg>
+                                     </span>
+                                     <input class="tp-cart-input" type="number"
+                                         name="items[673589a7850f5b0d42594b44f20f3d35][values][qty]" value="8"
+                                         min="1" max="11" data-bb-toggle="update-cart">
+                                     <span class="tp-cart-plus" data-bb-toggle="increase-qty">
+                                         <svg width="10" height="10" viewBox="0 0 10 10" fill="none"
+                                             xmlns="http://www.w3.org/2000/svg">
+                                             <path d="M5 1V9" stroke="currentColor" stroke-width="1.5"
+                                                 stroke-linecap="round" stroke-linejoin="round"></path>
+                                             <path d="M1 5H9" stroke="currentColor" stroke-width="1.5"
+                                                 stroke-linecap="round" stroke-linejoin="round"></path>
+                                         </svg>
+                                     </span>
+                                 </div>
+                                 <div class="cartmini__price-wrapper">
+                                     <div class="cartmini__price">
+                                         <span class="" data-bb-value="product-price">$2,250.00</span>
+
+                                     </div>
+
+                                 </div>
+                                 <div class="small">(Color: Black, Size: M)</div>
+
+
+
+
+                             </div>
+                             <a href="https://shofy.botble.com/cart/remove/673589a7850f5b0d42594b44f20f3d35"
+                                 class="cartmini__del" title="Remove this item" data-bb-toggle="remove-from-cart"
+                                 data-product-id="74" data-product-name="Sony X950H 4K Ultra HD Smart LED TV"
+                                 data-product-price="2250" data-product-sku="9W-196-A1" data-product-brand="Shofy"
+                                 data-product-categories="Weekly Best Selling,TWS Earphones,Smartphones &amp; Tablets,Backpack"
+                                 data-product-quantity="8">
+                                 <svg class="icon  svg-icon-ti-ti-x" xmlns="http://www.w3.org/2000/svg" width="24"
+                                     height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                     <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                     <path d="M18 6l-12 12"></path>
+                                     <path d="M6 6l12 12"></path>
+                                 </svg> </a>
+                         </div>
+                     </div>
+                 </form>
+
+             </div>
+
+             <div class="cartmini__checkout">
+                 <div class="d-flex flex-column gap-2 cartmini__checkout-title mb-30">
+                     <div>
+                         <h4>Subtotal:</h4>
+                         <span>$18,000.00</span>
+                     </div>
+                     <div>
+                         <h4>Tax:</h4>
+                         <span>$2,700.00</span>
+                     </div>
+                     <div>
+                         <h4>Total:</h4>
+                         <span>$20,700.00</span>
+                     </div>
+                 </div>
+                 <div class="cartmini__checkout-btn">
+                     <a href="https://shofy.botble.com/checkout/9303019639eac2a820f5ed4e87c94520"
+                         class="mb-10 tp-btn w-100">
+                         Checkout
+                     </a>
+
+                     <a href="https://shofy.botble.com/cart" class="tp-btn tp-btn-border w-100">
+                         View Cart
+                     </a>
+                 </div>
+             </div>
+
+         </div>
+     </div> --}}
  @endsection
