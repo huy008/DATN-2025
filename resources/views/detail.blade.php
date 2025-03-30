@@ -195,6 +195,7 @@
                                                  </button>
                                              </div>
                                          </div>
+                                         <input type="hidden" name="variant_id" class="variant_id" >
                                          <button type="submit" formaction="{{ route('cart.checkout') }}"
                                              name="checkout" class="tp-product-details-buy-now-btn w-100">
                                              Buy Now
@@ -761,12 +762,6 @@
                                                              </div>
                                                              <script type=text/x-custom-template id="review-image-template">
                                                                  <span class="image-viewer__item" data-id="__id__"><img src=https://shofy.botble.com/vendor/core/core/base/images/placeholder.png alt="Preview" class="img-responsive d-block"><span class="image-viewer__icon-remove"><svg class="icon svg-icon-ti-ti-x" xmlns="http://www.w3.org/2000/svg" width=24 height=24 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M18 6l-12 12" /><path d="M6 6l12 12" /></svg></span></span>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
-                                                                                                                                                                                                                                                                                                                                                                              
-                                                                                                                                                                                                                                                    
                                                                                                                           </script>
                                                              <div class="image-upload__viewer d-flex">
                                                                  <div class="image-viewer__list position-relative">
@@ -1526,6 +1521,8 @@
                  document.querySelector('[data-bb-value="product-price"]').textContent = variant.price;
                  //  document.querySelector('[data-bb-value="product-sku"]') = variant.sku;
                  document.querySelector('.text-success').textContent = variant.stock_quantity;
+
+                    document.querySelector('.variant_id').value = variant.id;
                  // Cập nhật hình ảnh (nếu có)
                  if (variant.id && variant.image_url) {
                      // 1. Ẩn tất cả ảnh trong gallery và thumbnail trước

@@ -32,6 +32,7 @@ Route::post('/find-variant', [ProductController::class, 'findVariant'])->name('p
 Route::post('/cart/add-to-cart', [CartController::class, 'addToCart'])->name('cart.add');
 Route::post('/cart/checkout', [CartController::class, 'checkout'])->name('cart.checkout');
 Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+Route::delete('/cart/remove/{id}', [CartController::class, 'remove'])->name('cart.remove');
 Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout');
 Route::post('/checkout', [CheckoutController::class, 'store'])->name('checkout.store');
 
@@ -84,6 +85,7 @@ Route::get('dashboard/index', [DashboardController::class, 'index'])->name('dash
         Route::get('/login', [AuthController::class, 'login'])->name('login');
         Route::get('register', [AuthController::class, 'index'])->name('register');
         Route::post('register', [AuthController::class, 'register'])->name('register.post');
+        Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 //     }
 // );
 
