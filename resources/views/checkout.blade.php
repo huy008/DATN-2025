@@ -37,56 +37,34 @@
                                          </span>
                                      </div>
                                  </div>
-
+                                 {{-- @dd($carts)    --}}
                                  <div class="py-3" bis_skin_checked="1">
+                                    @foreach ($carts as $cart)
                                      <div class="row cart-item" bis_skin_checked="1">
                                          <div class="col-3" bis_skin_checked="1">
                                              <div class="checkout-product-img-wrapper" bis_skin_checked="1">
                                                  <img class="item-thumb img-thumbnail img-rounded"
-                                                     src="https://shofy.botble.com/storage/main/products/product-11-150x150.jpg"
+                                                     src="{{asset($cart['img_thumbnail'])}}"
                                                      alt="Fitbit Charge 5 Fitness Tracker (Digital)">
-                                                 <span class="checkout-quantity">7</span>
+                                                 <span class="checkout-quantity">{{$cart['quantity']}}</span>
                                              </div>
                                          </div>
                                          <div class="col" bis_skin_checked="1">
                                              <p class="mb-0">
-                                                 Fitbit Charge 5 Fitness Tracker (Digital)
+                                                {{$cart['name']}}
                                              </p>
 
                                              <div class="ec-checkout-quantity"
                                                  data-url="https://shofy.botble.com/cart/update"
                                                  data-row-id="abf2d759b4e8bac06a1569f64bc77b10" bis_skin_checked="1">
-                                                 <button type="button"
-                                                     class="ec-checkout-quantity-control ec-checkout-quantity-minus"
-                                                     data-bb-toggle="decrease-qty">
-                                                     <svg class="icon  svg-icon-ti-ti-minus"
-                                                         xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                         viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                                         <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                                         <path d="M5 12l14 0"></path>
-                                                     </svg> </button>
-                                                 <input type="number"
-                                                     name="items[abf2d759b4e8bac06a1569f64bc77b10][values][qty]"
-                                                     value="7" min="1" max="13"
-                                                     data-bb-toggle="update-cart" readonly="">
-                                                 <button type="button"
-                                                     class="ec-checkout-quantity-control ec-checkout-quantity-plus"
-                                                     data-bb-toggle="increase-qty">
-                                                     <svg class="icon  svg-icon-ti-ti-plus"
-                                                         xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                         viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                                         <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                                         <path d="M12 5l0 14"></path>
-                                                         <path d="M5 12l14 0"></path>
-                                                     </svg> </button>
+                                               Số lương: {{$cart['quantity']}}
                                              </div>
                                          </div>
                                          <div class="col-auto text-end" bis_skin_checked="1">
-                                             <p>$709.00</p>
+                                             <p>{{$cart['quantity'] * $cart['base_price']}}</p>
                                          </div>
                                      </div>
+                                     @endforeach
                                  </div>
                                  <hr class="border-dark-subtle">
                              </div>

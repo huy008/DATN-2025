@@ -22,25 +22,26 @@ class CartController extends Controller
                     'variant_id' => $item->variant_id,
                     'quantity' => $item->quantity,
                     'attributes' => $item->attributes,
-                    'img_thumbnail' => $item->product->img_thumbnail,
+                    'img_thumbnail' => $item->variant ? $item->variant->image_url : $item->product->img_thumbnail,
                     'name' => $item->product->name,
-                    'base_price' => $item->product->base_price,
-                    'stock_quantity' => $item->product->stock_quantity,
+                    'base_price' => $item->variant ? $item->variant->price : $item->product->base_price,
+                    'stock_quantity' => $item->variant ? $item->variant->stock_quantity : $item->product->stock_quantity,
                 ];
             });
         } else {
             $cart = collect(session('cart', []));
-            $i=0;
-            foreach($cart as $item){
+            $i = 0;
+            foreach ($cart as $item) {
                 $product = Product::find($item['product_id']);
                 if ($product) {
                     $i++;
+                    $variant = $product->variants->where('id', $item['variant_id'])->first();
                     $carts[] = array_merge([
                         'id' => $i,
-                        'img_thumbnail' => $product->img_thumbnail,
+                        'img_thumbnail' => $variant ? $variant->image_url : $product->img_thumbnail,
                         'name' => $product->name,
-                        'base_price' => $product->base_price,
-                        'stock_quantity' => $product->stock_quantity,
+                        'base_price' => $variant ? $variant->price : $product->base_price,
+                        'stock_quantity' => $variant ? $variant->stock_quantity : $product->stock_quantity,
                     ], $item);
                 }
             }
@@ -86,7 +87,7 @@ class CartController extends Controller
             return redirect()->route('cart.index');
         } else {
             $cart = session()->get('cart', []);
-            $key = $request->id ;
+            $key = $request->id;
 
             if (isset($cart[$key])) {
                 $cart[$key]['quantity'] += $request->qty;

@@ -31,6 +31,12 @@ class Cart extends Model
         return $this->belongsTo(Product::class);
     }
 
+
+    public function variant()
+    {
+        return $this->belongsTo(ProductVariant::class);
+    }
+
     public function getAttributeColor()
     {
         return AttributeValue::find($this->attributes['color'] ?? null);
