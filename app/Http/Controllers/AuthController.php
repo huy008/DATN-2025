@@ -24,7 +24,11 @@ class AuthController extends Controller
     {
         $credentials = $request->only(['email', 'password']);
         if (Auth::guard('web')->attempt($credentials)) {
-            return redirect()->intended('/')->with('success', ['Login thành công']);
+            $notification = array(
+                'message' => 'Login thành công',
+                'alert-type' => 'success'
+            );
+            return redirect()->intended('/')->with($notification);
         }
         return redirect()->route('login')->with(['error' => ['Tài khoản mật khẩu không chính xác !!!'], 'email' => $credentials['email']]);
     }

@@ -329,7 +329,7 @@
              <div class="container">
                  <div class="tp-product-categories-slider swiper-container" data-items="5">
                      <div class="swiper-wrapper">
-                         @for ($i = 0; $i < 10; $i++)
+                         @foreach($categories as $category)
                              <div class="swiper-slide">
                                  <div class="tp-product-category-item text-center mb-40">
                                      <div class="tp-product-category-thumb fix">
@@ -342,14 +342,14 @@
                                      <div class="tp-product-category-content">
                                          <h3 class="tp-product-category-title">
                                              <a href="product-categories/headphones.html"
-                                                 title="Headphones">Headphones</a>
+                                                 title="Headphones">{{$category->name}}</a>
                                          </h3>
-                                         <p> 3 products
+                                         <p> {{$category->products_count}} products
                                          </p>
                                      </div>
                                  </div>
                              </div>
-                         @endfor
+                         @endforeach
                      </div>
                  </div>
              </div>

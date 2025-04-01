@@ -575,3 +575,4 @@
 
     <link media="all" type="text/css" rel="stylesheet"
         href="https://shofy.botble.com/vendor/core/plugins/ecommerce/css/front-theme.css?v=3.8.0">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" rel="stylesheet">

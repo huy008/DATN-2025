@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Product;
 use App\Repositories\AttributeRepository;
 use App\Repositories\CategoryRepository;
@@ -27,8 +28,10 @@ class DashboardClientController extends Controller
     public function index()
     {
        $products = Product::limit(10)->get();
+        $categories = Category::withCount('products')->get();
         return view('dashboard', compact(
-            'products'
+            'products',
+            'categories'
         ));
     }
 }
