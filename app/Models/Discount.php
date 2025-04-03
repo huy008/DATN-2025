@@ -2,13 +2,15 @@
 
 namespace App\Models;
 
+use App\Traits\QueryScopes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 class Discount extends Model
 {
-    use HasFactory;
+    use HasFactory, QueryScopes;
 
     protected $table = 'discounts'; // Tên bảng
 
@@ -44,5 +46,15 @@ class Discount extends Model
         return Attribute::make(
             get: fn($value) => $value === 'fixed' ? 'Giảm giá cố định' : 'Giảm giá theo phần trăm',
         );
+    }
+
+    public function products(): MorphToMany
+    {
+        return $this->morphedByMany(Product::class, 'discountable');
+    }
+
+    public function variants(): MorphToMany
+    {
+        return $this->morphedByMany(ProductVariant::class, 'discountable');
     }
 }

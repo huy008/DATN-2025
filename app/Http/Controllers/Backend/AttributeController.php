@@ -14,8 +14,6 @@ class AttributeController extends Controller
 {
     protected $attributeService;
     protected $attributeRepository;
-    protected $languageRepository;
-    protected $language;
 
     public function __construct(
         AttributeService $attributeService,

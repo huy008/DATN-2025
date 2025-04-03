@@ -12,6 +12,7 @@ use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\DashboardClientController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\DiscountController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,7 +25,7 @@ use App\Http\Controllers\CheckoutController;
 |
 */
 
-
+Route::resource('discounts', DiscountController::class);
 Route::get('/', [DashboardClientController::class, 'index'])->name('index');
 Route::get('{id}/detail', [ProductController::class, 'detail'])->name('product.detail');
 Route::post('/find-variant', [ProductController::class, 'findVariant'])->name('product.findVariant');
