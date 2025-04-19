@@ -35,7 +35,7 @@ class AuthController extends Controller
 
     public function logout()
     {
-        Session::flush();
+        session()->forget('cart');
         Auth::guard('web')->logout();
         return redirect()->route('login');
     }

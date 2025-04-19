@@ -40,6 +40,9 @@ Route::delete('/cart/remove/{id}', [CartController::class, 'remove'])->name('car
 Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout');
 Route::post('/checkout', [CheckoutController::class, 'store'])->name('checkout.store');
 
+Route::get('/ajax/search-products', [ProductController::class, 'ajaxSearch']);
+Route::get('/category/{id}', [ProductController::class, 'getByCategory'])->name('category.show');
+
 Route::group(['prefix' => 'product'], function () {
     Route::get('index', [ProductController::class, 'index'])->name('product.index');
     Route::get('create', [ProductController::class, 'create'])->name('product.create');
@@ -113,7 +116,7 @@ Route::get('dashboard/index', [DashboardController::class, 'index'])->name('dash
         Route::get('/login', [AuthController::class, 'login'])->name('login');
         Route::get('register', [AuthController::class, 'index'])->name('register');
         Route::post('register', [AuthController::class, 'register'])->name('register.post');
-        Route::get('logout', [AuthController::class, 'logout'])->name('logout');
+        Route::post('logout', [AuthController::class, 'logout'])->name('logout');
 //     }
 // );
 

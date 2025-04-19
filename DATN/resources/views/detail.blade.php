@@ -83,17 +83,14 @@
                                                  $halfStar = $rating - $fullStars >= 0.5;
                                              @endphp
 
-                                             {{-- Sao đầy --}}
                                              @for ($i = 0; $i < $fullStars; $i++)
                                                  <i class="fa fa-star" style="color: gold; font-size: 20px;"></i>
                                              @endfor
 
-                                             {{-- Sao nửa --}}
                                              @if ($halfStar)
                                                  <i class="fa fa-star-half-o" style="color: gold; font-size: 20px;"></i>
                                              @endif
 
-                                             {{-- Sao rỗng --}}
                                              @for ($i = 0; $i < 5 - $fullStars - ($halfStar ? 1 : 0); $i++)
                                                  <i class="fa fa-star-o" style="color: gold; font-size: 20px;"></i>
                                              @endfor

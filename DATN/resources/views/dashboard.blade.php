@@ -333,7 +333,7 @@
                              <div class="swiper-slide">
                                  <div class="tp-product-category-item text-center mb-40">
                                      <div class="tp-product-category-thumb fix">
-                                         <a href="product-categories/headphones.html" title="Headphones"><img
+                                         <a href="{{route('category.show',$category->id)}}" title="Headphones"><img
                                                  src=storage/main/general/placeholder.png data-bb-lazy="true"
                                                  loading="lazy"
                                                  data-src="https://shofy.botble.com/storage/main/product-categories/1.png"

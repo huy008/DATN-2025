@@ -4,9 +4,7 @@
          <section class="breadcrumb__area include-bg pt-60 pb-60 mb-50 mb-30 text-start pt-30 page_speed_1984785789">
              <div class="container" bis_skin_checked="1">
                  <div class="breadcrumb__content p-relative z-index-1" bis_skin_checked="1">
-                     <h3 class="breadcrumb__title">Shopping Cart</h3>
-                     <div class="breadcrumb__list js_breadcrumb_reduce_length_on_mobile" bis_skin_checked="1"><span><a
-                                 href="https://shofy.botble.com">Home</a></span><span> Shopping Cart </span></div>
+                     <h3 class="breadcrumb__title">Giỏ hàng</h3>
                  </div>
              </div>
          </section>
@@ -21,14 +19,17 @@
                                  <table class="table">
                                      <thead>
                                          <tr>
-                                             <th class="tp-cart-header-product">Product</th>
-                                             <th class="tp-cart-header-price">Price</th>
-                                             <th class="tp-cart-header-quantity">Quantity</th>
-                                             <th class="tp-cart-header-total">Total</th>
+                                             <th class="tp-cart-header-product">Sản phẩm</th>
+                                             <th class="tp-cart-header-price">Giá tiền</th>
+                                             <th class="tp-cart-header-quantity">Số lương</th>
+                                             <th class="tp-cart-header-total">Tổng tiền</th>
                                              <th></th>
                                          </tr>
                                      </thead>
+    
                                      <tbody>
+                                                                         @if(count($carts) !== 0)
+
                                          @foreach ($carts as $cart)
                                              <tr>
                                                  <td class="ps-3 cart-product-content">
@@ -80,7 +81,7 @@
                                                          </span>
                                                          <input class="tp-cart-input" type="number"
                                                              name="items[abf2d759b4e8bac06a1569f64bc77b10][values][qty]"
-                                                             value="{{ $cart['quantity'] }}" data-bb-toggle="update-cart">
+                                                             value="{{ $cart['stock_quantity'] }}" data-bb-toggle="update-cart">
                                                          <span class="tp-cart-plus" data-bb-toggle="increase-qty">
                                                              <svg width="10" height="10" viewBox="0 0 10 10"
                                                                  fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -93,7 +94,7 @@
                                                      </div>
                                                  </td>
                                                  <td class="tp-cart-total" data-title="Total">
-                                                     {{ $cart['base_price'] * $cart['quantity'] }}
+                                                     {{ $cart['base_price'] * $cart['stock_quantity'] }}
                                                  </td>
                                                  <td class="tp-cart-action" data-title="Remove">
                                                      <a href="#" class="tp-cart-action-btn"
@@ -115,8 +116,12 @@
                                                  </td>
                                              </tr>
                                          @endforeach
+                                         @else
+                                             <td colspan="4" style="text-align: center">Giỏ hàng của bạn đang trống.</td>
+                                                 @endif
                                      </tbody>
                                  </table>
+
                              </div>
                          </form>
                          <div class="tp-cart-bottom" bis_skin_checked="1">
@@ -141,20 +146,20 @@
                                  <span class="tp-cart-checkout-tax-title">Tax</span>
                                  <span class="tp-cart-checkout-tax-price">$496.30</span>
                              </div> --}}
-                             <div class="tp-cart-checkout-total d-flex align-items-center justify-content-between mt-3 mb-0"
+                             <div class="tp-cart-checkout-total d-flex align-items-center justify-content-between mt-3 mb-3"
                                  bis_skin_checked="1">
-                                 <span>Total</span>
+                                 <span>Tổng tiền</span>
                                  <span>$5,459.30</span>
                              </div>
                              <div class="tp-cart-checkout-proceed" bis_skin_checked="1">
-                                 <a href="https://shofy.botble.com/checkout/5808cf6fe2c848f25b8b5262b3f5f65a"
+                                 <a href="{{route('checkout')}}"
                                      class="tp-cart-checkout-btn w-100">
-                                     Proceed to Checkout
+                                     Thanh toán
                                  </a>
                              </div>
 
-                             <a href="https://shofy.botble.com/products" class="btn-link d-block text-center mt-3">
-                                 Continue Shopping
+                             <a href="{{route('index')}}" class="btn-link d-block text-center mt-3">
+                                 Tiếp tục mua hàng
                              </a>
                          </div>
                      </div>

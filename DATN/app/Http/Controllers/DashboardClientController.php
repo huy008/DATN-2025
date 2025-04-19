@@ -29,6 +29,7 @@ class DashboardClientController extends Controller
     {
        $products = Product::limit(10)->get();
         $categories = Category::withCount('products')->get();
+        session(['categories' => $categories]);
         return view('dashboard', compact(
             'products',
             'categories'

@@ -15,11 +15,14 @@ class CheckoutController extends Controller
 
         if (Auth::check()) {
             $carts = Auth::user()->carts()->with('product')->get();
+            $user = Auth::user();
         } else {
             $carts = session('cart', []);
         }
 
-        return view('checkout', compact('carts'));
+        $total = $this->calculateTotal();
+
+        return view('checkout', compact('carts', 'user', 'total'));
     }
 
     public function store(Request $request)
@@ -28,6 +31,10 @@ class CheckoutController extends Controller
             'user_id' => Auth::id(),
             'total_price' => $this->calculateTotal(),
             'status' => 'pending',
+            'phone' => $request->phone,
+            'address' => $request->address,
+            'payment_method' => $request->payment_method,
+            'note' => $request->note,
         ]);
 
         $cartItems = Auth::user()->carts;
@@ -37,23 +44,32 @@ class CheckoutController extends Controller
                 'order_id' => $order->id,
                 'product_id' => $item['product_id'],
                 'quantity' => $item['quantity'],
-                'price' => $item['price'],
+                'price' => 1111,
             ]);
         }
 
-        // Xóa giỏ hàng
         if (Auth::check()) {
             Auth::user()->carts()->delete();
         } else {
             session()->forget('cart');
         }
 
-        $this->vnqay($this->calculateTotal());
+        switch($request->payment_method){
+            case 'vnpay':
+           $this->vnqay($this->calculateTotal());
+            break;
+            case 'momo':
+                die(123);
+                break;
+            case 'home':
+                die(123);
+                break;
+        }
+
     }
 
     private function calculateTotal()
     {
-        // Tính tổng tiền
         $total = 0;
 
         if (Auth::check()) {
@@ -72,14 +88,14 @@ class CheckoutController extends Controller
     public function vnqay($total)
     {
         $vnp_Url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
-        $vnp_Returnurl = "https://localhost/vnpay_php/vnpay_return.php";
-        $vnp_TmnCode = "FIM7LK8X"; //Mã website tại VNPAY 
-        $vnp_HashSecret = "TJTV6G00BMU2FJD6Y58BOSUSXD7S01FT"; //Chuỗi bí mật
+        $vnp_Returnurl = "http://127.0.0.1:8000/";
+        $vnp_TmnCode = "FIM7LK8X"; 
+        $vnp_HashSecret = "TJTV6G00BMU2FJD6Y58BOSUSXD7S01FT"; 
 
-        $vnp_TxnRef = time(); //Mã đơn hàng. Trong thực tế Merchant cần insert đơn hàng vào DB và gửi mã này  sang VNPAY
+        $vnp_TxnRef = time(); 
         $vnp_OrderInfo = "Thanh toán hóa đơn";
         $vnp_OrderType = "Shop";
-        $vnp_Amount = $total * 100;
+        $vnp_Amount = 10000000 * 100;
         $vnp_Locale = "VN";
         $vnp_BankCode = "NCB";
         $vnp_IpAddr = $_SERVER['REMOTE_ADDR'];

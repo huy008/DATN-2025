@@ -37,14 +37,13 @@
                                          </span>
                                      </div>
                                  </div>
-                                 {{-- @dd($carts)    --}}
                                  <div class="py-3" bis_skin_checked="1">
                                     @foreach ($carts as $cart)
                                      <div class="row cart-item" bis_skin_checked="1">
                                          <div class="col-3" bis_skin_checked="1">
                                              <div class="checkout-product-img-wrapper" bis_skin_checked="1">
                                                  <img class="item-thumb img-thumbnail img-rounded"
-                                                     src="{{asset($cart['img_thumbnail'])}}"
+                                                     src="{{asset($cart->product->img_thumbnail)}}"
                                                      alt="Fitbit Charge 5 Fitness Tracker (Digital)">
                                                  <span class="checkout-quantity">{{$cart['quantity']}}</span>
                                              </div>
@@ -72,33 +71,11 @@
                          <div class="mt-2 p-2" bis_skin_checked="1">
                              <div class="row" bis_skin_checked="1">
                                  <div class="col-6" bis_skin_checked="1">
-                                     <p>Subtotal:</p>
-                                 </div>
-                                 <div class="col-6" bis_skin_checked="1">
-                                     <p class="price-text sub-total-text text-end">
-                                         $4,963.00
-                                     </p>
-                                 </div>
-                             </div>
-                             <div class="row" bis_skin_checked="1">
-                                 <div class="col-6" bis_skin_checked="1">
-                                     <p>Tax (<small>VAT - 10%</small>)
-                                     </p>
-                                 </div>
-                                 <div class="col-6 float-end" bis_skin_checked="1">
-                                     <p class="price-text tax-price-text">
-                                         $496.30
-                                     </p>
-                                 </div>
-                             </div>
-
-                             <div class="row" bis_skin_checked="1">
-                                 <div class="col-6" bis_skin_checked="1">
-                                     <p><strong>Total</strong>:</p>
+                                     <p><strong>Tổng tiền</strong>:</p>
                                  </div>
                                  <div class="col-6 float-end" bis_skin_checked="1">
                                      <p class="total-text raw-total-text" data-price="5459.3">
-                                         $5,459.30
+                                         {{$total}}
                                      </p>
                                  </div>
                              </div>
@@ -134,7 +111,7 @@
                      <hr class="border-dark-subtle">
                  </div>
                  <div class="mb-4" bis_skin_checked="1">
-                     <h5 class="checkout-billing-information-title">Billing information</h5>
+                     <h5 class="checkout-billing-information-title">Thanh toán</h5>
                      <div class="customer-billing-address-form" bis_skin_checked="1">
                          <div class="mb-3 form-group" bis_skin_checked="1">
                              <input name="billing_address_same_as_shipping_address" type="hidden" value="0">
@@ -144,8 +121,8 @@
                              <div class="form-group mb-3 " bis_skin_checked="1">
                                  <div class="form-input-wrapper" bis_skin_checked="1">
                                      <input class="form-control" id="billing-address-name" name="billing_address[name]"
-                                         autocomplete="family-name" type="text" value="huy">
-                                     <label for="billing-address-name">Full Name</label>
+                                         autocomplete="family-name" type="text" value="{{$user->name}}">
+                                     <label for="billing-address-name">Tên</label>
                                  </div>
 
                              </div>
@@ -156,7 +133,7 @@
                                          <div class="form-input-wrapper" bis_skin_checked="1">
                                              <input class="form-control" id="billing-address-email"
                                                  name="billing_address[email]" autocomplete="email" type="email"
-                                                 value="huy@gmail.com">
+                                                 value="{{$user->email}}">
                                              <label for="billing-address-email">Email</label>
                                          </div>
 
@@ -166,47 +143,8 @@
                                      <div class="form-group  " bis_skin_checked="1">
                                          <div class="form-input-wrapper" bis_skin_checked="1">
                                              <input id="billing-address-phone" class="form-control" autocomplete="phone"
-                                                 name="billing_address[phone]" type="text">
-                                             <label>Phone</label>
-                                         </div>
-
-                                     </div>
-                                 </div>
-                             </div>
-
-                             <div class="form-group mb-3 " bis_skin_checked="1">
-                                 <div class="select--arrow form-input-wrapper" bis_skin_checked="1">
-                                     <svg class="icon  svg-icon-ti-ti-chevron-down" xmlns="http://www.w3.org/2000/svg"
-                                         width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                         stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                         stroke-linejoin="round">
-                                         <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                         <path d="M6 9l6 6l6 -6"></path>
-                                     </svg> <label for="billing-address-country">Country</label>
-                                 </div>
-
-                             </div>
-
-                             <div class="row" bis_skin_checked="1">
-                                 <div class="col-sm-6 col-12" bis_skin_checked="1">
-                                     <div class="form-group mb-3 " bis_skin_checked="1">
-                                         <div class="form-input-wrapper" bis_skin_checked="1">
-                                             <input class="form-control" id="billing-address-state"
-                                                 name="billing_address[state]" type="text" autocomplete="state"
-                                                 value="">
-                                             <label for="billing-address-state">State</label>
-                                         </div>
-
-                                     </div>
-                                 </div>
-
-                                 <div class="col-sm-6 col-12" bis_skin_checked="1">
-                                     <div class="form-group  " bis_skin_checked="1">
-                                         <div class="form-input-wrapper" bis_skin_checked="1">
-                                             <input class="form-control" id="billing-address-city"
-                                                 name="billing_address[city]" type="text" autocomplete="city"
-                                                 value="">
-                                             <label for="billing-address-city">City</label>
+                                                 name="phone" type="text" value="{{$user->phone}}">
+                                             <label>Số điện thoại</label>
                                          </div>
 
                                      </div>
@@ -216,9 +154,21 @@
                              <div class="form-group mb-3 " bis_skin_checked="1">
                                  <div class="form-input-wrapper" bis_skin_checked="1">
                                      <input class="form-control" id="billing-address-address"
-                                         name="billing_address[address]" autocomplete="address" type="text"
+                                         name="address" autocomplete="address" type="text"
                                          value="">
-                                     <label for="billing-address-address">Address</label>
+                                     <label for="billing-address-address">Địa chỉ</label>
+                                 </div>
+
+                             </div>
+
+                                  <div class="form-group mb-3 " bis_skin_checked="1">
+                                 <div class="form-input-wrapper" bis_skin_checked="1">
+                                         <select class="form-control" name="payment_method" id="">
+                                            <option value="vnpay">Thanh toán bằng VN PAY</option>
+                                               <option value="momo">Thanh toán bằng Momo</option>
+                                            <option value="home">Thanh toán khi nhận hàng</option>
+                                         </select>
+                                     <label for="billing-address-address">Phương thức thanh toán</label>
                                  </div>
 
                              </div>
@@ -226,7 +176,7 @@
                          </div>
                      </div>
                  </div>
-                 <input class="form-control" data-counter="250" name="amount" type="hidden" value="5459.3">
+                 <input class="form-control" data-counter="250" name="total_price" type="hidden" value="5459.3">
                  <div data-bb-toggle="checkout-payment-methods-area" bis_skin_checked="1">
                      <input name="currency" type="hidden" value="USD">
 
@@ -234,15 +184,15 @@
                  </div>
                  <div class="form-group mb-3" bis_skin_checked="1">
                      <label class="form-label" for="description">
-                         Order notes
+                         Ghi chú
                      </label>
                      <textarea class="form-control" data-counter="10000" rows="3"
-                         placeholder="Notes about your order, e.g. special notes for delivery." id="description" name="description"
+                         placeholder="Notes about your order, e.g. special notes for delivery." id="description" name="note"
                          cols="50"></textarea>
                  </div>
                  <div class="w-100 row align-items-center g-3 mb-5" bis_skin_checked="1">
                      <div class="order-2 order-md-1 col-md-6 text-center text-md-start mb-4 mb-md-0" bis_skin_checked="1">
-                         <a class="d-flex align-items-center gap-1" href="https://shofy.botble.com/cart">
+                         <a class="d-flex align-items-center gap-1" href="{{route('cart.index')}}">
                              <svg class="icon  svg-icon-ti-ti-arrow-narrow-left" xmlns="http://www.w3.org/2000/svg"
                                  width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                  stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -250,14 +200,14 @@
                                  <path d="M5 12l14 0"></path>
                                  <path d="M5 12l4 4"></path>
                                  <path d="M5 12l4 -4"></path>
-                             </svg> <span class="d-inline-block back-to-cart">Back to cart</span>
+                             </svg> <span class="d-inline-block back-to-cart">Quay lại giỏ hàng</span>
                          </a>
                      </div>
                      <input type="hidden" name="redirect" value="1">
                      <div class="order-1 order-md-2 col-md-6" bis_skin_checked="1">
                          <button class="btn payment-checkout-btn payment-checkout-btn-step float-end"
                              data-processing-text="Processing. Please wait..." data-error-header="Error" type="submit">
-                             Checkout
+                             Thanh toán
                          </button>
                      </div>
                  </div>

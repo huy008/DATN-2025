@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Models\Product;
 use App\Models\ProductVariant;
 use App\Repositories\AttributeRepository;
@@ -19,7 +20,7 @@ class ProductController extends Controller
     protected $attributeRepository;
     protected $categoryRepository;
 
-    public function __construct(AttributeRepository $attributeRepository, ProductService $productService, ProductRepository $productRepository,CategoryRepository $categoryRepository)
+    public function __construct(AttributeRepository $attributeRepository, ProductService $productService, ProductRepository $productRepository, CategoryRepository $categoryRepository)
     {
         $this->productService = $productService;
         $this->productRepository = $productRepository;
@@ -27,7 +28,14 @@ class ProductController extends Controller
         $this->categoryRepository = $categoryRepository;
     }
 
+    public function getByCategory($id)
+    {
+        $category = Category::findOrFail($id);
 
+        $products = $category->products()->with('variants')->paginate(12);
+
+        return view('product', compact('category', 'products'));
+    }
     public function index(Request $request)
     {
         $products = $this->productService->paginate($request);
@@ -78,7 +86,7 @@ class ProductController extends Controller
                     'attribute_value' => $attribute['attribute_value'],
                 ];
             }
-            $variantImages = ProductVariant::where('product_id',$id)
+            $variantImages = ProductVariant::where('product_id', $id)
                 ->get(['image_url', 'id'])->toArray();
         }
         return view('detail', compact(
@@ -181,6 +189,27 @@ class ProductController extends Controller
             return redirect()->route('product.index')->with('success', 'Xóa bản ghi thành công');
         }
         return redirect()->route('product.index')->with('error', 'Xóa bản ghi không thành công. Hãy thử lại');
+    }
+
+    public function ajaxSearch(Request $request)
+    {
+        $query = $request->input('q');
+
+        $products = Product::where('name', 'LIKE', "%{$query}%")
+            ->take(5)
+            ->get()
+            ->map(function ($product) {
+                return [
+                    'name' => $product->name,
+                    'url' => route('product.detail', $product->id),
+                    'image' => asset($product->img_thumbnail),
+                    'base_price' => $product->base_price ? number_format($product->base_price, 2) : null,
+                    'reviews_count' => $product->reviews->count(),
+                'rating_percent' => $product->average_rating,
+                ];
+            });
+
+        return response()->json($products);
     }
 
     private function configData()

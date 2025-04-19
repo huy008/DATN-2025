@@ -14,11 +14,7 @@ class Cart extends Model
         'product_id',
         'quantity',
         'variant_id',
-        'attributes'
-    ];
-
-    protected $casts = [
-        'attributes' => 'array'
+        'price'
     ];
 
     public function user()
