@@ -27,12 +27,19 @@ class DashboardClientController extends Controller
 
     public function index()
     {
-       $products = Product::limit(10)->get();
+       $products = Product::limit(8)->orderBy('created_at','desc')
+            ->take(8)->get();
+        $topRatedProducts = Product::with('reviews')
+            ->withAvg('reviews', 'rating') 
+            ->orderByDesc('reviews_avg_rating') 
+            ->take(8)
+            ->get();
         $categories = Category::withCount('products')->get();
         session(['categories' => $categories]);
         return view('dashboard', compact(
             'products',
-            'categories'
+            'categories',
+            'topRatedProducts'
         ));
     }
 }

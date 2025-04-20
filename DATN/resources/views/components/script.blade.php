@@ -92,7 +92,7 @@
     gtag('js', new Date());
     gtag('config', 'G-76NX8HY29D');
 </script>
-<script src={{ asset('client/vendor/core/packages/theme/js/toast.js') }}></script>
+{{-- <script src={{ asset('client/vendor/core/packages/theme/js/toast.js') }}></script> --}}
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         window.Theme = window.Theme || {};

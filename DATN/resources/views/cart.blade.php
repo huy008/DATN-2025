@@ -60,12 +60,12 @@
                                                  <td class="tp-cart-price" data-title="Price">
                                                      <div class="" bis_skin_checked="1">
                                                          <span class=""
-                                                             data-bb-value="product-price">{{ $cart['base_price'] }}</span>
+                                                             data-bb-value="product-price">{{ format_currency($cart['base_price']) }}</span>
 
                                                          <span class="">
                                                              <small>
                                                                  <del class="text-muted"
-                                                                     data-bb-value="product-original-price">{{ $cart['base_price'] }}</del>
+                                                                     data-bb-value="product-original-price">{{ format_currency($cart['base_price'])}}</del>
                                                              </small>
                                                          </span>
                                                      </div>
@@ -94,7 +94,7 @@
                                                      </div>
                                                  </td>
                                                  <td class="tp-cart-total" data-title="Total">
-                                                     {{ $cart['base_price'] * $cart['stock_quantity'] }}
+                                                     {{ format_currency($cart['base_price'] * $cart['stock_quantity']) }}
                                                  </td>
                                                  <td class="tp-cart-action" data-title="Remove">
                                                      <a href="#" class="tp-cart-action-btn"
@@ -166,73 +166,8 @@
                  </div>
              </div>
          </section>
-
-
-
-
-
-
-
      </main>
-     <section class="tp-subscribe-area pt-70 pb-65 theme-bg p-relative z-index-1">
-         <div class="tp-subscribe-shape d-none d-sm-block" bis_skin_checked="1"><img
-                 src="https://shofy.botble.com/themes/shofy/images/newsletter/shape-1.png" data-bb-lazy="true"
-                 class="tp-subscribe-shape-1 entered loaded" loading="lazy"
-                 data-src="https://shofy.botble.com/themes/shofy/images/newsletter/shape-1.png"
-                 alt="Subscribe our Newsletter" data-ll-status="loaded"><img
-                 src="https://shofy.botble.com/themes/shofy/images/newsletter/shape-2.png" data-bb-lazy="true"
-                 class="tp-subscribe-shape-2 entered loaded" loading="lazy"
-                 data-src="https://shofy.botble.com/themes/shofy/images/newsletter/shape-2.png"
-                 alt="Subscribe our Newsletter" data-ll-status="loaded"><img
-                 src="https://shofy.botble.com/themes/shofy/images/newsletter/shape-3.png" data-bb-lazy="true"
-                 class="tp-subscribe-shape-3 entered loaded" loading="lazy"
-                 data-src="https://shofy.botble.com/themes/shofy/images/newsletter/shape-3.png"
-                 alt="Subscribe our Newsletter" data-ll-status="loaded"><img
-                 src="https://shofy.botble.com/themes/shofy/images/newsletter/shape-4.png" data-bb-lazy="true"
-                 class="tp-subscribe-shape-4 entered loaded" loading="lazy"
-                 data-src="https://shofy.botble.com/themes/shofy/images/newsletter/shape-4.png"
-                 alt="Subscribe our Newsletter" data-ll-status="loaded">
-             <div class="tp-subscribe-plane" bis_skin_checked="1"><img class="tp-subscribe-plane-shape"
-                     src="https://shofy.botble.com/themes/shofy/images/newsletter/plane.png"
-                     alt="Subscribe our Newsletter"><svg width="399" height="110" class="d-none d-sm-block"
-                     viewBox="0 0 399 110" fill="none" xmlns="http://www.w3.org/2000/svg">
-                     <path
-                         d="M0.499634 1.00049C8.5 20.0005 54.2733 13.6435 60.5 40.0005C65.6128 61.6426 26.4546 130.331 15 90.0005C-9 5.5 176.5 127.5 218.5 106.5C301.051 65.2247 202 -57.9188 344.5 40.0003C364 53.3997 384 22 399 22"
-                         stroke="white" stroke-opacity="0.5" stroke-dasharray="3 3"></path>
-                 </svg><svg class="d-sm-none" width="193" height="110" viewBox="0 0 193 110" fill="none"
-                     xmlns="http://www.w3.org/2000/svg">
-                     <path
-                         d="M1 1C4.85463 20.0046 26.9085 13.6461 29.9086 40.0095C32.372 61.6569 13.5053 130.362 7.98637 90.0217C-3.57698 5.50061 85.7981 127.53 106.034 106.525C145.807 65.2398 98.0842 -57.9337 166.742 40.0093C176.137 53.412 185.773 22.0046 193 22.0046"
-                         stroke="white" stroke-opacity="0.5" stroke-dasharray="3 3"></path>
-                 </svg></div>
-         </div>
-         <div class="container" bis_skin_checked="1">
-             <div class="row align-items-center" bis_skin_checked="1">
-                 <div class="col-xl-7 col-lg-7" bis_skin_checked="1">
-                     <div class="tp-subscribe-content" bis_skin_checked="1"><span>Sale 20% off all store</span>
-                         <h3 class="tp-subscribe-title">Subscribe our Newsletter</h3>
-                     </div>
-                 </div>
-                 <div class="col-xl-5 col-lg-5" bis_skin_checked="1">
-                     <div class="tp-subscribe-form" bis_skin_checked="1">
-                         <form method="POST" action="https://shofy.botble.com/newsletter/subscribe"
-                             accept-charset="UTF-8" id="botble-newsletter-forms-fronts-newsletter-form"
-                             class="subscribe-form dirty-check" novalidate="novalidate"><input name="_token"
-                                 type="hidden" value="fixS1HA6FB9V19i58E4Q9IhApKC9ndtwGaEfIrlW">
-                             <div class="tp-subscribe-input" bis_skin_checked="1"><input class="form-control"
-                                     placeholder="Enter Your Email" id="newsletter-email" required="required"
-                                     name="email" type="email" aria-required="true"><button class=""
-                                     type="submit">Subscribe</button></div>
-                             <div class="newsletter-message newsletter-success-message page_speed_691515591"
-                                 bis_skin_checked="1"></div>
-                             <div class="newsletter-message newsletter-error-message page_speed_691515591"
-                                 bis_skin_checked="1"></div>
-                         </form>
-                     </div>
-                 </div>
-             </div>
-         </div>
-     </section>
+   
      <script>
          document.addEventListener('DOMContentLoaded', function() {
              const minusButtons = document.querySelectorAll('.tp-cart-minus');
@@ -249,7 +184,7 @@
 
                  // Tính tổng tiền sản phẩm
                  const total = quantity * price;
-                 totalElement.innerText = `$${total.toFixed(2)}`;
+                 totalElement.innerText = `${total.toFixed(2)}₫`;
 
                  updateCartTotal(); // Cập nhật tổng giỏ hàng
              }
@@ -262,7 +197,7 @@
                  });
 
                  // Cập nhật tổng tiền giỏ hàng
-                 totalCartElement.innerText = `$${totalCart.toFixed(2)}`;
+                 totalCartElement.innerText = `${totalCart.toFixed(2)}₫`;
              }
 
              function changeQuantity(button, increase = true) {

@@ -28,6 +28,7 @@ class CheckoutController extends Controller
     public function store(Request $request)
     {
         $order = Order::create([
+            'order_number' => time(),
             'user_id' => Auth::id(),
             'total_price' => $this->calculateTotal(),
             'status' => 'pending',
@@ -54,18 +55,17 @@ class CheckoutController extends Controller
             session()->forget('cart');
         }
 
-        switch($request->payment_method){
+        switch ($request->payment_method) {
             case 'vnpay':
-           $this->vnqay($this->calculateTotal());
-            break;
+                $this->vnqay($this->calculateTotal());
+                break;
             case 'momo':
-                die(123);
+                $this->momo_payment($this->calculateTotal());
                 break;
             case 'home':
                 die(123);
                 break;
         }
-
     }
 
     private function calculateTotal()
@@ -89,13 +89,13 @@ class CheckoutController extends Controller
     {
         $vnp_Url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
         $vnp_Returnurl = "http://127.0.0.1:8000/";
-        $vnp_TmnCode = "FIM7LK8X"; 
-        $vnp_HashSecret = "TJTV6G00BMU2FJD6Y58BOSUSXD7S01FT"; 
+        $vnp_TmnCode = "FIM7LK8X";
+        $vnp_HashSecret = "TJTV6G00BMU2FJD6Y58BOSUSXD7S01FT";
 
-        $vnp_TxnRef = time(); 
+        $vnp_TxnRef = time();
         $vnp_OrderInfo = "Thanh toán hóa đơn";
         $vnp_OrderType = "Shop";
-        $vnp_Amount = 10000000 * 100;
+        $vnp_Amount = $total* 100000;
         $vnp_Locale = "VN";
         $vnp_BankCode = "NCB";
         $vnp_IpAddr = $_SERVER['REMOTE_ADDR'];
@@ -152,6 +152,75 @@ class CheckoutController extends Controller
             die();
         } else {
             echo json_encode($returnData);
+        }
+    }
+
+    function execPostRequest($url, $data)
+    {
+        $ch = curl_init($url);
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt(
+            $ch,
+            CURLOPT_HTTPHEADER,
+            array(
+                'Content-Type: application/json',
+                'Content-Length: ' . strlen($data)
+            )
+        );
+        curl_setopt($ch, CURLOPT_TIMEOUT, 5);
+        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 5);
+        //execute post
+        $result = curl_exec($ch);
+        //close connection
+        curl_close($ch);
+        return $result;
+    }
+
+    public function momo_payment($total)
+    {
+
+        $endpoint = "https://test-payment.momo.vn/v2/gateway/api/create";
+
+        $partnerCode = 'MOMOBKUN20180529';
+        $accessKey = 'klm05TvNBzhg7h7j';
+        $secretKey = 'at67qH6mk8w5Y1nAyMoYKMWACiEi2bsa';
+        $orderInfo = "Thanh toán qua ATM MoMo";
+        $amount = 100000;
+        $orderId = time() . "";
+        $redirectUrl = "http://127.0.0.1:8000/checkout";
+        $ipnUrl = "http://127.0.0.1:8000/checkout";
+        $extraData = "";
+
+        $requestId = time() . "";
+        $requestType = "payWithATM";
+        // $extraData = ($_POST["extraData"] ? $_POST["extraData"] : "");
+        //before sign HMAC SHA256 signature
+        $rawHash = "accessKey=" . $accessKey . "&amount=" . $amount . "&extraData=" . $extraData . "&ipnUrl=" . $ipnUrl . "&orderId=" . $orderId . "&orderInfo=" . $orderInfo . "&partnerCode=" . $partnerCode . "&redirectUrl=" . $redirectUrl . "&requestId=" . $requestId . "&requestType=" . $requestType;
+        $signature = hash_hmac("sha256", $rawHash, $secretKey);
+        $data = array(
+            'partnerCode' => $partnerCode,
+            'partnerName' => "Test",
+            "storeId" => "MomoTestStore",
+            'requestId' => $requestId,
+            'amount' => $amount,
+            'orderId' => $orderId,
+            'orderInfo' => $orderInfo,
+            'redirectUrl' => $redirectUrl,
+            'ipnUrl' => $ipnUrl,
+            'lang' => 'vi',
+            'extraData' => $extraData,
+            'requestType' => $requestType,
+            'signature' => $signature
+        );
+        $result = $this->execPostRequest($endpoint, json_encode($data));
+        $jsonResult = json_decode($result, true);  
+        if (isset($jsonResult['payUrl'])) {
+            header('Location: ' . $jsonResult['payUrl']);
+            die();
+        } else {
+            dd($jsonResult);
         }
     }
 }

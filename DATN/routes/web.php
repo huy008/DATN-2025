@@ -43,6 +43,9 @@ Route::post('/checkout', [CheckoutController::class, 'store'])->name('checkout.s
 Route::get('/ajax/search-products', [ProductController::class, 'ajaxSearch']);
 Route::get('/category/{id}', [ProductController::class, 'getByCategory'])->name('category.show');
 
+Route::get('/orders', [OrderController::class, 'orderList'])->name('orders.index')->middleware('auth');
+Route::get('/order-status/{orderNumber}', [OrderController::class, 'showStatus'])->name('order.status');
+
 Route::group(['prefix' => 'product'], function () {
     Route::get('index', [ProductController::class, 'index'])->name('product.index');
     Route::get('create', [ProductController::class, 'create'])->name('product.create');

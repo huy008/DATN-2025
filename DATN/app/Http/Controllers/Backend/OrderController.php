@@ -3,9 +3,12 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Order;
 use App\Repositories\OrderRepository;
 use App\Services\OrderService;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
@@ -40,6 +43,42 @@ class OrderController extends Controller
             'config',
             'orders'
         ));
+    }
+
+    public function orderList(Request $request)
+    {
+        $query = Auth::user()
+            ->orders()
+            ->with('order_items.product')
+            ->latest();
+
+        // Lọc theo trạng thái
+        if ($request->filled('status')) {
+            $query->where('status', $request->status);
+        }
+
+        // Lọc theo khoảng thời gian
+        if ($request->filled('start_date') && $request->filled('end_date')) {
+            $query->whereBetween('created_at', [
+                Carbon::parse($request->start_date)->startOfDay(),
+                Carbon::parse($request->end_date)->endOfDay()
+            ]);
+        }
+
+        $orders = $query->paginate(5);
+
+        return view('orders', compact('orders'));
+    }
+
+    public function showStatus($orderNumber)
+    {
+        $order = Order::where('order_number', $orderNumber)->with('order_items.product')->first();
+
+        if (!$order) {
+            return view('orders.status-not-found', ['orderNumber' => $orderNumber]);
+        }
+
+        return view('status', compact('order'));
     }
 
     public function create(){
