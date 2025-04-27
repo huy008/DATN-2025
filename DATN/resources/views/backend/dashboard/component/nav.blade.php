@@ -16,7 +16,7 @@
                     @endforeach --}}
                 </div>
             </li>
-            <li class="dropdown">
+            {{-- <li class="dropdown">
                 <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
                     <i class="fa fa-envelope"></i>  <span class="label label-warning">16</span>
                 </a>
@@ -110,19 +110,19 @@
                         </div>
                     </li>
                 </ul>
-            </li>
+            </li> --}}
 
 
-            <li>
+            {{-- <li> --}}
                 {{-- <a href="{{ route('auth.logout') }}">
                     <i class="fa fa-sign-out"></i> Log out
                 </a> --}}
-            </li>
+            {{-- </li>
             <li>
                 <a class="right-sidebar-toggle">
                     <i class="fa fa-tasks"></i>
                 </a>
-            </li>
+            </li> --}}
         </ul>
     </nav>
 </div>

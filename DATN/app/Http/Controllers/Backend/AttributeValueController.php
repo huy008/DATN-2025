@@ -70,33 +70,30 @@ class AttributeValueController extends Controller
     }
 
     public function edit($id){
-        // $this->authorize('modules', 'attribute.catalogue.update');
-        $attributeCatalogue = $this->attributeCatalogueRepository->getAttributeCatalogueById($id, $this->language);
+        $attributes = $this->attributeRepository->all();
+        $attributeCatalogue = $this->attributeCatalogueRepository->findById($id);
         $config = $this->configData();
-        $config['seo'] = __('messages.attributeCatalogue');
         $config['method'] = 'edit';
-        $dropdown  = $this->nestedset->Dropdown();
-        $template = 'backend.attribute.catalogue.store';
+        $template = 'backend.attribute.value.store';
         return view('backend.dashboard.layout', compact(
             'template',
             'config',
-            'dropdown',
             'attributeCatalogue',
+            'attributes'
         ));
     }
 
-    public function update($id, UpdateAttributeCatalogueRequest $request){
-        if($this->attributeCatalogueService->update($id, $request, $this->language)){
-            return redirect()->route('attribute.catalogue.index')->with('success','Cập nhật bản ghi thành công');
+    public function update($id, Request $request){
+        if($this->attributeCatalogueService->update($id, $request)){
+            return redirect()->route('attribute.value.index')->with('success','Cập nhật bản ghi thành công');
         }
-        return redirect()->route('attribute.catalogue.index')->with('error','Cập nhật bản ghi không thành công. Hãy thử lại');
+        return redirect()->route('attribute.value.index')->with('error','Cập nhật bản ghi không thành công. Hãy thử lại');
     }
 
     public function delete($id){
-        // $this->authorize('modules', 'attribute.catalogue.destroy');
         $config['seo'] = __('messages.attributeCatalogue');
-        $attributeCatalogue = $this->attributeCatalogueRepository->getAttributeCatalogueById($id, $this->language);
-        $template = 'backend.attribute.catalogue.delete';
+        $attributeCatalogue = $this->attributeCatalogueRepository->findById($id);
+        $template = 'backend.attribute.value.delete';
         return view('backend.dashboard.layout', compact(
             'template',
             'attributeCatalogue',
@@ -104,11 +101,11 @@ class AttributeValueController extends Controller
         ));
     }
 
-    public function destroy(DeleteAttributeCatalogueRequest $request, $id){
-        if($this->attributeCatalogueService->destroy($id, $this->language)){
-            return redirect()->route('attribute.catalogue.index')->with('success','Xóa bản ghi thành công');
+    public function destroy(Request $request, $id){
+        if($this->attributeCatalogueService->destroy($id)){
+            return redirect()->route('attribute.value.index')->with('success','Xóa bản ghi thành công');
         }
-        return redirect()->route('attribute.catalogue.index')->with('error','Xóa bản ghi không thành công. Hãy thử lại');
+        return redirect()->route('attribute.value.index')->with('error','Xóa bản ghi không thành công. Hãy thử lại');
     }
 
     private function configData(){

@@ -45,7 +45,7 @@
                     {!! $product->description!!}
                 </td>
                               <td>
-                    {{ $product->base_price }}
+                    {{ format_currency($product->base_price) }}
                 </td>
                 <td class="text-center"> 
                     <a href="{{ route('product.edit', $product->id) }}" class="btn btn-success"><i class="fa fa-edit"></i></a>
@@ -55,4 +55,4 @@
             @endforeach
     </tbody>
 </table>
-{{-- {{  $products->links('pagination::bootstrap-4') }} --}}
+{{  $products->links('pagination::bootstrap-4') }}

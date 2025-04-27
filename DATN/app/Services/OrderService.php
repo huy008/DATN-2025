@@ -115,6 +115,7 @@ class OrderService
             'payment_method',
             'phone',
             'address',
+            'order_number'
         ];
     }
 }

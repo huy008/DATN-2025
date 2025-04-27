@@ -11,14 +11,8 @@ class CheckoutController extends Controller
 {
     public function index()
     {
-        $carts = [];
-
-        if (Auth::check()) {
-            $carts = Auth::user()->carts()->with('product')->get();
-            $user = Auth::user();
-        } else {
-            $carts = session('cart', []);
-        }
+        $user = Auth::user();
+        $carts = $user->carts()->with(['variant', 'product'])->get();
 
         $total = $this->calculateTotal();
 
@@ -27,6 +21,20 @@ class CheckoutController extends Controller
 
     public function store(Request $request)
     {
+        $request->validate([
+            'address' => 'required|string',
+            'phone' => [
+                'required',
+                'regex:/^0[0-9]{9}$/',
+            ],
+        ], [
+            'address.required' => 'Vui lòng nhập địa chỉ.',
+            'address.string' => 'Địa chỉ phải là chuỗi ký tự.',
+
+            'phone.required' => 'Vui lòng nhập số điện thoại.',
+            'phone.regex' => 'Số điện thoại không đúng định dạng.',
+        ]);
+
         $order = Order::create([
             'order_number' => time(),
             'user_id' => Auth::id(),
@@ -71,17 +79,13 @@ class CheckoutController extends Controller
     private function calculateTotal()
     {
         $total = 0;
-
         if (Auth::check()) {
             $cartItems = Auth::user()->carts;
-        } else {
-            $cartItems = collect(session('cart', []));
-        }
 
-        foreach ($cartItems as $item) {
-            $total += $item['price'] * $item['quantity'];
-        }
-
+            foreach ($cartItems as $item) {
+                $total += $item->price * $item->quantity;
+            }
+        } 
         return $total;
     }
 
@@ -95,7 +99,7 @@ class CheckoutController extends Controller
         $vnp_TxnRef = time();
         $vnp_OrderInfo = "Thanh toán hóa đơn";
         $vnp_OrderType = "Shop";
-        $vnp_Amount = $total* 100000;
+        $vnp_Amount = $total* 100;
         $vnp_Locale = "VN";
         $vnp_BankCode = "NCB";
         $vnp_IpAddr = $_SERVER['REMOTE_ADDR'];

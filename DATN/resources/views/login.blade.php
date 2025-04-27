@@ -8,7 +8,7 @@
                       <h3 class="breadcrumb__title">
                           Đăng nhập</h3>
                       <div class="breadcrumb__list js_breadcrumb_reduce_length_on_mobile">
-                          <span><a href="{{route('index')}}">Trang chủ</a></span><span>
+                          <span><a href="{{ route('index') }}">Trang chủ</a></span><span>
                               Đăng nhập </span>
                       </div>
                   </div>
@@ -43,17 +43,25 @@
                                               </div>
                                               <div>
                                                   <h3 class="auth-card__header-title fs-4 mb-1">
-                                                    Đăng nhập vào tài khoản của bạn
+                                                      Đăng nhập vào tài khoản của bạn
                                                   </h3>
                                                   <p class="auth-card__header-description text-muted">
-                                                    Dữ liệu cá nhân của bạn sẽ được sử dụng để hỗ trợ trải nghiệm của bạn trên toàn trang web này, để quản lý quyền truy cập vào tài khoản của bạn
+                                                      Dữ liệu cá nhân của bạn sẽ được sử dụng để hỗ trợ trải nghiệm của bạn
+                                                      trên toàn trang web này, để quản lý quyền truy cập vào tài khoản của
+                                                      bạn
                                                   </p>
                                               </div>
                                           </div>
                                       </div>
                                       <div class="auth-card__body">
-                                          <form method="POST" action="{{route('login.post')}}"
-                                              accept-charset="UTF-8" id="botble-ecommerce-forms-fronts-auth-login-form"
+                                          @if (session('error'))
+                                              <div class="alert alert-danger">
+                                                  {{ session('error') }}
+                                              </div>
+                                          @endif
+
+                                          <form method="POST" action="{{ route('login.post') }}" accept-charset="UTF-8"
+                                              id="botble-ecommerce-forms-fronts-auth-login-form"
                                               class="js-base-form dirty-check" icon="ti ti-lock"
                                               heading="Đăng nhập vào tài khoản của bạn"
                                               description="Dữ liệu cá nhân của bạn sẽ được sử dụng để hỗ trợ trải nghiệm của bạn trên toàn trang web này, để quản lý quyền truy cập vào tài khoản của bạn"
@@ -75,7 +83,7 @@
                                                                   d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10z" />
                                                               <path d="M3 7l9 6l9 -6" />
                                                           </svg></span><input class="form-control ps-5" data-counter="60"
-                                                          placeholder="Nhập email" name=email type=email id="email">
+                                                          placeholder="Nhập email" name=email type=email id="email" value="{{ old('email') }}" >
                                                   </div>
                                               </div>
                                               <div class="mb-3 position-relative">
@@ -177,7 +185,7 @@
                                                       </svg></button>
                                               </div>
                                               <div class="mt-3 text-center">
-                                                 Bạn có tài khoản chưa?<a href="{{route('register')}}"
+                                                  Bạn có tài khoản chưa?<a href="{{ route('register') }}"
                                                       class="ms-1 text-decoration-underline">Đăng ký</a>
                                               </div>
                                           </form>
@@ -190,5 +198,4 @@
               </div>
           </section>
       </main>
-   
   @endsection

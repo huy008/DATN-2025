@@ -1,3 +1,4 @@
+@include('backend.dashboard.component.breadcrumb', ['title' => 'Giá trị thuộc tính'])
 <div class="row mt20">
     <div class="col-lg-12">
         <div class="ibox float-e-margins">
@@ -12,4 +13,3 @@
         </div>
     </div>
 </div>
-

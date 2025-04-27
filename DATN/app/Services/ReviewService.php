@@ -23,7 +23,7 @@ class ReviewService
 
     public function paginate($request){
         $condition = [
-            'keyword' => addslashes($request->input('keyword')),
+            'product_name' => addslashes($request->input('keyword')),
         ];
         $perPage = $request->integer('perpage');
         $reviews = $this->reviewRepository->pagination(
@@ -33,7 +33,9 @@ class ReviewService
             ['path' => 'review/index'], 
             ['id', 'DESC'],  
             [],
+            ['product']
         );
+
         return $reviews;
     }
 
@@ -91,6 +93,7 @@ class ReviewService
             'product_id',
             'rating',
             'comment',
+            'publish'
         ];
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Attribute;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\ProductVariant;
@@ -32,7 +33,24 @@ class ProductController extends Controller
     {
         $category = Category::findOrFail($id);
 
-        $products = $category->products()->with('variants')->paginate(12);
+        $search = request('q');
+        $priceRange = request('price_range');
+
+        // Bắt đầu query với sản phẩm trong danh mục
+        $query = $category->products()->with('variants');
+
+        if ($search) {
+            $query->where('name', 'like', '%' . $search . '%');
+        }
+
+        if ($priceRange) {
+            list($minPrice, $maxPrice) = explode('-', $priceRange);
+            $query->whereHas('variants', function ($q) use ($minPrice, $maxPrice) {
+                $q->whereBetween('price', [(int)$minPrice, (int)$maxPrice]);
+            });
+        }
+
+        $products = $query->paginate(12);
 
         return view('product', compact('category', 'products'));
     }
@@ -87,8 +105,12 @@ class ProductController extends Controller
                 ];
             }
             $variantImages = ProductVariant::where('product_id', $id)
-                ->get(['image_url', 'id'])->toArray();
+                ->pluck('image_url')
+                ->unique()
+                ->values()
+                ->toArray();
         }
+
         $productRelated = Product::where('category_id', $product->category_id)->limit(8)->get();
         return view('detail', compact(
             'product',
@@ -114,6 +136,7 @@ class ProductController extends Controller
             ->first();
 
         if ($variant) {
+            $variant->final_price = $variant->final_price;
             return response()->json([
                 'variant' => $variant,
             ]);
@@ -205,9 +228,10 @@ class ProductController extends Controller
                     'name' => $product->name,
                     'url' => route('product.detail', $product->id),
                     'image' => asset($product->img_thumbnail),
-                    'base_price' => $product->base_price ? number_format($product->base_price, 2) : null,
+                    'base_price' => $product->base_price ? format_currency($product->base_price) : 0,
+                    'final_price' => $product->final_price ? format_currency($product->final_price) : 0,
                     'reviews_count' => $product->reviews->count(),
-                'rating_percent' => $product->average_rating,
+                    'rating_percent' => $product->average_rating,
                 ];
             });
 

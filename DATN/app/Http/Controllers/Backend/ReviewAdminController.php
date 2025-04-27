@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Review;
 use Illuminate\Http\Request;
 use App\Repositories\ReviewRepository;
 use App\Services\ReviewService;
@@ -50,6 +51,21 @@ class ReviewAdminController extends Controller
         }
         return redirect()->route('review.index')->with('error','Xóa bản ghi không thành công. Hãy thử lại');
     }
+
+    public function updateStatus(Request $request)
+    {
+        $review = Review::find($request->id);
+
+        if (!$review) {
+            return response()->json(['success' => false, 'message' => 'Review không tồn tại']);
+        }
+
+        $review->publish = $request->status;
+        $review->save();
+
+        return response()->json(['success' => true, 'message' => 'Cập nhật trạng thái thành công']);
+    }
+
 
     private function configData(){
         return [

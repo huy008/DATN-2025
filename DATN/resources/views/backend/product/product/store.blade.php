@@ -1,4 +1,5 @@
 
+@include('backend.dashboard.component.breadcrumb', ['title' => "Sản phẩm"])
 @include('backend.dashboard.component.formError')
 @php
     $url = ($config['method'] == 'create') ? route('product.store') : route('product.update', $product->id);

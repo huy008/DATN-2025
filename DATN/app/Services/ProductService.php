@@ -28,6 +28,7 @@ class ProductService
         $perPage = $request->integer('perpage');
         $condition = [
             'keyword' => addslashes($request->input('keyword')),
+            'category_id' => $request->input('product_catalogue_id')
         ];
         $paginationConfig = [
             'path' => 'product/index',
@@ -41,6 +42,7 @@ class ProductService
             extend: $paginationConfig,
             orderBy: $orderBy,
         );
+
         return $products;
     }
 
@@ -57,7 +59,7 @@ class ProductService
                 'name' => $request->name,
                 'sku' => $request->sku,
                 'description' => $request->description,
-                'base_price' => $request->price,
+                'base_price' => str_replace('.', '', $request->price),
                 'img_thumbnail' => $request->image,
                 'short_description' => $request->short_description,
                 'stock_quantity' => $request->stock_quantity,
@@ -67,7 +69,7 @@ class ProductService
 
                 foreach ($request->variant['price'] as $index => $price) {
                     $variant = $product->variants()->create([
-                        'price' => $price,
+                        'price' => str_replace('.', '', $price),
                         'stock_quantity' => $request->variant['quantity'][$index],
                         'image_url' => $request->variant['album'][$index],
                         'sku' => $request->variant['sku'][$index],

@@ -68,57 +68,33 @@
          }
      </style>
      <div class="container my-0 my-md-3 my-lg-5 checkout-content-wrap">
+
          <form action="{{ route('checkout.store') }}" method="POST">
              @csrf
              <div class="row" id="main-checkout-product-info" bis_skin_checked="1">
-
                  <div class="col-lg-5 col-md-6 order-1 order-md-2" bis_skin_checked="1">
-                     <div class="d-block d-sm-none" bis_skin_checked="1">
-                         <div class="checkout-logo" bis_skin_checked="1">
-                             <a href="https://shofy.botble.com" title="Shofy - Multipurpose eCommerce Laravel Script">
-                                 <img src="https://shofy.botble.com/storage/main/general/logo.png"
-                                     alt="Shofy - Multipurpose eCommerce Laravel Script">
-                             </a>
-                         </div>
-                         <hr class="border-dark-subtle">
-                     </div>
-                     <div class="my-3 bg-light" bis_skin_checked="1">
+                         <div class="my-3 bg-light" bis_skin_checked="1">
                          <div class="position-relative p-3" id="cart-item" bis_skin_checked="1">
                              <div class="bg-light py-2" bis_skin_checked="1">
-                                 <p class="font-weight-bold mb-0">Product(s):</p>
+                                 <h4 class="font-weight-bold mb-0">Danh sách sản phẩm : </h4>
                              </div>
 
                              <div class="checkout-products-marketplace shipping-method-wrapper" bis_skin_checked="1">
                                  <div class="mt-3 bg-light mb-3" bis_skin_checked="1">
-                                     <div class="p-2" style="background: antiquewhite;" bis_skin_checked="1">
-                                         <img class="img-fluid rounded"
-                                             src="https://shofy.botble.com/storage/main/stores/8.png" alt="Old El Paso"
-                                             style="max-width: 30px; margin-inline-end: 3px;">
-                                         <span class="font-weight-bold">Old El Paso</span>
-                                         <div class="d-flex align-items-center gap-2" bis_skin_checked="1">
-                                             <div class="bb-product-rating" style="--bb-rating-size: 70px"
-                                                 bis_skin_checked="1">
-                                                 <span style="width: 58.235294117647% !important;"></span>
-                                             </div>
-                                             <span class="small text-muted">
-                                                 (68 Reviews)
-                                             </span>
-                                         </div>
-                                     </div>
                                      <div class="py-3" bis_skin_checked="1">
                                          @foreach ($carts as $cart)
                                              <div class="row cart-item" bis_skin_checked="1">
                                                  <div class="col-3" bis_skin_checked="1">
                                                      <div class="checkout-product-img-wrapper" bis_skin_checked="1">
                                                          <img class="item-thumb img-thumbnail img-rounded"
-                                                             src="{{ asset($cart->product->img_thumbnail) }}"
+                                                             src="{{ asset($cart->variant->image_url ?? $cart->product->img_thumbnail) }}"
                                                              alt="Fitbit Charge 5 Fitness Tracker (Digital)">
                                                          <span class="checkout-quantity">{{ $cart['quantity'] }}</span>
                                                      </div>
                                                  </div>
                                                  <div class="col" bis_skin_checked="1">
                                                      <p class="mb-0">
-                                                         {{ $cart['name'] }}
+                                                         {{ $cart->product->name }}
                                                      </p>
 
                                                      <div class="ec-checkout-quantity"
@@ -129,7 +105,7 @@
                                                      </div>
                                                  </div>
                                                  <div class="col-auto text-end" bis_skin_checked="1">
-                                                     <p>{{ $cart['quantity'] * $cart['base_price'] }}</p>
+                                                     <p>{{ format_currency($cart->quantity * $cart->price) }}</p>
                                                  </div>
                                              </div>
                                          @endforeach
@@ -144,7 +120,7 @@
                                      </div>
                                      <div class="col-6 float-end" bis_skin_checked="1">
                                          <p class="total-text raw-total-text" data-price="5459.3">
-                                             {{ $total }}
+                                             {{ format_currency($total) }}
                                          </p>
                                      </div>
                                  </div>
@@ -170,66 +146,59 @@
                      </div>
                  </div>
                  <div class="form-checkout col-lg-7 col-md-6" bis_skin_checked="1">
-                     <div class="d-none d-sm-block" bis_skin_checked="1">
-                         <div class="checkout-logo" bis_skin_checked="1">
-                             <a href="https://shofy.botble.com" title="Shofy - Multipurpose eCommerce Laravel Script">
-                                 <img src="https://shofy.botble.com/storage/main/general/logo.png"
-                                     alt="Shofy - Multipurpose eCommerce Laravel Script">
-                             </a>
-                         </div>
-                         <hr class="border-dark-subtle">
-                     </div>
                      <div class="mb-4" bis_skin_checked="1">
-                         <h5 class="checkout-billing-information-title">Thanh toán</h5>
+                         <h3 class="checkout-billing-information-title">Thanh toán</h3>
                          <div class="customer-billing-address-form" bis_skin_checked="1">
                              <div class="mb-3 form-group" bis_skin_checked="1">
                                  <input name="billing_address_same_as_shipping_address" type="hidden" value="0">
                              </div>
 
                              <div class="billing-address-form-wrapper" bis_skin_checked="1">
-                                 <div class="form-group mb-3 " bis_skin_checked="1">
-                                     <div class="form-input-wrapper" bis_skin_checked="1">
-                                         <input class="form-control" id="name" name=""
-                                             autocomplete="family-name" type="text" value="{{ $user->name }}">
-                                         <label for="name">Tên</label>
-                                     </div>
+                                 <div class="form-group" bis_skin_checked="1">
+                                     <label for="name">Tên</label>
+                                     <input class="form-control" id="name" name=""
+                                         autocomplete="family-name" type="text" value="{{ $user->name }}" disabled>
                                  </div>
 
                                  <div class="row" bis_skin_checked="1">
                                      <div class="col-lg-8 col-12" bis_skin_checked="1">
                                          <div class="form-group  " bis_skin_checked="1">
-                                             <div class="form-input-wrapper" bis_skin_checked="1">
-                                                 <input id="email" class="form-control" autocomplete="email"
-                                                     name="email" type="text" value="{{ $user->phone }}">
-                                                 <label for="email">Email</label>
-                                             </div>
+                                             <label for="email">Email</label>
+                                             <input id="email" class="form-control" autocomplete="email"
+                                                 name="email" type="text" value="{{ $user->email }}" disabled>
                                          </div>
                                      </div>
                                      <div class="col-lg-4 col-12" bis_skin_checked="1">
                                          <div class="form-group  " bis_skin_checked="1">
-                                             <div class="form-input-wrapper" bis_skin_checked="1">
-                                                 <input id="phone" class="form-control" autocomplete="phone"
-                                                     name="phone" type="text" value="{{ $user->phone }}">
-                                                 <label for="phone">Số điện thoại</label>
-                                             </div>
+                                             <label for="phone">Số điện thoại</label>
+                                             <input id="phone" class="form-control" autocomplete="phone"
+                                                 name="phone" type="text" value="{{ $user->phone }}">
+                                             @error('phone')
+                                                 <small class="text-danger">{{ $message }}</small>
+                                             @enderror
                                          </div>
                                      </div>
                                  </div>
 
                                  <div class="form-group mb-3 " bis_skin_checked="1">
-                                     <div class="form-input-wrapper" bis_skin_checked="1">
+                                     <div class="form-group" bis_skin_checked="1">
+                                         <label for="address">Địa chỉ</label>
                                          <input class="form-control" id="address" name="address"
                                              autocomplete="address" type="text" value="">
-                                         <label for="address">Địa chỉ</label>
                                      </div>
+                                     @error('address')
+                                         <small class="text-danger">{{ $message }}</small>
+                                     @enderror
                                  </div>
                                  <div class="form-group mb-3" bis_skin_checked="1">
                                      <label class="form-label" for="description">
                                          Ghi chú
                                      </label>
-                                     <textarea class="form-control" data-counter="10000" rows="3"
-                                         placeholder="Notes about your order, e.g. special notes for delivery." id="description" name="note"
-                                         cols="50"></textarea>
+                                     <textarea class="form-control" data-counter="10000" rows="3" placeholder="Nhập ghi chú" id="description"
+                                         name="note" cols="50"></textarea>
+                                     @error('note')
+                                         <small classc="text-danger">{{ $message }}</small>
+                                     @enderror
                                  </div>
                                  <div class="form-group mb-3 " bis_skin_checked="1">
                                      <div class="payment-method-wrapper">

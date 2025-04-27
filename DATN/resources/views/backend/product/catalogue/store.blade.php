@@ -1,4 +1,4 @@
-{{-- @include('backend.dashboard.component.breadcrumb', ['title' => $config['seo'][$config['method']]['title']]) --}}
+@include('backend.dashboard.component.breadcrumb', ['title' => "Danh mục"])
 @include('backend.dashboard.component.formError')
 @php
     $url =
@@ -53,10 +53,10 @@
                             <div class="col-lg-12">
                                 <div class="form-row">
                                     <span class="image img-cover image-target"><img
-                                            src="{{ old('img_thumbnail', $model->img_thumbnail ?? '') ? old('img_thumbnail', $model->img_thumbnail ?? '') : 'backend/img/not-found.jpg' }}"
+                                            src="{{ old('img_thumbnail', $productCatalogue->img_thumbnail ?? '') ? old('img_thumbnail', $productCatalogue->img_thumbnail ?? '') : 'backend/img/not-found.jpg' }}"
                                             alt=""></span>
                                     <input type="hidden" name="img_thumbnail"
-                                        value="{{ old('img_thumbnail', $model->img_thumbnail ?? '') }}">
+                                        value="{{ old('img_thumbnail', $productCatalogue->img_thumbnail ?? '') }}">
                                 </div>
                             </div>
                         </div>

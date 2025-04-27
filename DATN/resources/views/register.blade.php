@@ -8,8 +8,8 @@
                      <h3 class="breadcrumb__title">
                          Đăng ký</h3>
                      <div class="breadcrumb__list js_breadcrumb_reduce_length_on_mobile">
-                         <span><a href="{{route('index')}}">Trang chủ</a></span><span>
-                              Đăng ký </span>
+                         <span><a href="{{ route('index') }}">Trang chủ</a></span><span>
+                             Đăng ký </span>
                      </div>
                  </div>
              </div>
@@ -46,14 +46,16 @@
                                                      Đăng ký tài khoản
                                                  </h3>
                                                  <p class="auth-card__header-description text-muted">
-                                                   Dữ liệu cá nhân của bạn sẽ được sử dụng để hỗ trợ trải nghiệm của bạn trên toàn trang web này, để quản lý quyền truy cập vào tài khoản của bạn.
+                                                     Dữ liệu cá nhân của bạn sẽ được sử dụng để hỗ trợ trải nghiệm của bạn
+                                                     trên toàn trang web này, để quản lý quyền truy cập vào tài khoản của
+                                                     bạn.
                                                  </p>
                                              </div>
                                          </div>
                                      </div>
                                      <div class="auth-card__body">
-                                         <form method="POST" action="{{route('register.post')}}"
-                                             accept-charset="UTF-8" id="botble-ecommerce-forms-fronts-auth-register-form"
+                                         <form method="POST" action="{{ route('register.post') }}" accept-charset="UTF-8"
+                                             id="botble-ecommerce-forms-fronts-auth-register-form"
                                              class="js-base-form dirty-check" icon="ti ti-user-plus"
                                              heading="Register an account"
                                              description="Your personal data will be used to support your experience throughout this website, to manage access to your account."
@@ -74,7 +76,11 @@
                                                              <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" />
                                                              <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
                                                          </svg></span><input class="form-control ps-5" data-counter="250"
-                                                         placeholder="Nhập tên" name=name type=text id="name">
+                                                         placeholder="Nhập tên" name=name type=text id="name"
+                                                         value="{{ old('name') }}">
+                                                     @error('name')
+                                                         <small class="text-danger">{{ $message }}</small>
+                                                     @enderror
                                                  </div>
                                              </div>
                                              <div class="mb-3 position-relative">
@@ -93,8 +99,11 @@
                                                                  d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10z" />
                                                              <path d="M3 7l9 6l9 -6" />
                                                          </svg></span><input class="form-control ps-5" data-counter="60"
-                                                         placeholder="Nhập email" autocomplete="email" name=email type=email
-                                                         id="email">
+                                                         placeholder="Nhập email" autocomplete="email" name=email type=text
+                                                         id="email" value="{{ old('email') }}">
+                                                     @error('email')
+                                                         <small class="text-danger">{{ $message }}</small>
+                                                     @enderror
                                                  </div>
                                              </div>
                                              <div class="mb-3 position-relative">
@@ -113,13 +122,17 @@
                                                                  d="M5 4h4l2 5l-2.5 1.5a11 11 0 0 0 5 5l1.5 -2.5l5 2v4a2 2 0 0 1 -2 2a16 16 0 0 1 -15 -15a2 2 0 0 1 2 -2" />
                                                          </svg></span><input
                                                          class="form-control ps-5 js-phone-number-mask form-control"
-                                                         data-counter="250" placeholder="Nhập số điện thoại" autocomplete="tel"
-                                                         name=phone_number type=text id="phone">
+                                                         data-counter="250" placeholder="Nhập số điện thoại"
+                                                         autocomplete="tel" name=phone type=text id="phone"
+                                                         value="{{ old('phone') }}">
+                                                     @error('phone')
+                                                         <small class="text-danger">{{ $message }}</small>
+                                                     @enderror
                                                  </div>
                                              </div>
                                              <div class="mb-3 position-relative">
                                                  <label class="form-label" for="password">
-                                                      Nhập mật khẩu
+                                                     Nhập mật khẩu
                                                  </label>
                                                  <div class="position-relative">
                                                      <span class="auth-input-icon input-group-text"><svg
@@ -148,8 +161,13 @@
                                                                  <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
                                                                  <path
                                                                      d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" />
+
                                                              </svg></span>
+
                                                      </div>
+                                                     @error('password')
+                                                         <small class="text-danger">{{ $message }}</small>
+                                                     @enderror
                                                  </div>
                                              </div>
                                              <style>
@@ -221,7 +239,7 @@
                                                      </div>
                                                  </div>
                                              </div>
-                           
+
                                              <div class="d-grid">
                                                  <button class="btn btn-primary btn-auth-submit" type=submit>Đăng ký<svg
                                                          class="icon svg-icon-ti-ti-arrow-narrow-right"
@@ -235,7 +253,7 @@
                                                      </svg></button>
                                              </div>
                                              <div class="mt-3 text-center">
-                                                 Đã có một tài khoản?<a href="{{route('login')}}"
+                                                 Đã có một tài khoản?<a href="{{ route('login') }}"
                                                      class="ms-1 text-decoration-underline">Đăng nhập</a>
                                              </div>
                                          </form>
@@ -248,5 +266,4 @@
              </div>
          </section>
      </main>
-   
  @endsection

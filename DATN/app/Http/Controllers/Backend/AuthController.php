@@ -14,7 +14,7 @@ class AuthController extends Controller
 
     public function index(){
 
-        if(Auth::guard('admin')->id() > 0){
+        if (Auth::guard('admin')->check()) {
             return redirect()->route('dashboard.index');
         }
         
@@ -30,7 +30,6 @@ class AuthController extends Controller
            return redirect()->route('dashboard.index')->with('success','Đăng nhập thành công');
         }
         return redirect()->route('auth.admin')->with('error','Email hoặc Mật khẩu không chính xác');
-        
     }
 
     public function logout(Request $request){

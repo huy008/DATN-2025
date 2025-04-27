@@ -20,13 +20,13 @@
                         <input type="checkbox" value="{{ $order->id }}" class="input-checkbox checkBoxItem">
                     </td>
                     <td>
-                        {{ $order->id }}
+                        {{ $order->order_number }}
                     </td>
                     <td>
                         {{ $order->user->name }}
                     </td>
                     <td>
-                        {{ $order->total_price }}
+                        {{ format_currency($order->total_price) }}
                     </td>
                     <td>
                         @php

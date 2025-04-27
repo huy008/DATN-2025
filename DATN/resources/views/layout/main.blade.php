@@ -13,8 +13,7 @@
     @include('components.header')
 
     @yield('content')
-
-    @include('components.footer')
+        @include('components.footer')
 
     @include('components.script')
       @include('components.toast')

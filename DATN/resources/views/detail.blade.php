@@ -26,9 +26,8 @@
                                          <div class="bb-product-gallery-images">
                                              @if (!empty($variantImages))
                                                  @foreach ($variantImages as $variantImage)
-                                                     <a href="{{ asset($variantImage['image_url']) }}"
-                                                         data-variant-id="{{ $variantImage['id'] }}" class="variant-image">
-                                                         <img src="{{ asset($variantImage['image_url']) }}"
+                                                     <a href="{{ asset($variantImage) }}" class="variant-image">
+                                                         <img src="{{ asset($variantImage) }}"
                                                              alt="{{ $product->name }}"></a>
                                                  @endForEach
                                              @else
@@ -41,10 +40,8 @@
                                          <div class="bb-product-gallery-thumbnails" data-vertical="1">
                                              @if (!empty($variantImages))
                                                  @foreach ($variantImages as $variantImage)
-                                                     <div data-variant-id="{{ $variantImage['id'] }}"
-                                                         class="variant-thumbnail">
-                                                         <img src='{{ asset($variantImage['image_url']) }}'
-                                                             alt="{{ $product->name }}">
+                                                     <div data-variant-id="{{ $variantImage }}" class="variant-thumbnail">
+                                                         <img src='{{ asset($variantImage) }}' alt="{{ $product->name }}">
                                                      </div>
                                                  @endForeach
                                              @else
@@ -101,7 +98,9 @@
                                  </div>
                                  <div class="tp-product-details-price-wrapper mb-20">
                                      <span class="tp-product-details-price new-price"
-                                         data-bb-value="product-price">{{ $product->base_price }}</span>
+                                         data-bb-value="product-price">{{ format_currency($product->final_price??$product->base_price) }}</span>
+                                     <span class=""><small><del class="tp-product-details-price old-price"
+                                                 data-bb-value="product-original-price">{{ format_currency($product->base_price) }}</del></small></span>
                                  </div>
                                  <form method="POST" action="{{ route('cart.add') }}" class="product-form">
                                      @csrf
@@ -111,13 +110,13 @@
                                      <div class="product-attributes product-attribute-swatches" id="product-attributes-15">
                                          <div class="bb-product-attribute-swatch visual-swatches-wrapper attribute-swatches-wrapper"
                                              data-type="visual" data-slug="color">
-                                             @if (!empty($groupedAttributes['color']))
+                                             @if (!empty($groupedAttributes['Màu sắc']))
                                                  <h4 class="bb-product-attribute-swatch-title">
                                                      Màu sắc:
                                                  </h4>
                                                  <ul
                                                      class="bb-product-attribute-swatch-list visual-swatch color-swatch attribute-swatch">
-                                                     @foreach ($groupedAttributes['color'] as $color)
+                                                     @foreach ($groupedAttributes['Màu sắc'] as $color)
                                                          <li data-slug="green" data-id="{{ $color['attribute_value_id'] }}"
                                                              data-bs-toggle="tooltip" data-bs-title="Disabled tooltip"
                                                              class="bb-product-attribute-swatch-item attribute-swatch-item">
@@ -134,12 +133,12 @@
                                          </div>
                                          <div class="bb-product-attribute-swatch text-swatches-wrapper attribute-swatches-wrapper"
                                              data-type="text" data-slug="capacity">
-                                             @if (!empty($groupedAttributes['capacity']))
+                                             @if (!empty($groupedAttributes['Dung lượng']))
                                                  <h4 class="bb-product-attribute-swatch-title">
                                                      Dung lượng :
                                                  </h4>
                                                  <ul class="bb-product-attribute-swatch-list text-swatch attribute-swatch">
-                                                     @foreach ($groupedAttributes['capacity'] as $capacity)
+                                                     @foreach ($groupedAttributes['Dung lượng'] as $capacity)
                                                          <li data-slug="{{ $capacity['attribute_value'] }}"
                                                              data-id="{{ $capacity['attribute_value_id'] }}"
                                                              class="bb-product-attribute-swatch-item attribute-swatch-item">
@@ -272,7 +271,6 @@
                                                              đánh giá)</a>
                                                      </div>
                                                  </div>
-
                                                  <div class="tp-product-price-wrapper" style="text-align:left">
                                                      <span class="tp-product-price new-price"
                                                          data-bb-value="product-price">{{ format_currency($product->final_price ?? $product->base_price) }}</span>
@@ -1559,10 +1557,17 @@
              selectedColor = selectFirst(colorInputs);
              selectedCapacity = selectFirst(capacityInputs);
 
+             function formatCurrency(price) {
+                 return Number(price).toLocaleString('vi-VN') + 'đ';
+             }
+
              // Hàm cập nhật thông tin biến thể lên giao diện
              function updateVariantDetails(variant) {
                  // Ví dụ: Cập nhật giá, SKU, hình ảnh...
-                 document.querySelector('[data-bb-value="product-price"]').textContent = variant.price;
+                 document.querySelector('[data-bb-value="product-original-price"]').textContent = formatCurrency(
+                     variant.price);
+                 document.querySelector('[data-bb-value="product-price"]').textContent = formatCurrency(variant
+                     .final_price);
                  //  document.querySelector('[data-bb-value="product-sku"]') = variant.sku;
                  document.querySelector('.text-success').textContent = variant.stock_quantity + " sản phẩm có sẵn";
 

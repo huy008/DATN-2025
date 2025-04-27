@@ -31,10 +31,6 @@ class Product extends Model
 
     public function getFinalPriceAttribute()
     {
-        if ($this->variants()->count() > 0) {
-            return null; // Sản phẩm có biến thể thì không áp dụng giảm giá
-        }
-
         $discount = $this->discounts()
             ->where('start_date', '<=', now())
             ->where('end_date', '>=', now())
@@ -42,10 +38,10 @@ class Product extends Model
 
         if ($discount) {
             return $discount->type === 'percentage'
-                ? $this->price * (1 - $discount->value / 100)
-                : max($this->price - $discount->value, 0);
+                ? $this->base_price * (1 - $discount->value / 100)
+                : max($this->base_price - $discount->value, 0);
         }
-        return $this->price;
+        return $this->base_price;
     }
 
     public function reviews()

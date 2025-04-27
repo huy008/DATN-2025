@@ -1,4 +1,4 @@
-<form action="{{ route('attribute.index') }}">
+<form action="{{ route('discounts.index') }}">
     <div class="filter-wrapper">
         <div class="uk-flex uk-flex-middle uk-flex-space-between">
             @include('backend.dashboard.component.perpage')

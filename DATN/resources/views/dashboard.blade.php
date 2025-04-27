@@ -100,203 +100,206 @@
                  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
              }
          </style>
-       <section class="tp-slider-area p-relative z-index-1">
-    <div class="tp-slider-active tp-slider-variation swiper-container" data-loop="" data-autoplay="1"
-        data-autoplay-speed="5000">
-        <div class="swiper-wrapper">
-            <div class="tp-slider-item tp-slider-height d-flex align-items-center swiper-slide page_speed_234370733">
-                <div class="tp-slider-shape d-none d-sm-block">
-                    <img src=storage/main/general/placeholder.png data-bb-lazy="true" class="tp-slider-shape-1"
-                        loading="lazy" data-src="https://shofy.botble.com/storage/main/sliders/shape-1.png"
-                        alt="Bộ sưu tập máy tính bảng tốt nhất 2025"><img src=storage/main/general/placeholder.png
-                        data-bb-lazy="true" class="tp-slider-shape-2" loading="lazy"
-                        data-src="https://shofy.botble.com/storage/main/sliders/shape-2.png"
-                        alt="Bộ sưu tập máy tính bảng tốt nhất 2025"><img src=storage/main/general/placeholder.png
-                        data-bb-lazy="true" class="tp-slider-shape-3" loading="lazy"
-                        data-src="https://shofy.botble.com/storage/main/sliders/shape-3.png"
-                        alt="Bộ sưu tập máy tính bảng tốt nhất 2025"><img src=storage/main/general/placeholder.png
-                        data-bb-lazy="true" class="tp-slider-shape-4" loading="lazy"
-                        data-src="https://shofy.botble.com/storage/main/sliders/shape-4.png"
-                        alt="Bộ sưu tập máy tính bảng tốt nhất 2025">
-                </div>
-                <div class="container">
-                    <div class="row align-items-center">
-                        <div class="col-xl-5 col-lg-6 col-md-6">
-                            <div class="tp-slider-content p-relative z-index-1">
-                                <span>Bắt đầu từ
-                                    <b>274.000₫</b></span>
-                                <h3 class="tp-slider-title page_speed_12458825">
-                                    Bộ sưu tập máy tính bảng tốt nhất 2025
-                                </h3>
-                                <p class="page_speed_873799895">
-                                    Ưu đãi đặc biệt
-                                    <span>-35%</span>
-                                    giảm giá
-                                    tuần này
-                                </p>
-                                <div class="tp-slider-btn">
-                                    <a href="products.html" class="tp-btn tp-btn-2 tp-btn-white">
-                                        Mua ngay
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-7 col-lg-6 col-md-6">
-                            <div class="tp-slider-thumb text-end">
-                                <a href="products.html">
-                                    <picture>
-                                        <source srcset="https://shofy.botble.com/storage/main/sliders/slider-1.png"
-                                            media="(min-width: 1200px)">
-                                        <source srcset="https://shofy.botble.com/storage/main/sliders/slider-1.png"
-                                            media="(min-width: 768px)">
-                                        <source srcset="https://shofy.botble.com/storage/main/sliders/slider-1.png"
-                                            media="(max-width: 767px)">
-                                        <img src=storage/main/general/placeholder.png data-bb-lazy="true"
-                                            loading="eager"
-                                            data-src="https://shofy.botble.com/storage/main/sliders/slider-1.png"
-                                            alt="Bộ sưu tập máy tính bảng tốt nhất 2025">
-                                    </picture>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="tp-slider-item tp-slider-height d-flex align-items-center swiper-slide page_speed_234370733">
-                <div class="tp-slider-shape d-none d-sm-block">
-                    <img src=storage/main/general/placeholder.png data-bb-lazy="true" class="tp-slider-shape-1"
-                        loading="lazy" data-src="https://shofy.botble.com/storage/main/sliders/shape-1.png"
-                        alt="Bộ sưu tập sổ tay tốt nhất 2025"><img src=storage/main/general/placeholder.png
-                        data-bb-lazy="true" class="tp-slider-shape-2" loading="lazy"
-                        data-src="https://shofy.botble.com/storage/main/sliders/shape-2.png"
-                        alt="Bộ sưu tập sổ tay tốt nhất 2025"><img src=storage/main/general/placeholder.png
-                        data-bb-lazy="true" class="tp-slider-shape-3" loading="lazy"
-                        data-src="https://shofy.botble.com/storage/main/sliders/shape-3.png"
-                        alt="Bộ sưu tập sổ tay tốt nhất 2025"><img src=storage/main/general/placeholder.png
-                        data-bb-lazy="true" class="tp-slider-shape-4" loading="lazy"
-                        data-src="https://shofy.botble.com/storage/main/sliders/shape-4.png"
-                        alt="Bộ sưu tập sổ tay tốt nhất 2025">
-                </div>
-                <div class="container">
-                    <div class="row align-items-center">
-                        <div class="col-xl-5 col-lg-6 col-md-6">
-                            <div class="tp-slider-content p-relative z-index-1">
-                                <span>Bắt đầu từ
-                                    <b>999.000₫</b></span>
-                                <h3 class="tp-slider-title page_speed_12458825">
-                                    Bộ sưu tập sổ tay tốt nhất 2025
-                                </h3>
-                                <p class="page_speed_873799895">
-                                    Ưu đãi đặc biệt
-                                    <span>-10%</span>
-                                    giảm giá
-                                    tuần này
-                                </p>
-                                <div class="tp-slider-btn">
-                                    <a href="products.html" class="tp-btn tp-btn-2 tp-btn-white">
-                                        Mua ngay
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-7 col-lg-6 col-md-6">
-                            <div class="tp-slider-thumb text-end">
-                                <a href="products.html">
-                                    <picture>
-                                        <source srcset="https://shofy.botble.com/storage/main/sliders/slider-3.png"
-                                            media="(min-width: 1200px)">
-                                        <source srcset="https://shofy.botble.com/storage/main/sliders/slider-3.png"
-                                            media="(min-width: 768px)">
-                                        <source srcset="https://shofy.botble.com/storage/main/sliders/slider-3.png"
-                                            media="(max-width: 767px)">
-                                        <img src=storage/main/general/placeholder.png data-bb-lazy="true"
-                                            loading="eager"
-                                            data-src="https://shofy.botble.com/storage/main/sliders/slider-3.png"
-                                            alt="Bộ sưu tập sổ tay tốt nhất 2025">
-                                    </picture>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="tp-slider-item tp-slider-height d-flex align-items-center swiper-slide is-light page_speed_315843806">
-                <div class="tp-slider-shape d-none d-sm-block">
-                    <img src=storage/main/general/placeholder.png data-bb-lazy="true" class="tp-slider-shape-1"
-                        loading="lazy" data-src="https://shofy.botble.com/storage/main/sliders/shape-1.png"
-                        alt="Bộ sưu tập điện thoại tốt nhất 2025"><img src=storage/main/general/placeholder.png
-                        data-bb-lazy="true" class="tp-slider-shape-2" loading="lazy"
-                        data-src="https://shofy.botble.com/storage/main/sliders/shape-2.png"
-                        alt="Bộ sưu tập điện thoại tốt nhất 2025"><img src=storage/main/general/placeholder.png
-                        data-bb-lazy="true" class="tp-slider-shape-3" loading="lazy"
-                        data-src="https://shofy.botble.com/storage/main/sliders/shape-3.png"
-                        alt="Bộ sưu tập điện thoại tốt nhất 2025"><img src=storage/main/general/placeholder.png
-                        data-bb-lazy="true" class="tp-slider-shape-4" loading="lazy"
-                        data-src="https://shofy.botble.com/storage/main/sliders/shape-4.png"
-                        alt="Bộ sưu tập điện thoại tốt nhất 2025">
-                </div>
-                <div class="container">
-                    <div class="row align-items-center">
-                        <div class="col-xl-5 col-lg-6 col-md-6">
-                            <div class="tp-slider-content p-relative z-index-1">
-                                <span>Bắt đầu từ
-                                    <b>999.000₫</b></span>
-                                <h3 class="tp-slider-title page_speed_12458825">
-                                    Bộ sưu tập điện thoại tốt nhất 2025
-                                </h3>
-                                <p class="page_speed_873799895">
-                                    Ưu đãi đặc biệt
-                                    <span>-10%</span>
-                                    giảm giá
-                                    tuần này
-                                </p>
-                                <div class="tp-slider-btn">
-                                    <a href="products.html" class="tp-btn tp-btn-2 tp-btn-white">
-                                        Mua ngay
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-7 col-lg-6 col-md-6">
-                            <div class="tp-slider-thumb text-end">
-                                <a href="products.html">
-                                    <picture>
-                                        <source
-                                            srcset="https://shofy.botble.com/storage/main/sliders/slider-2.png"
-                                            media="(min-width: 1200px)">
-                                        <source
-                                            srcset="https://shofy.botble.com/storage/main/sliders/slider-2.png"
-                                            media="(min-width: 768px)">
-                                        <source
-                                            srcset="https://shofy.botble.com/storage/main/sliders/slider-2.png"
-                                            media="(max-width: 767px)">
-                                        <img src=storage/main/general/placeholder.png data-bb-lazy="true"
-                                            loading="eager"
-                                            data-src="https://shofy.botble.com/storage/main/sliders/slider-2.png"
-                                            alt="Bộ sưu tập điện thoại tốt nhất 2025">
-                                    </picture>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="tp-slider-arrow tp-swiper-arrow d-none d-lg-block">
-            <button type=button class="tp-slider-button-prev"><svg width=8 height=14 viewBox="0 0 8 14"
-                    fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M7 13L1 7L7 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
-                        stroke-linejoin="round" />
-                </svg></button><button type=button class="tp-slider-button-next"><svg width=8 height=14
-                    viewBox="0 0 8 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M1 13L7 7L1 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
-                        stroke-linejoin="round" />
-                </svg></button>
-        </div>
-        <div class="tp-slider-dot tp-swiper-dot">
-        </div>
-    </div>
-</section>
+         <section class="tp-slider-area p-relative z-index-1">
+             <div class="tp-slider-active tp-slider-variation swiper-container" data-loop="" data-autoplay="1"
+                 data-autoplay-speed="5000">
+                 <div class="swiper-wrapper">
+                     <div
+                         class="tp-slider-item tp-slider-height d-flex align-items-center swiper-slide page_speed_234370733">
+                         <div class="tp-slider-shape d-none d-sm-block">
+                             <img src=storage/main/general/placeholder.png data-bb-lazy="true" class="tp-slider-shape-1"
+                                 loading="lazy" data-src="https://shofy.botble.com/storage/main/sliders/shape-1.png"
+                                 alt="Bộ sưu tập máy tính bảng tốt nhất 2025"><img src=storage/main/general/placeholder.png
+                                 data-bb-lazy="true" class="tp-slider-shape-2" loading="lazy"
+                                 data-src="https://shofy.botble.com/storage/main/sliders/shape-2.png"
+                                 alt="Bộ sưu tập máy tính bảng tốt nhất 2025"><img src=storage/main/general/placeholder.png
+                                 data-bb-lazy="true" class="tp-slider-shape-3" loading="lazy"
+                                 data-src="https://shofy.botble.com/storage/main/sliders/shape-3.png"
+                                 alt="Bộ sưu tập máy tính bảng tốt nhất 2025"><img src=storage/main/general/placeholder.png
+                                 data-bb-lazy="true" class="tp-slider-shape-4" loading="lazy"
+                                 data-src="https://shofy.botble.com/storage/main/sliders/shape-4.png"
+                                 alt="Bộ sưu tập máy tính bảng tốt nhất 2025">
+                         </div>
+                         <div class="container">
+                             <div class="row align-items-center">
+                                 <div class="col-xl-5 col-lg-6 col-md-6">
+                                     <div class="tp-slider-content p-relative z-index-1">
+                                         <span>Bắt đầu từ
+                                             <b>274.000₫</b></span>
+                                         <h3 class="tp-slider-title page_speed_12458825">
+                                             Bộ sưu tập máy tính bảng tốt nhất 2025
+                                         </h3>
+                                         <p class="page_speed_873799895">
+                                             Ưu đãi đặc biệt
+                                             <span>-35%</span>
+                                             giảm giá
+                                             tuần này
+                                         </p>
+                                         <div class="tp-slider-btn">
+                                             <a href="products.html" class="tp-btn tp-btn-2 tp-btn-white">
+                                                 Mua ngay
+                                             </a>
+                                         </div>
+                                     </div>
+                                 </div>
+                                 <div class="col-xl-7 col-lg-6 col-md-6">
+                                     <div class="tp-slider-thumb text-end">
+                                         <a href="products.html">
+                                             <picture>
+                                                 <source srcset="https://shofy.botble.com/storage/main/sliders/slider-1.png"
+                                                     media="(min-width: 1200px)">
+                                                 <source srcset="https://shofy.botble.com/storage/main/sliders/slider-1.png"
+                                                     media="(min-width: 768px)">
+                                                 <source srcset="https://shofy.botble.com/storage/main/sliders/slider-1.png"
+                                                     media="(max-width: 767px)">
+                                                 <img src=storage/main/general/placeholder.png data-bb-lazy="true"
+                                                     loading="eager"
+                                                     data-src="https://shofy.botble.com/storage/main/sliders/slider-1.png"
+                                                     alt="Bộ sưu tập máy tính bảng tốt nhất 2025">
+                                             </picture>
+                                         </a>
+                                     </div>
+                                 </div>
+                             </div>
+                         </div>
+                     </div>
+                     <div
+                         class="tp-slider-item tp-slider-height d-flex align-items-center swiper-slide page_speed_234370733">
+                         <div class="tp-slider-shape d-none d-sm-block">
+                             <img src=storage/main/general/placeholder.png data-bb-lazy="true" class="tp-slider-shape-1"
+                                 loading="lazy" data-src="https://shofy.botble.com/storage/main/sliders/shape-1.png"
+                                 alt="Bộ sưu tập sổ tay tốt nhất 2025"><img src=storage/main/general/placeholder.png
+                                 data-bb-lazy="true" class="tp-slider-shape-2" loading="lazy"
+                                 data-src="https://shofy.botble.com/storage/main/sliders/shape-2.png"
+                                 alt="Bộ sưu tập sổ tay tốt nhất 2025"><img src=storage/main/general/placeholder.png
+                                 data-bb-lazy="true" class="tp-slider-shape-3" loading="lazy"
+                                 data-src="https://shofy.botble.com/storage/main/sliders/shape-3.png"
+                                 alt="Bộ sưu tập sổ tay tốt nhất 2025"><img src=storage/main/general/placeholder.png
+                                 data-bb-lazy="true" class="tp-slider-shape-4" loading="lazy"
+                                 data-src="https://shofy.botble.com/storage/main/sliders/shape-4.png"
+                                 alt="Bộ sưu tập sổ tay tốt nhất 2025">
+                         </div>
+                         <div class="container">
+                             <div class="row align-items-center">
+                                 <div class="col-xl-5 col-lg-6 col-md-6">
+                                     <div class="tp-slider-content p-relative z-index-1">
+                                         <span>Bắt đầu từ
+                                             <b>999.000₫</b></span>
+                                         <h3 class="tp-slider-title page_speed_12458825">
+                                             Bộ sưu tập sổ tay tốt nhất 2025
+                                         </h3>
+                                         <p class="page_speed_873799895">
+                                             Ưu đãi đặc biệt
+                                             <span>-10%</span>
+                                             giảm giá
+                                             tuần này
+                                         </p>
+                                         <div class="tp-slider-btn">
+                                             <a href="products.html" class="tp-btn tp-btn-2 tp-btn-white">
+                                                 Mua ngay
+                                             </a>
+                                         </div>
+                                     </div>
+                                 </div>
+                                 <div class="col-xl-7 col-lg-6 col-md-6">
+                                     <div class="tp-slider-thumb text-end">
+                                         <a href="products.html">
+                                             <picture>
+                                                 <source srcset="https://shofy.botble.com/storage/main/sliders/slider-3.png"
+                                                     media="(min-width: 1200px)">
+                                                 <source srcset="https://shofy.botble.com/storage/main/sliders/slider-3.png"
+                                                     media="(min-width: 768px)">
+                                                 <source srcset="https://shofy.botble.com/storage/main/sliders/slider-3.png"
+                                                     media="(max-width: 767px)">
+                                                 <img src=storage/main/general/placeholder.png data-bb-lazy="true"
+                                                     loading="eager"
+                                                     data-src="https://shofy.botble.com/storage/main/sliders/slider-3.png"
+                                                     alt="Bộ sưu tập sổ tay tốt nhất 2025">
+                                             </picture>
+                                         </a>
+                                     </div>
+                                 </div>
+                             </div>
+                         </div>
+                     </div>
+                     <div
+                         class="tp-slider-item tp-slider-height d-flex align-items-center swiper-slide is-light page_speed_315843806">
+                         <div class="tp-slider-shape d-none d-sm-block">
+                             <img src=storage/main/general/placeholder.png data-bb-lazy="true" class="tp-slider-shape-1"
+                                 loading="lazy" data-src="https://shofy.botble.com/storage/main/sliders/shape-1.png"
+                                 alt="Bộ sưu tập điện thoại tốt nhất 2025"><img src=storage/main/general/placeholder.png
+                                 data-bb-lazy="true" class="tp-slider-shape-2" loading="lazy"
+                                 data-src="https://shofy.botble.com/storage/main/sliders/shape-2.png"
+                                 alt="Bộ sưu tập điện thoại tốt nhất 2025"><img src=storage/main/general/placeholder.png
+                                 data-bb-lazy="true" class="tp-slider-shape-3" loading="lazy"
+                                 data-src="https://shofy.botble.com/storage/main/sliders/shape-3.png"
+                                 alt="Bộ sưu tập điện thoại tốt nhất 2025"><img src=storage/main/general/placeholder.png
+                                 data-bb-lazy="true" class="tp-slider-shape-4" loading="lazy"
+                                 data-src="https://shofy.botble.com/storage/main/sliders/shape-4.png"
+                                 alt="Bộ sưu tập điện thoại tốt nhất 2025">
+                         </div>
+                         <div class="container">
+                             <div class="row align-items-center">
+                                 <div class="col-xl-5 col-lg-6 col-md-6">
+                                     <div class="tp-slider-content p-relative z-index-1">
+                                         <span>Bắt đầu từ
+                                             <b>999.000₫</b></span>
+                                         <h3 class="tp-slider-title page_speed_12458825">
+                                             Bộ sưu tập điện thoại tốt nhất 2025
+                                         </h3>
+                                         <p class="page_speed_873799895">
+                                             Ưu đãi đặc biệt
+                                             <span>-10%</span>
+                                             giảm giá
+                                             tuần này
+                                         </p>
+                                         <div class="tp-slider-btn">
+                                             <a href="products.html" class="tp-btn tp-btn-2 tp-btn-white">
+                                                 Mua ngay
+                                             </a>
+                                         </div>
+                                     </div>
+                                 </div>
+                                 <div class="col-xl-7 col-lg-6 col-md-6">
+                                     <div class="tp-slider-thumb text-end">
+                                         <a href="products.html">
+                                             <picture>
+                                                 <source
+                                                     srcset="https://shofy.botble.com/storage/main/sliders/slider-2.png"
+                                                     media="(min-width: 1200px)">
+                                                 <source
+                                                     srcset="https://shofy.botble.com/storage/main/sliders/slider-2.png"
+                                                     media="(min-width: 768px)">
+                                                 <source
+                                                     srcset="https://shofy.botble.com/storage/main/sliders/slider-2.png"
+                                                     media="(max-width: 767px)">
+                                                 <img src=storage/main/general/placeholder.png data-bb-lazy="true"
+                                                     loading="eager"
+                                                     data-src="https://shofy.botble.com/storage/main/sliders/slider-2.png"
+                                                     alt="Bộ sưu tập điện thoại tốt nhất 2025">
+                                             </picture>
+                                         </a>
+                                     </div>
+                                 </div>
+                             </div>
+                         </div>
+                     </div>
+                 </div>
+                 <div class="tp-slider-arrow tp-swiper-arrow d-none d-lg-block">
+                     <button type=button class="tp-slider-button-prev"><svg width=8 height=14 viewBox="0 0 8 14"
+                             fill="none" xmlns="http://www.w3.org/2000/svg">
+                             <path d="M7 13L1 7L7 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                 stroke-linejoin="round" />
+                         </svg></button><button type=button class="tp-slider-button-next"><svg width=8 height=14
+                             viewBox="0 0 8 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                             <path d="M1 13L7 7L1 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                 stroke-linejoin="round" />
+                         </svg></button>
+                 </div>
+                 <div class="tp-slider-dot tp-swiper-dot">
+                 </div>
+             </div>
+         </section>
 
          <section class="tp-product-category pt-60 pb-15 page_speed_1476740769">
              <div class="container">
@@ -307,9 +310,8 @@
                                  <div class="tp-product-category-item text-center mb-40">
                                      <div class="tp-product-category-thumb fix">
                                          <a href="{{ route('category.show', $category->id) }}" title="Headphones"><img
-                                                 src=storage/main/general/placeholder.png data-bb-lazy="true"
-                                                 loading="lazy"
-                                                 data-src="https://shofy.botble.com/storage/main/product-categories/1.png"
+                                                 src={{ asset($category->img_thumbnail) }} data-bb-lazy="true"
+                                                 loading="lazy" data-src="{{ asset($category->img_thumbnail) }}"
                                                  alt="Headphones"></a>
                                      </div>
                                      <div class="tp-product-category-content">
@@ -396,7 +398,8 @@
                                                  <div class="tp-product-item transition-3 mb-25 ">
                                                      <div class="tp-product-thumb p-relative fix m-img">
                                                          <a href="{{ route('product.detail', $product->id) }}">
-                                                             <img src="{{ $product->img_thumbnail }}" data-bb-lazy="true"
+                                                             <img style="max-height:300px"
+                                                                 src="{{ $product->img_thumbnail }}" data-bb-lazy="true"
                                                                  loading="lazy" data-src="{{ $product->img_thumbnail }}"
                                                                  alt="{{ $product->name }}" data-ll-status="loaded"
                                                                  class="entered loaded">
@@ -411,8 +414,7 @@
 
 
                                                          <div class="tp-product-category">
-                                                             <a href="https://shofy.botble.com/stores/global-office">Global
-                                                                 Office</a>
+                                                             <a href="#">{{ $product->category->name }}</a>
                                                          </div>
                                                          <h3 class="text-truncate tp-product-title">
                                                              <a href="{{ route('product.detail', $product->id) }}"
@@ -422,25 +424,41 @@
                                                          </h3>
 
                                                          <div class="">
-                                                             <div class="tp-product-rating d-flex align-items-center">
-                                                                 <div class="tp-product-rating-icon">
-                                                                     <div class="bb-product-rating"
-                                                                         style="--bb-rating-size: 70px">
-                                                                         <span style="width: 82.5% !important;"></span>
-                                                                     </div>
+                                                             <div
+                                                                 class="tp-product-details-rating-wrapper d-flex align-items-center mb-10">
+                                                                 <div class="tp-product-details-rating">
+                                                                     @php
+                                                                         $reviewCount = $product->reviews->count();
+                                                                         $rating = $product->average_rating;
+                                                                         $fullStars = floor($rating);
+                                                                         $halfStar = $rating - $fullStars >= 0.5;
+                                                                     @endphp
+
+                                                                     @for ($i = 0; $i < $fullStars; $i++)
+                                                                         <i class="fa fa-star"
+                                                                             style="color: gold; font-size: 15px;"></i>
+                                                                     @endfor
+
+                                                                     @if ($halfStar)
+                                                                         <i class="fa fa-star-half-o"
+                                                                             style="color: gold; font-size: 15px;"></i>
+                                                                     @endif
+
+                                                                     @for ($i = 0; $i < 5 - $fullStars - ($halfStar ? 1 : 0); $i++)
+                                                                         <i class="fa fa-star-o"
+                                                                             style="color: gold; font-size: 15px;"></i>
+                                                                     @endfor
                                                                  </div>
-                                                                 <div class="tp-product-rating-text">
-                                                                     <a href="{{ route('product.detail', $product->id) }}#product-review"
-                                                                         data-bb-toggle="scroll-to-review">
-                                                                         <span class="d-none d-sm-block">(8 reviews)</span>
-                                                                         <span class="d-block d-sm-none">(8)</span>
-                                                                     </a>
+                                                                 <div class="tp-product-details-reviews">
+                                                                     <a href=""
+                                                                         data-bb-toggle="scroll-to-review">({{ $reviewCount }}
+                                                                         đánh giá)</a>
                                                                  </div>
                                                              </div>
 
                                                              <div class="tp-product-price-wrapper">
                                                                  <span class="tp-product-price new-price"
-                                                                     data-bb-value="product-price">{{ format_currency($product->final_price??$product->base_price) }}</span>
+                                                                     data-bb-value="product-price">{{ format_currency($product->final_price ?? $product->base_price) }}</span>
 
                                                                  <span class="">
                                                                      <small>
@@ -449,6 +467,7 @@
                                                                      </small>
                                                                  </span>
                                                              </div>
+
                                                          </div>
 
 
@@ -472,7 +491,7 @@
                      <div class="col-xl-5 col-lg-6 col-md-5">
                          <div class="tp-section-title-wrapper ">
                              <h3 class="section-title tp-section-title">
-                                Sản phẩm <span>được đánh giá cao</span>
+                                 Sản phẩm <span>được đánh giá cao</span>
                              </h3>
                          </div>
 
@@ -491,7 +510,8 @@
                                                  <div class="tp-product-item transition-3 mb-25 ">
                                                      <div class="tp-product-thumb p-relative fix m-img">
                                                          <a href="{{ route('product.detail', $product->id) }}">
-                                                             <img src="{{ $product->img_thumbnail }}" data-bb-lazy="true"
+                                                             <img style="max-height:300px"
+                                                                 src="{{ $product->img_thumbnail }}" data-bb-lazy="true"
                                                                  loading="lazy" data-src="{{ $product->img_thumbnail }}"
                                                                  alt="{{ $product->name }}" data-ll-status="loaded"
                                                                  class="entered loaded">
@@ -506,8 +526,7 @@
 
 
                                                          <div class="tp-product-category">
-                                                             <a href="https://shofy.botble.com/stores/global-office">Global
-                                                                 Office</a>
+                                                             <a href="#">{{ $product->category->name }}</a>
                                                          </div>
                                                          <h3 class="text-truncate tp-product-title">
                                                              <a href="{{ route('product.detail', $product->id) }}"
@@ -517,30 +536,46 @@
                                                          </h3>
 
                                                          <div class="">
-                                                             <div class="tp-product-rating d-flex align-items-center">
-                                                                 <div class="tp-product-rating-icon">
-                                                                     <div class="bb-product-rating"
-                                                                         style="--bb-rating-size: 70px">
-                                                                         <span style="width: 82.5% !important;"></span>
-                                                                     </div>
+                                                             <div
+                                                                 class="tp-product-details-rating-wrapper d-flex align-items-center mb-10">
+                                                                 <div class="tp-product-details-rating">
+                                                                     @php
+                                                                         $reviewCount = $product->reviews->count();
+                                                                         $rating = $product->average_rating;
+                                                                         $fullStars = floor($rating);
+                                                                         $halfStar = $rating - $fullStars >= 0.5;
+                                                                     @endphp
+
+                                                                     @for ($i = 0; $i < $fullStars; $i++)
+                                                                         <i class="fa fa-star"
+                                                                             style="color: gold; font-size: 15px;"></i>
+                                                                     @endfor
+
+                                                                     @if ($halfStar)
+                                                                         <i class="fa fa-star-half-o"
+                                                                             style="color: gold; font-size: 15px;"></i>
+                                                                     @endif
+
+                                                                     @for ($i = 0; $i < 5 - $fullStars - ($halfStar ? 1 : 0); $i++)
+                                                                         <i class="fa fa-star-o"
+                                                                             style="color: gold; font-size: 15px;"></i>
+                                                                     @endfor
                                                                  </div>
-                                                                 <div class="tp-product-rating-text">
-                                                                     <a href="{{ route('product.detail', $product->id) }}#product-review"
-                                                                         data-bb-toggle="scroll-to-review">
-                                                                         <span class="d-none d-sm-block">(8 reviews)</span>
-                                                                         <span class="d-block d-sm-none">(8)</span>
-                                                                     </a>
+                                                                 <div class="tp-product-details-reviews">
+                                                                     <a href="#"
+                                                                         data-bb-toggle="scroll-to-review">({{ $reviewCount }}
+                                                                         đánh giá)</a>
                                                                  </div>
                                                              </div>
 
                                                              <div class="tp-product-price-wrapper">
                                                                  <span class="tp-product-price new-price"
-                                                                     data-bb-value="product-price">{{ $product->base_price }}</span>
+                                                                     data-bb-value="product-price">{{ format_currency($product->final_price ?? $product->base_price) }}</span>
 
                                                                  <span class="">
                                                                      <small>
                                                                          <del class="tp-product-price old-price"
-                                                                             data-bb-value="product-original-price">{{ $product->base_price }}</del>
+                                                                             data-bb-value="product-original-price">{{ format_currency($product->base_price) }}</del>
                                                                      </small>
                                                                  </span>
                                                              </div>
@@ -744,8 +779,10 @@
      <script src={{ asset('client/vendor/core/plugins/cookie-consent/js/cookie-consent0ff5.js?v=1.0.2') }}></script>
      <script src={{ asset('client/vendor/core/plugins/sale-popup/js/sale-popup5438.js?v=1.2.0></script') }}>
          < script src = {{ asset('client/vendor/core/plugins/newsletter/js/newsletter0d71.js?v=1.2.5') }} >
-     </>
-     <script src={{ asset('client/vendor/core/plugins/ecommerce/js/front-ecommerce8913.js?v=1.3.1.3') }}></script>
+             <
+             /> <
+         script src = {{ asset('client/vendor/core/plugins/ecommerce/js/front-ecommerce8913.js?v=1.3.1.3') }} >
+     </script>
      <script defer src={{ asset('client/themes/shofy/js/ecommercec8c4.js?v=1.3.1') }}></script>
      //
      <script async defer src='https://www.googletagmanager.com/gtag/js?id=G-76NX8HY29D'></script>

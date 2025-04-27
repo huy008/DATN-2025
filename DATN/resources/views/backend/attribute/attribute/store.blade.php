@@ -1,3 +1,4 @@
+@include('backend.dashboard.component.breadcrumb', ['title' => "Thuộc tính"])
 @include('backend.dashboard.component.formError')
 @php
     $url = $config['method'] == 'create' ? route('attribute.store') : route('attribute.update', $attribute->id);
@@ -16,7 +17,7 @@
                             <div class="col-lg-12">
                                 <div class="form-row">
                                     <label for=""
-                                        class="control-label text-left">{{ __('messages.title') }}<span
+                                        class="control-label text-left">Tên thuộc tính<span
                                             class="text-danger">(*)</span></label>
                                     <input type="text" name="name"
                                         value="{{ old('name', $attribute->name ?? '') }}" class="form-control"

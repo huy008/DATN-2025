@@ -17,6 +17,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\DiscountController;
 use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\UserProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,7 +45,8 @@ Route::post('/find-variant', [ProductController::class, 'findVariant'])->name('p
 
 Route::post('/cart/add-to-cart', [CartController::class, 'addToCart'])->name('cart.add');
 Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
-Route::delete('/cart/remove/{id}', [CartController::class, 'remove'])->name('cart.remove');
+Route::post('/cart/remove', [CartController::class, 'remove'])->name('cart.remove');
+Route::post('/cart/update-quantity', [CartController::class, 'updateQuantity'])->name('cart.updateQuantity');
 
 Route::get('/ajax/search-products', [ProductController::class, 'ajaxSearch']);
 Route::get('/category/{id}', [ProductController::class, 'getByCategory'])->name('category.show');
@@ -58,6 +60,13 @@ Route::middleware(['user'])->group(function () {
     Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout');
     Route::post('/checkout', [CheckoutController::class, 'store'])->name('checkout.store');
     Route::post('/reviews', [ReviewController::class, 'store'])->name('reviews.store');
+
+    Route::prefix('profile')->group(function () {
+        Route::get('/', [UserProfileController::class, 'index'])->name('profile.index');
+        Route::post('/update', [UserProfileController::class, 'update'])->name('profile.update');
+        Route::get('/change-password', [UserProfileController::class, 'getChangePassword'])->name('profile.getChangePassword');
+        Route::post('/change-password', [UserProfileController::class, 'changePassword'])->name('profile.changePassword');
+    });
 });
 
 Route::middleware(['admin'])->group(
@@ -76,6 +85,7 @@ Route::middleware(['admin'])->group(
         Route::group(['prefix' => 'review'], function () {
             Route::get('index', [ReviewAdminController::class, 'index'])->name('review.index');
             Route::post('{id}/destroy', [ReviewAdminController::class, 'destroy'])->where(['id' => '[0-9]+'])->name('review.destroy');
+            Route::post('/update-status', [ReviewAdminController::class, 'updateStatus'])->name('review.updateStatus');
         });
 
         Route::group(['prefix' => 'user'], function () {

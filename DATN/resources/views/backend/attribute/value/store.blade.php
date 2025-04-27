@@ -1,3 +1,4 @@
+@include('backend.dashboard.component.breadcrumb', ['title' => "Giá trị thuộc tính"])
 @include('backend.dashboard.component.formError')
 @php
     $url =
@@ -18,25 +19,26 @@
                         <div class="row mb15">
                             <div class="col-lg-12 mb15">
                                 <div class="form-row">
-                                    <label for=""
-                                        class="control-label text-left">{{ __('messages.title') }}<span
+                                    <label for="" class="control-label text-left">Chọn thuộc tính<span
                                             class="text-danger">(*)</span></label>
                                     <select name="attribute_id" id="{{ __('messages.title') }}" class="form-control">
                                         @foreach ($attributes as $attribute)
-                                            <option value="{{ $attribute->id }}">{{ $attribute->name }}</option>
+                                            <option value="{{ $attribute->id }}"
+                                                {{ isset($attributeCatalogue) && $attribute->id == $attributeCatalogue->attribute_id ? 'selected' : '' }}>
+                                                {{ $attribute->name }}
+                                            </option>
                                         @endforeach
                                     </select>
                                 </div>
                             </div>
                             <div class="col-lg-12">
-
                                 <div class="form-row">
-                                    <label for=""
-                                        class="control-label text-left">{{ __('messages.title') }}<span
+                                    <label for="" class="control-label text-left">Giá trị thuộc tính<span
                                             class="text-danger">(*)</span></label>
                                     <input type="text" name="value"
-                                        value="{{ old('value', $attribute->name ?? '') }}" class="form-control"
-                                        placeholder="" autocomplete="off" {{ isset($disabled) ? 'disabled' : '' }}>
+                                        value="{{ old('value', $attributeCatalogue->value ?? '') }}"
+                                        class="form-control" placeholder="" autocomplete="off"
+                                        {{ isset($disabled) ? 'disabled' : '' }}>
                                 </div>
                             </div>
                         </div>

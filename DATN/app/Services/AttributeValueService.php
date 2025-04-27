@@ -28,7 +28,7 @@ class  AttributeValueService
     public function paginate($request){
         $perPage = $request->integer('perpage');
         $condition = [
-            'keyword' => addslashes($request->input('keyword')),
+            'value' => addslashes($request->input('keyword')),
         ];
         $attributeCatalogues = $this->attributeCatalogueRepository->pagination(
             column: ['id', 'value', 'attribute_id'],
@@ -55,14 +55,11 @@ class  AttributeValueService
         }
     }
 
-    public function update($id, $request, $languageId){
+    public function update($id, $request){
         DB::beginTransaction();
         try{
             $attributeCatalogue = $this->attributeCatalogueRepository->findById($id);
-            $flag = $this->updateCatalogue($attributeCatalogue, $request);
-            if($flag == TRUE){
-                $this->updateLanguageForCatalogue($attributeCatalogue, $request, $languageId);
-            }
+            $this->attributeCatalogueRepository->update($attributeCatalogue->id,  $request->only(['attribute_id', 'value']));
             DB::commit();
             return true;
         }catch(\Exception $e ){
@@ -73,7 +70,7 @@ class  AttributeValueService
         }
     }
 
-    public function destroy($id, $languageId){
+    public function destroy($id){
         DB::beginTransaction();
         try{
             $attributeCatalogue = $this->attributeCatalogueRepository->delete($id);
@@ -87,57 +84,6 @@ class  AttributeValueService
         }
     }
 
-    private function updateCatalogue($attributeCatalogue, $request){
-        $payload = $request->only($this->payload());
-        $flag = $this->attributeCatalogueRepository->update($attributeCatalogue->id, $payload);
-        return $flag;
-    }
-
-    private function updateLanguageForCatalogue($attributeCatalogue, $request, $languageId){
-        $payload = $this->formatLanguagePayload($attributeCatalogue, $request, $languageId);
-        $attributeCatalogue->languages()->detach([$languageId, $attributeCatalogue->id]);
-        $language = $this->attributeCatalogueRepository->createPivot($attributeCatalogue, $payload, 'languages');
-        return $language;
-    }
-
-    private function formatLanguagePayload($attributeCatalogue, $request, $languageId){
-        $payload = $request->only($this->payloadLanguage());
-        $payload['canonical'] = Str::slug($payload['canonical']);
-        $payload['language_id'] =  $languageId;
-        $payload['attribute_catalogue_id'] = $attributeCatalogue->id;
-        return $payload;
-    }
-
-    public function updateStatus($post = []){
-        DB::beginTransaction();
-        try{
-            $payload[$post['field']] = (($post['value'] == 1)?2:1);
-            $postCatalogue = $this->attributeCatalogueRepository->update($post['modelId'], $payload);
-            DB::commit();
-            return true;
-        }catch(\Exception $e ){
-            DB::rollBack();
-            // Log::error($e->getMessage());
-            echo $e->getMessage();die();
-            return false;
-        }
-    }
-
-    public function updateStatusAll($post){
-        DB::beginTransaction();
-        try{
-            $payload[$post['field']] = $post['value'];
-            $flag = $this->attributeCatalogueRepository->updateByWhereIn('id', $post['id'], $payload);
-
-            DB::commit();
-            return true;
-        }catch(\Exception $e ){
-            DB::rollBack();
-            // Log::error($e->getMessage());
-            echo $e->getMessage();die();
-            return false;
-        }
-    }
 
     private function payload(){
         return [

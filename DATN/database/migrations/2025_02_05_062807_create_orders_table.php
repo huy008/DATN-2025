@@ -16,6 +16,11 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->decimal('total_price', 10, 2);
             $table->enum('status', ['pending', 'processing', 'completed', 'cancelled'])->default('pending');
+            $table->string('payment_method')->nullable();
+            $table->string('phone')->nullable();
+            $table->text('address')->nullable();
+            $table->string('order_number')->unique();
+            $table->text('note');
             $table->timestamps();
         });
     }

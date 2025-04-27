@@ -444,20 +444,20 @@
           display: none;
       }
 
-      .page_speed_10 {
-          background-color: #ad1e1e !important;
-      }
-
       .page_speed_1 {
-          background-color: #430303 !important;
+          background-color: #24ec4f !important;
       }
 
       .page_speed_2 {
-          background-color: #DA323F !important;
+          background-color: #ffffff !important;
       }
 
-      .page_speed_9 {
-          background-color: #def109 !important;
+      .page_speed_3 {
+          background-color: #000000 !important;
+      }
+
+      .page_speed_4 {
+          background-color: #c421e5 !important;
       }
 
       .page_speed_151184969 {

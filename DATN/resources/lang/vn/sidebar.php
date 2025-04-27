@@ -47,7 +47,7 @@ return [
             'subModule' => [
                 [
                     'title' => 'QL Nhóm Thành Viên',
-                    'route' => 'user/catalogue/index'
+                    'route' => 'user/index'
                 ],
             ]
         ],
@@ -71,6 +71,17 @@ return [
                     'title' => 'Quản lý đánh giá',
                     'route' => 'review/index'
                 ]    
+            ]
+                ],
+        [
+            'title' => 'Quản lý khuyến mãi',
+            'icon' => 'fa fa-file',
+            'name' => ['language', 'generate'],
+            'subModule' => [
+                [
+                    'title' => 'Quản lý khuyến mãi',
+                    'route' => 'discounts'
+                ]
             ]
         ]
     ],

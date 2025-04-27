@@ -4,7 +4,6 @@
             @include('backend.dashboard.component.perpage')
             <div class="action">
                 <div class="uk-flex uk-flex-middle">
-                    @include('backend.dashboard.component.filterPublish')
                     @php
                         $attributeCatalogueId = request('attribute_catalogue_id') ?: old('attribute_catalogue_id');
                     @endphp

@@ -1,4 +1,4 @@
-
+@include('backend.dashboard.component.breadcrumb', ['title' => "Khuyến mãi"])
 <div class="row mt20">
     <div class="col-lg-12">
         <div class="ibox float-e-margins">

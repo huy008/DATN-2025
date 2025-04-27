@@ -15,15 +15,14 @@ class DiscountController extends Controller
     protected $discountRepository;
 
     public function __construct(
-      DiscountService $discountService,
-      DiscountRepository $discountRepository,
+        DiscountService $discountService,
+        DiscountRepository $discountRepository,
     ) {
         $this->discountService = $discountService;
         $this->discountRepository = $discountRepository;
     }
     public function index(Request $request)
     {
-        // $discounts = Discount::with(['products', 'variants'])->get();
         $discounts = $this->discountService->paginate($request);
         $config = [
             'js' => [
@@ -65,18 +64,20 @@ class DiscountController extends Controller
             'end_date' => 'required|date|after:start_date',
             'products' => 'nullable|array',
             'products.*' => 'exists:products,id',
-            'variants' => 'nullable|array',
-            'variants.*' => 'exists:product_variants,id',
         ]);
 
+        // Tạo discount
         $discount = Discount::create($validated);
 
+        // Áp dụng cho các sản phẩm đã chọn (bao gồm cả sản phẩm không có biến thể)
         if (isset($validated['products'])) {
-            $discount->products()->attach($validated['products']);
-        }
+            $discount->products()->attach($validated['products']); // Gắn sản phẩm chính vào discount
 
-        if (isset($validated['variants'])) {
-            $discount->variants()->attach($validated['variants']);
+            // Áp dụng cho tất cả các variants thuộc product
+            $variants = ProductVariant::whereIn('product_id', $validated['products'])->pluck('id')->toArray();
+            if (!empty($variants)) {
+                $discount->variants()->attach($variants); // Gắn biến thể vào discount
+            }
         }
 
         return redirect()->route('discounts.index')->with('success', 'Discount created successfully');
@@ -104,20 +105,28 @@ class DiscountController extends Controller
             'end_date' => 'required|date|after:start_date',
             'products' => 'nullable|array',
             'products.*' => 'exists:products,id',
-            'variants' => 'nullable|array',
-            'variants.*' => 'exists:product_variants,id',
         ]);
 
+        // Cập nhật discount
         $discount->update($validated);
 
+        // Cập nhật sản phẩm (bao gồm cả sản phẩm không có biến thể)
         $discount->products()->sync($validated['products'] ?? []);
-        $discount->variants()->sync($validated['variants'] ?? []);
+
+        // Cập nhật biến thể (nếu có)
+        $variants = [];
+        if (!empty($validated['products'])) {
+            $variants = ProductVariant::whereIn('product_id', $validated['products'])->pluck('id')->toArray();
+        }
+
+        $discount->variants()->sync($variants);
 
         return redirect()->route('discounts.index')->with('success', 'Discount updated successfully');
     }
 
     public function destroy(Discount $discount)
     {
+        // Xóa mối quan hệ với sản phẩm và biến thể
         $discount->products()->detach();
         $discount->variants()->detach();
         $discount->delete();
