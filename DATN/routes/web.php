@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Auth\ForgotPasswordController;
+use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Backend\AttributeController;
 use App\Http\Controllers\Backend\AttributeValueController;
 
@@ -39,6 +41,12 @@ Route::middleware(['guest:web'])->group(
     }
 );
 
+Route::get('/forgot-password', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
+Route::post('/forgot-password', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
+
+Route::get('/reset-password/{token}', [ResetPasswordController::class, 'showResetForm'])->name('password.reset');
+Route::post('/reset-password', [ResetPasswordController::class, 'reset'])->name('password.update');
+
 Route::get('/', [DashboardClientController::class, 'index'])->name('index');
 Route::get('{id}/detail', [ProductController::class, 'detail'])->name('product.detail');
 Route::post('/find-variant', [ProductController::class, 'findVariant'])->name('product.findVariant');
@@ -60,6 +68,7 @@ Route::middleware(['user'])->group(function () {
     Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout');
     Route::post('/checkout', [CheckoutController::class, 'store'])->name('checkout.store');
     Route::post('/reviews', [ReviewController::class, 'store'])->name('reviews.store');
+    Route::get('/payment-success', [CheckoutController::class, 'paymentSuccess'])->name('payment.success');
 
     Route::prefix('profile')->group(function () {
         Route::get('/', [UserProfileController::class, 'index'])->name('profile.index');

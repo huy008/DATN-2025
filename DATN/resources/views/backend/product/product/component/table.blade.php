@@ -32,11 +32,7 @@
                             <div class="name"><span class="maintitle">{{ $product->name }}</span></div>
                             <div class="catalogue">
                                 <span class="text-danger">{{ __('messages.tableGroup') }} </span>
-                                {{-- @foreach($product->product_catalogues as $val)
-                                @foreach($val->product_catalogue_language as $cat)
-                                <a href="{{ route('product.index', ['product_catalogue_id' => $val->id]) }}" title="">{{ $cat->name }}</a>
-                                @endforeach
-                                @endforeach --}}
+                                  <span>{{ $product->category?->name }}</span>
                             </div>
                             
                         </div>
@@ -47,7 +43,7 @@
                               <td>
                     {{ format_currency($product->base_price) }}
                 </td>
-                <td class="text-center"> 
+                <td class="text-center" style="width:120px"> 
                     <a href="{{ route('product.edit', $product->id) }}" class="btn btn-success"><i class="fa fa-edit"></i></a>
                     <a href="{{ route('product.delete', $product->id) }}" class="btn btn-danger"><i class="fa fa-trash"></i></a>
                 </td>

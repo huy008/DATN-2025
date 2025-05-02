@@ -119,8 +119,10 @@ class OrderController extends Controller
 
     public function destroy($id){
         if($this->orderService->destroy($id)){
-            return redirect()->route('order.index')->with('success','Xóa bản ghi thành công');
+            toastr()->success('Hủy đơn hàng thành công', 'Thành công', ['timeOut' => 2000]);
+            return redirect()->route('orders.index');
         }
-        return redirect()->route('order.index')->with('error','Xóa bản ghi không thành công. Hãy thử lại');
+        toastr()->error('Hủy đơn hàng không thành công', 'Thất bại', ['timeOut' => 2000]);
+        return redirect()->route('orders.index');
     }
 }

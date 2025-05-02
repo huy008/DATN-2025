@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Order;
 use App\Models\OrderItem;
+use App\Models\Product;
+use App\Models\ProductVariant;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -52,9 +54,28 @@ class CheckoutController extends Controller
             OrderItem::create([
                 'order_id' => $order->id,
                 'product_id' => $item['product_id'],
+                'variant_id' => $item['variant_id'],
                 'quantity' => $item['quantity'],
-                'price' => 1111,
+                'price' => $item['price'],
             ]);
+
+            if ($item['variant_id']) {
+                $variant = ProductVariant::find($item['variant_id']);
+
+                if ($variant && $variant->stock_quantity >= $item['quantity']) {
+                    $variant->decrement('stock_quantity', $item['quantity']);
+                } else {
+                    return back()->withErrors('Biến thể của sản phẩm "' . $variant->product->name . '" không đủ số lượng.');
+                }
+            } else {
+                $product = Product::find($item['product_id']);
+
+                if ($product && $product->stock_quantity >= $item['quantity']) {
+                    $product->decrement('stock_quantity', $item['quantity']);
+                } else {
+                    return back()->withErrors('Sản phẩm "' . $product->name . '" không đủ số lượng.');
+                }
+            }
         }
 
         if (Auth::check()) {
@@ -76,6 +97,24 @@ class CheckoutController extends Controller
         }
     }
 
+    public function paymentSuccess(Request $request)
+    {
+        // Lấy thông tin từ URL
+        $data = $request->all();
+
+        // Kiểm tra mã phản hồi từ cổng thanh toán (vnp_ResponseCode)
+        if ($data['vnp_ResponseCode'] == '00') {
+            $message = 'Thanh toán thành công!';
+            $status = 'success';
+        } else {
+            $message = 'Thanh toán thất bại! Vui lòng thử lại.';
+            $status = 'error';
+        }
+
+        // Trả về view với thông tin thanh toán
+        return view('payment.success', compact('message', 'status', 'data'));
+    }
+
     private function calculateTotal()
     {
         $total = 0;
@@ -85,21 +124,21 @@ class CheckoutController extends Controller
             foreach ($cartItems as $item) {
                 $total += $item->price * $item->quantity;
             }
-        } 
+        }
         return $total;
     }
 
     public function vnqay($total)
     {
         $vnp_Url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
-        $vnp_Returnurl = "http://127.0.0.1:8000/";
+        $vnp_Returnurl = "http://127.0.0.1:8000/payment-success";
         $vnp_TmnCode = "FIM7LK8X";
         $vnp_HashSecret = "TJTV6G00BMU2FJD6Y58BOSUSXD7S01FT";
 
         $vnp_TxnRef = time();
         $vnp_OrderInfo = "Thanh toán hóa đơn";
         $vnp_OrderType = "Shop";
-        $vnp_Amount = $total* 100;
+        $vnp_Amount = $total * 100;
         $vnp_Locale = "VN";
         $vnp_BankCode = "NCB";
         $vnp_IpAddr = $_SERVER['REMOTE_ADDR'];
@@ -219,7 +258,7 @@ class CheckoutController extends Controller
             'signature' => $signature
         );
         $result = $this->execPostRequest($endpoint, json_encode($data));
-        $jsonResult = json_decode($result, true);  
+        $jsonResult = json_decode($result, true);
         if (isset($jsonResult['payUrl'])) {
             header('Location: ' . $jsonResult['payUrl']);
             die();

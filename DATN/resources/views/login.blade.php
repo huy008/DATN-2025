@@ -54,9 +54,13 @@
                                           </div>
                                       </div>
                                       <div class="auth-card__body">
-                                          @if (session('error'))
+                                          @if ($errors->any())
                                               <div class="alert alert-danger">
-                                                  {{ session('error') }}
+                                                  <ul style="list-style-type: none;">
+                                                      @foreach ($errors->all() as $error)
+                                                          <li>{{ $error }}</li>
+                                                      @endforeach
+                                                  </ul>
                                               </div>
                                           @endif
 
@@ -83,7 +87,8 @@
                                                                   d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10z" />
                                                               <path d="M3 7l9 6l9 -6" />
                                                           </svg></span><input class="form-control ps-5" data-counter="60"
-                                                          placeholder="Nhập email" name=email type=email id="email" value="{{ old('email') }}" >
+                                                          placeholder="Nhập email" name=email type=email id="email"
+                                                          value="{{ old('email',session('email')) }}">
                                                   </div>
                                               </div>
                                               <div class="mb-3 position-relative">
@@ -166,9 +171,8 @@
                                                           </span></label>
                                                   </div>
                                                   <div class="col-6 text-end">
-                                                      <a href="password/reset.html"
-                                                          class="text-decoration-underline">Forgot
-                                                          password?</a>
+                                                      <a href="{{route('password.request')}}"
+                                                          class="text-decoration-underline">Quên mật khẩu</a>
                                                   </div>
                                               </div>
                                               <div class="d-grid">

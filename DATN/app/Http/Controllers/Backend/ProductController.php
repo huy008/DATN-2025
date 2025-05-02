@@ -7,6 +7,7 @@ use App\Models\Attribute;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\ProductVariant;
+use App\Models\Review;
 use App\Repositories\AttributeRepository;
 use App\Repositories\CategoryRepository;
 use App\Repositories\ProductRepository;
@@ -36,7 +37,6 @@ class ProductController extends Controller
         $search = request('q');
         $priceRange = request('price_range');
 
-        // Bắt đầu query với sản phẩm trong danh mục
         $query = $category->products()->with('variants');
 
         if ($search) {
@@ -109,14 +109,39 @@ class ProductController extends Controller
                 ->unique()
                 ->values()
                 ->toArray();
+
+            $productVariants = $product->variants->map(function ($variant) {
+                return [
+                    'variant_id' => $variant->id,
+                    'stock_quantity' => $variant->stock_quantity,
+                ];
+            });
         }
+
+        $reviews = Review::where('product_id', $id)->get();
+        $averageRating = $reviews->avg('rating'); // Tính điểm trung bình
+        $reviewCount = $reviews->count(); // Số lượng đánh giá
+
+        // Phân loại các đánh giá theo số sao
+        $starRatings = [
+            '5' => $reviews->where('rating', 5)->count(),
+            '4' => $reviews->where('rating', 4)->count(),
+            '3' => $reviews->where('rating', 3)->count(),
+            '2' => $reviews->where('rating', 2)->count(),
+            '1' => $reviews->where('rating', 1)->count(),
+        ];
 
         $productRelated = Product::where('category_id', $product->category_id)->limit(8)->get();
         return view('detail', compact(
             'product',
             'groupedAttributes',
             'variantImages',
-            'productRelated'
+            'productRelated',
+            'reviews',
+            'averageRating',
+            'reviewCount',
+            'starRatings',
+            'productVariants'
         ));
     }
 
@@ -162,9 +187,27 @@ class ProductController extends Controller
             'productCategories'
         ));
     }
-    // StoreProductRequest
     public function store(Request $request)
     {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'base_price' => 'required|min:0',
+            'description' => 'nullable|string',
+            'product_catalogue_id' => 'required|exists:categories,id',
+            'stock_quantity' => 'required|integer|min:0',
+        ], [
+            'name.required' => 'Tên sản phẩm không được để trống.',
+            'name.string' => 'Tên sản phẩm phải là chuỗi ký tự.',
+            'name.max' => 'Tên sản phẩm không được vượt quá 255 ký tự.',
+            'base_price.required' => 'Giá sản phẩm không được để trống.',
+            'base_price.min' => 'Giá sản phẩm phải lớn hơn hoặc bằng 0.',
+            'description.string' => 'Mô tả phải là một chuỗi ký tự.',
+            'product_catalogue_id.required' => 'Danh mục sản phẩm không được để trống.',
+            'product_catalogue_id.exists' => 'Danh mục sản phẩm không tồn tại.',
+            'stock_quantity.required' => 'Số lượng sản phẩm không được để trống.',
+            'stock_quantity.integer' => 'Số lượng sản phẩm phải là số nguyên.',
+            'stock_quantity.min' => 'Số lượng sản phẩm phải lớn hơn hoặc bằng 0.',
+        ]);
         if ($this->productService->create($request)) {
             return redirect()->route('product.index')->with('success', 'Thêm mới bản ghi thành công');
         }
@@ -190,6 +233,25 @@ class ProductController extends Controller
 
     public function update($id, Request $request)
     {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'base_price' => 'required|min:0',
+            'description' => 'nullable|string',
+            'product_catalogue_id' => 'required|exists:categories,id',
+            'stock_quantity' => 'required|integer|min:0',
+        ], [
+            'name.required' => 'Tên sản phẩm không được để trống.',
+            'name.string' => 'Tên sản phẩm phải là chuỗi ký tự.',
+            'name.max' => 'Tên sản phẩm không được vượt quá 255 ký tự.',
+            'base_price.required' => 'Giá sản phẩm không được để trống.',
+            'base_price.min' => 'Giá sản phẩm phải lớn hơn hoặc bằng 0.',
+            'description.string' => 'Mô tả phải là một chuỗi ký tự.',
+            'product_catalogue_id.required' => 'Danh mục sản phẩm không được để trống.',
+            'product_catalogue_id.exists' => 'Danh mục sản phẩm không tồn tại.',
+            'stock_quantity.required' => 'Số lượng sản phẩm không được để trống.',
+            'stock_quantity.integer' => 'Số lượng sản phẩm phải là số nguyên.',
+            'stock_quantity.min' => 'Số lượng sản phẩm phải lớn hơn hoặc bằng 0.',
+        ]);
         if ($this->productService->update($id, $request)) {
             return redirect()->route('product.index')->with('success', 'Cập nhật bản ghi thành công');
         }

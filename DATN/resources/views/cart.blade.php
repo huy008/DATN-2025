@@ -225,11 +225,11 @@
                      })
                      .then(response => response.json())
                      .then(data => {
-                         if (data.success) {
-                             showToast('Cập nhật số lượng thành công!');
-                         } else {
-                             showToast(data.message || 'Cập nhật thất bại!', 'error');
-                         }
+                        //  if (data.success) {
+                        //      showToast('Cập nhật số lượng thành công!');
+                        //  } else {
+                        //      showToast(data.message || 'Cập nhật thất bại!', 'error');
+                        //  }
                      })
                      .catch(error => {
                          console.error('Lỗi:', error);
@@ -256,9 +256,9 @@
                          if (data.success) {
                              row.remove();
                              updateCartTotal();
-                             showToast('Đã xóa sản phẩm khỏi giỏ hàng!');
+                            //  showToast('Đã xóa sản phẩm khỏi giỏ hàng!');
                          } else {
-                             showToast('Xóa sản phẩm thất bại!', 'error');
+                            //  showToast('Xóa sản phẩm thất bại!', 'error');
                          }
                      })
                      .catch(error => {

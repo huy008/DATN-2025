@@ -10,7 +10,7 @@ class Review extends Model
 {
     use HasFactory, QueryScopes;
 
-    protected $fillable = ['user_id', 'product_id', 'rating', 'comment', 'publish'];
+    protected $fillable = ['user_id', 'product_id', 'rating', 'comment', 'publish','order_id'];
 
     public function user()
     {

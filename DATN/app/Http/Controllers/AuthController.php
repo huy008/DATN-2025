@@ -22,15 +22,22 @@ class AuthController extends Controller
 
     public function postLogin(Request $request)
     {
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required',
+        ], [
+            'email.required' => 'Vui lòng nhập email.',
+            'email.email' => 'Email không đúng định dạng.',
+
+            'password.required' => 'Vui lòng nhập mật khẩu.',
+        ]);
         $credentials = $request->only(['email', 'password']);
         if (Auth::guard('web')->attempt($credentials)) {
-            $notification = array(
-                'message' => 'Login thành công',
-                'alert-type' => 'success'
-            );
-            return redirect()->intended('/')->with($notification);
+            toastr()->success('Đăng nhập thành công','Thành công',['timeOut'=>2000]);
+            return redirect()->intended('/');
         }
-        return redirect()->route('login')->with(['error' => 'Tài khoản mật khẩu không chính xác !!!', 'email' => $credentials['email']]);
+        toastr()->error('Tài khoản mật khẩu không chính xác !!!', 'Thất bại', ['timeOut' => 2000]);
+        return redirect()->route('login')->with(['email' => $credentials['email']]);
     }
 
     public function logout()
@@ -85,6 +92,8 @@ class AuthController extends Controller
 
         Auth::guard('web')->login($user);
 
-        return redirect()->intended('/')->with('success', ['Login thành công']);
+        toastr()->success('Đăng ký thành công', 'Thành công', ['timeOut' => 2000]);
+
+        return redirect()->intended('/');
     }
 }

@@ -54,7 +54,7 @@ class ReviewController extends Controller
             'rating' => $request->rating,
             'comment' => $request->comment,
         ]);
-
-        return back()->with('success', 'Đánh giá của bạn đã được gửi.');
+        toastr()->success('Đánh giá của bạn đã được gửi.', 'Thành công', ['timeOut' => 2000]);
+        return back();
     }
 }

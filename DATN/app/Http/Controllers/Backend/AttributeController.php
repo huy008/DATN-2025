@@ -55,8 +55,15 @@ class AttributeController extends Controller
         ));
     }
 
-    public function store(StoreAttributeRequest $request){
-
+    public function store(Request $request){
+        $request->validate([
+            'name' => 'required|string|max:255|unique:attributes,name', 
+        ], [
+            'name.required' => 'Tên thuộc tính không được để trống.',
+            'name.string' => 'Tên thuộc tính phải là chuỗi ký tự.',
+            'name.max' => 'Tên thuộc tính không được vượt quá 255 ký tự.',
+            'name.unique' => 'Tên thuộc tính đã tồn tại.',
+        ]);
         if($this->attributeService->create($request)){
             return redirect()->route('attribute.index')->with('success','Thêm mới bản ghi thành công');
         }
@@ -76,6 +83,14 @@ class AttributeController extends Controller
     }
 
     public function update($id, UpdateAttributeRequest $request){
+        $request->validate([
+            'name' => 'required|string|max:255|unique:attributes,name',
+        ], [
+            'name.required' => 'Tên thuộc tính không được để trống.',
+            'name.string' => 'Tên thuộc tính phải là chuỗi ký tự.',
+            'name.max' => 'Tên thuộc tính không được vượt quá 255 ký tự.',
+            'name.unique' => 'Tên thuộc tính đã tồn tại.',
+        ]);
         if($this->attributeService->update($id, $request)){
             return redirect()->route('attribute.index')->with('success','Cập nhật bản ghi thành công');
         }

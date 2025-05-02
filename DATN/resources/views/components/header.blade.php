@@ -7,9 +7,9 @@
                      <div class="row align-items-center">
                          <div class="col-xl-2 col-lg-2 col-md-4 col-6">
                              <div class="logo"><a href="{{ route('index') }}"><img
-                                         src={{ asset('client/storage/main/general/logo.png') }} data-bb-lazy="false"
+                                         src={{ asset('images/logo.png') }} data-bb-lazy="false"
                                          class="page_speed_1759980468" loading="eager"
-                                         alt="Shofy - Multipurpose eCommerce Laravel Script"></a>
+                                         alt="Shofy - Multipurpose eCommerce Laravel Script" style="width:150px;height:70px;border-radius:20px;"></a>
                              </div>
                          </div>
                          <div class="col-xl-6 col-lg-7 d-none d-lg-block pl-70">

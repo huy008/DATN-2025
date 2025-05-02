@@ -64,7 +64,7 @@
                     <label for="">Nhập giá</label>
                     <input 
                         type="text"
-                        name="price"
+                        name="base_price"
                         value="{{ old('base_price', (isset($product)) ? number_format($product->base_price, 0 , ',', '.') : '') }}"
                         class="form-control int"
                     >

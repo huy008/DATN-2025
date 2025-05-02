@@ -56,14 +56,21 @@ class DiscountController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'description' => 'nullable|string',
-            'type' => 'required|in:fixed,percentage',
-            'value' => 'required|numeric|min:0',
-            'start_date' => 'required|date',
-            'end_date' => 'required|date|after:start_date',
-            'products' => 'nullable|array',
-            'products.*' => 'exists:products,id',
+            'name' => 'required|string|max:255',  // Tên chương trình giảm giá là bắt buộc
+            'description' => 'nullable|string',  // Mô tả không bắt buộc
+            'start_date' => 'required|date|after_or_equal:today',  // Ngày bắt đầu là bắt buộc và phải là ngày hợp lệ
+            'end_date' => 'required|date|after:start_date',  // Ngày kết thúc phải là ngày hợp lệ và sau ngày bắt đầu
+            'type' => 'required|in:percentage,fixed',  // Loại giảm giá phải là phần trăm hoặc số tiền cố định
+            'value' => 'required|numeric|min:0',  // Giá trị giảm giá phải là số và không nhỏ hơn 0
+            'products' => 'required|array|min:1',  // Phải chọn ít nhất một sản phẩm
+            'products.*' => 'exists:products,id',  // Các sản phẩm phải tồn tại trong bảng sản phẩm
+        ], [
+            'name.required' => 'Tên chương trình giảm giá là bắt buộc.',
+            'start_date.required' => 'Ngày bắt đầu là bắt buộc.',
+            'end_date.required' => 'Ngày kết thúc là bắt buộc.',
+            'type.required' => 'Loại giảm giá là bắt buộc.',
+            'value.required' => 'Giá trị giảm giá là bắt buộc.',
+            'products.required' => 'Phải chọn ít nhất một sản phẩm.',
         ]);
 
         // Tạo discount
@@ -97,14 +104,21 @@ class DiscountController extends Controller
     public function update(Request $request, Discount $discount)
     {
         $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'description' => 'nullable|string',
-            'type' => 'required|in:fixed,percentage',
-            'value' => 'required|numeric|min:0',
-            'start_date' => 'required|date',
-            'end_date' => 'required|date|after:start_date',
-            'products' => 'nullable|array',
-            'products.*' => 'exists:products,id',
+            'name' => 'required|string|max:255',  // Tên chương trình giảm giá là bắt buộc
+            'description' => 'nullable|string',  // Mô tả không bắt buộc
+            'start_date' => 'required|date|after_or_equal:today',  // Ngày bắt đầu là bắt buộc và phải là ngày hợp lệ
+            'end_date' => 'required|date|after:start_date',  // Ngày kết thúc phải là ngày hợp lệ và sau ngày bắt đầu
+            'type' => 'required|in:percentage,fixed',  // Loại giảm giá phải là phần trăm hoặc số tiền cố định
+            'value' => 'required|numeric|min:0',  // Giá trị giảm giá phải là số và không nhỏ hơn 0
+            'products' => 'required|array|min:1',  // Phải chọn ít nhất một sản phẩm
+            'products.*' => 'exists:products,id',  // Các sản phẩm phải tồn tại trong bảng sản phẩm
+        ], [
+            'name.required' => 'Tên chương trình giảm giá là bắt buộc.',
+            'start_date.required' => 'Ngày bắt đầu là bắt buộc.',
+            'end_date.required' => 'Ngày kết thúc là bắt buộc.',
+            'type.required' => 'Loại giảm giá là bắt buộc.',
+            'value.required' => 'Giá trị giảm giá là bắt buộc.',
+            'products.required' => 'Phải chọn ít nhất một sản phẩm.',
         ]);
 
         // Cập nhật discount

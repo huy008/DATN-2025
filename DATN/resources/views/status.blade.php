@@ -121,21 +121,30 @@
         .product-price strong {
             color: #333;
         }
+
+        .cancel-button-container {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+        }
+        .order-container {
+    position: relative;
+}
     </style>
-       <section class="breadcrumb__area include-bg mb-30 text-start pt-30 page_speed_617743483">
-              <div class="container">
-                  <div class="breadcrumb__content p-relative z-index-1">
-                      <h3 class="breadcrumb__title">
-                          Trạng thái đơn hàng - {{$order->order_number}}</h3>
-                      <div class="breadcrumb__list js_breadcrumb_reduce_length_on_mobile">
-                          <span><a href="{{route('index')}}">Trang chủ</a></span><span>
-                              Trạng thái đơn hàng - {{$order->order_number}} </span>
-                      </div>
-                  </div>
-              </div>
-          </section>
+    <section class="breadcrumb__area include-bg mb-30 text-start pt-30 page_speed_617743483">
+        <div class="container">
+            <div class="breadcrumb__content p-relative z-index-1">
+                <h3 class="breadcrumb__title">
+                    Trạng thái đơn hàng - {{ $order->order_number }}</h3>
+                <div class="breadcrumb__list js_breadcrumb_reduce_length_on_mobile">
+                    <span><a href="{{ route('index') }}">Trang chủ</a></span><span>
+                        Trạng thái đơn hàng - {{ $order->order_number }} </span>
+                </div>
+            </div>
+        </div>
+    </section>
     <div class="order-container">
-     
+
 
         <p><strong>Trạng thái:</strong>
             @php
@@ -149,6 +158,7 @@
             {{ $statusText[$order->status] ?? 'Không xác định' }}
         </p>
         <p><strong>Ngày đặt hàng:</strong> {{ $order->created_at->format('d/m/Y H:i') }}</p>
+        <p><strong>Địa chỉ giao hàng:</strong> {{ $order->address }}</p>
         @if ($order->status === 'completed')
             <h4>Đánh giá sản phẩm:</h4>
             @foreach ($order->order_items as $item)
@@ -156,7 +166,10 @@
                     <p><strong>{{ $item->product->name }}</strong></p>
 
                     @php
-                        $existingReview = $item->product->reviews->where('user_id', auth()->id())->first();
+                        $existingReview = $item->product->reviews
+                            ->where('user_id', auth()->id())
+                            ->where('order_id', $order->id)
+                            ->first();
                     @endphp
 
                     @if ($existingReview)
@@ -211,5 +224,14 @@
             </ul>
         @endif
         <p><strong>Tổng tiền:</strong> {{ number_format($order->total_price, 0, ',', '.') }}₫</p>
+        @if ($order->status == 'pending')
+            <div class="cancel-button-container">
+                <form action="{{ route('order.destroy', $order->id) }}" method="post"
+                    onsubmit="return confirm('Bạn có chắc chắn hủy đơn hàng không ?');">
+                    @csrf
+                    <button class="btn btn-danger"><i class="fa fa-trash"></i> Hủy đơn hàng</button>
+                </form>
+            </div>
+        @endif
     </div>
 @endsection

@@ -17,65 +17,82 @@ class DashboardController extends Controller
 
     }
 
-    public function index(Request $request){
-        $from = $request->from ?? Carbon::now()->startOfMonth()->toDateString();
-        $to = $request->to ?? Carbon::now()->endOfMonth()->toDateString();
+public function index(Request $request){
+    $from = $request->from ?? Carbon::now()->startOfMonth()->toDateString();
+    $to = $request->to ?? Carbon::now()->endOfMonth()->toDateString();
 
-        $orders = Order::whereBetween('created_at', [$from, $to])->get();
+    $orders = Order::whereBetween('created_at', [$from, $to])->get();
 
-        $totalRevenue = $orders->where('status', 'completed')->sum('total_price');
-        $successfulOrders = $orders->where('status', 'completed')->count();
-        $cancelledOrders = $orders->where('status', 'cancelled')->count();
+    $totalRevenue = $orders->where('status', 'completed')->sum('total_price');
+    $successfulOrders = $orders->where('status', 'completed')->count();
+    $cancelledOrders = $orders->where('status', 'cancelled')->count();
+    $totalOrders = $orders->count();
+    
+    // Tính tỷ lệ đơn hàng
+    $successRate = $totalOrders > 0 ? round(($successfulOrders / $totalOrders) * 100) : 0;
+    // dd($successRate);
+    $cancelRate = $totalOrders > 0 ? round(($cancelledOrders / $totalOrders) * 100) : 0;
+    
+    // Tính doanh thu trung bình
+    $averageRevenue = $successfulOrders > 0 ? round($totalRevenue / $successfulOrders) : 0;
+    
+    // Tìm đơn hàng có giá trị cao nhất
+    $highestOrder = $orders->where('status', 'completed')->max('total_price') ?? 0;
 
-        $topProducts = OrderItem::select('product_id', DB::raw('SUM(quantity) as total_sold'), DB::raw(' SUM(quantity * price) as total_revenue'))
-            ->whereHas('order', function ($q) use ($from, $to) {
-                $q->where('status', 'completed')
-                    ->whereBetween('created_at', [$from, $to]);
-            })
-            ->whereIn('order_id', $orders->pluck('id'))
-            ->groupBy('product_id')
-            ->with('product')
-            ->orderByDesc('total_sold')
-            ->take(5)
-            ->get()
-            ->map(function ($item) {
-                $item->name = $item->product->name ?? 'N/A';
-                return $item;
-            });
-
-
-        $products = Product::with('variants')->get();
-
-        $inventory = $products->map(function ($product) {
-            $hasVariants = $product->variants->count() > 0;
-
-            return (object)[
-                'id' => $product->id,
-                'name' => $product->name,
-                'stock_quantity' => $hasVariants
-                    ? $product->variants->sum('stock_quantity')
-                    : $product->stock_quantity,
-                'has_variants' => $hasVariants,
-            ];
+    $topProducts = OrderItem::select('product_id', DB::raw('SUM(quantity) as total_sold'), DB::raw('SUM(quantity * price) as total_revenue'))
+        ->whereHas('order', function ($q) use ($from, $to) {
+            $q->where('status', 'completed')
+                ->whereBetween('created_at', [$from, $to]);
+        })
+        ->whereIn('order_id', $orders->pluck('id'))
+        ->groupBy('product_id')
+        ->with('product')
+        ->orderByDesc('total_sold')
+        ->take(5)
+        ->get()
+        ->map(function ($item) {
+            $item->name = $item->product->name ?? 'N/A';
+            return $item;
         });
 
-        $totalStock = $inventory->sum('stock_quantity');
+    $products = Product::with('variants')->get();
 
-        $config = $this->config();
-        $template = 'backend.dashboard.home.index';
-        return view('backend.dashboard.layout', compact(
-            'template',
-            'config',
-            'from',
-            'to',
-            'totalRevenue',
-            'successfulOrders',
-            'cancelledOrders',
-            'topProducts',
-            'inventory',
-            'totalStock'
-        ));
-    }
+    $inventory = $products->map(function ($product) {
+        $hasVariants = $product->variants->count() > 0;
+
+        return (object)[
+            'id' => $product->id,
+            'name' => $product->name,
+            'stock_quantity' => $hasVariants
+                ? $product->variants->sum('stock_quantity')
+                : $product->stock_quantity,
+            'has_variants' => $hasVariants,
+        ];
+    });
+
+    $totalStock = $inventory->sum('stock_quantity');
+
+    $config = $this->config();
+    $template = 'backend.dashboard.home.index';
+    
+    return view('backend.dashboard.layout', compact(
+        'template',
+        'config',
+        'from',
+        'to',
+        'totalRevenue',
+        'successfulOrders',
+        'cancelledOrders',
+        'totalOrders',
+        'successRate',
+        'cancelRate',
+        'averageRevenue',
+        'highestOrder',
+        'topProducts',
+        'inventory',
+        'totalStock'
+    ));
+}
     
     private function config(){
         return [

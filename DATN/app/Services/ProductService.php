@@ -59,7 +59,7 @@ class ProductService
                 'name' => $request->name,
                 'sku' => $request->sku,
                 'description' => $request->description,
-                'base_price' => str_replace('.', '', $request->price),
+                'base_price' => str_replace('.', '', $request->base_price),
                 'img_thumbnail' => $request->image,
                 'short_description' => $request->short_description,
                 'stock_quantity' => $request->stock_quantity,
@@ -132,7 +132,7 @@ class ProductService
                 'name' => $request->name,
                 'sku' => $request->sku,
                 'description' => $request->description,
-                'base_price' => $request->price,
+                'base_price' => str_replace('.', '', $request->base_price),
                 'img_thumbnail' => $request->image,
                 'short_description' => $request->short_description,
                 'stock_quantity' => $request->stock_quantity,
@@ -310,6 +310,7 @@ class ProductService
             'img_thumbnail',
             'short_description',
             'description',
+            'category_id'
         ];
     }
 

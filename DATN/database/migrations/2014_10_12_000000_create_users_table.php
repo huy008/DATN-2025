@@ -19,7 +19,6 @@ return new class extends Migration
             $table->string('img_thumbnail')->nullable();
             $table->string('phone')->nullable();
             $table->text('address')->nullable();
-            $table->rememberToken();
             $table->timestamps();
         });
     }

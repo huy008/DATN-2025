@@ -6,8 +6,7 @@
             <div class="panel-head">
                 <div class="panel-title">Thông tin chung</div>
                 <div class="panel-description">
-                    <p>{{ __('messages.generalTitle') }} <span class="text-danger">{{ $model->name }}</span></p>
-                    <p>{{ __('messages.generalDescription') }}</p>
+                    <p>Bạn đang muốn xóa bản ghi  <span class="text-danger">{{ $model->name }}</span> không ? Lưu ý: Không thể khôi phục dữ liệu sau khi xóa. Hãy chắc chắn bạn muốn thực hiện chức năng này</p>
                 </div>
             </div>
         </div>
@@ -17,7 +16,7 @@
                     <div class="row mb15">
                         <div class="col-lg-12">
                             <div class="form-row">
-                                <label for="" class="control-label text-left">{{ __('messages.tableName') }} <span class="text-danger">(*)</span></label>
+                                <label for="" class="control-label text-left">Tên bản ghi <span class="text-danger">(*)</span></label>
                                 <input 
                                     type="text"
                                     name="name"

@@ -55,8 +55,8 @@ class UserProfileController extends Controller
         }
 
         $user->save();
-
-        return redirect()->route('profile.index')->with('success', 'Thông tin cá nhân đã được cập nhật.');
+        toastr()->success('Thông tin cá nhân đã được cập nhật.', 'Thành công', ['timeOut' => 2000]);
+        return redirect()->route('profile.index');
     }
 
     public function getChangePassword()
@@ -84,7 +84,7 @@ class UserProfileController extends Controller
 
         $user->password = bcrypt($request->input('password'));
         $user->save();
-
-        return redirect()->back()->with('success', 'Đổi mật khẩu thành công.');
+        toastr()->success('Đổi mật khẩu thành công.', 'Thành công', ['timeOut' => 2000]);
+        return redirect()->back();
     }
 }

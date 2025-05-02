@@ -28,7 +28,7 @@
                                     <label for="name">Tên chương trình giảm giá <span
                                             class="text-danger">*</span></label>
                                     <input type="text" class="form-control" id="name" name="name"
-                                        value="{{ old('name', $discount->name ?? '') }}" required>
+                                        value="{{ old('name', $discount->name ?? '') }}" >
                                 </div>
 
                                 <div class="form-group">
@@ -44,21 +44,21 @@
                                         <label for="start_date">Ngày bắt đầu <span class="text-danger">*</span></label>
                                         <input type="date" class="form-control" id="start_date" name="start_date"
                                             value="{{ old('start_date', isset($discount) ? $discount->start_date->format('Y-m-d') : '') }}"
-                                            required>
+                                            >
                                     </div>
 
                                     <div class="form-group col-md-6">
                                         <label for="end_date">Ngày kết thúc <span class="text-danger">*</span></label>
                                         <input type="date" class="form-control" id="end_date" name="end_date"
                                             value="{{ old('end_date', isset($discount) ? $discount->end_date->format('Y-m-d') : '') }}"
-                                            required>
+                                            >
                                     </div>
                                 </div>
 
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
                                         <label for="type">Loại giảm giá <span class="text-danger">*</span></label>
-                                        <select class="form-control" id="type" name="type" required>
+                                        <select class="form-control" id="type" name="type" >
                                             <option value="percentage"
                                                 {{ old('type', $discount->type ?? '') === 'percentage' ? 'selected' : '' }}>
                                                 Phần trăm (%)</option>
@@ -73,7 +73,7 @@
                                         <div class="input-group">
                                             <input type="number" class="form-control" id="value" name="value"
                                                 min="0" step="0.01"
-                                                value="{{ old('value', $discount->value ?? '') }}" required>
+                                                value="{{ old('value', $discount->value ?? '') }}" >
                                         </div>
                                     </div>
                                 </div>
@@ -84,7 +84,7 @@
                         <div class="form-group">
                             <label for="products">Sản phẩm áp dụng <span class="text-danger">*</span></label>
                             <select class="form-control select2-products" id="products" name="products[]" multiple
-                                required placeholder="Chọn sản phẩm">
+                                 placeholder="Chọn sản phẩm">
                                 @foreach ($products as $product)
                                     <option value="{{ $product->id }}"
                                         {{ in_array($product->id, old('products', $selectedProducts ?? [])) ? 'selected' : '' }}>

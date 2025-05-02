@@ -11,6 +11,7 @@ use App\Http\Requests\DeleteAttributeCatalogueRequest;
 use App\Repositories\AttributeRepository;
 use App\Repositories\AttributeValueRepository;
 use App\Services\AttributeValueService;
+
 class AttributeValueController extends Controller
 {
 
@@ -22,13 +23,14 @@ class AttributeValueController extends Controller
         AttributeValueService $attributeCatalogueService,
         AttributeValueRepository $attributeCatalogueRepository,
         AttributeRepository $attributeRepository
-    ){
+    ) {
         $this->attributeCatalogueService = $attributeCatalogueService;
         $this->attributeCatalogueRepository = $attributeCatalogueRepository;
         $this->attributeRepository = $attributeRepository;
     }
- 
-    public function index(Request $request){
+
+    public function index(Request $request)
+    {
         $attributeCatalogues = $this->attributeCatalogueService->paginate($request);
         $config = [
             'js' => [
@@ -50,7 +52,8 @@ class AttributeValueController extends Controller
         ));
     }
 
-    public function create(){
+    public function create()
+    {
         $attributes = $this->attributeRepository->all();
         $config['seo'] = __('messages.attributeCatalogue');
         $config['method'] = 'create';
@@ -62,14 +65,26 @@ class AttributeValueController extends Controller
         ));
     }
 
-    public function store(StoreAttributeCatalogueRequest $request){
-        if($this->attributeCatalogueService->create($request)){
-            return redirect()->route('attribute.value.index')->with('success','Thêm mới bản ghi thành công');
+    public function store(Request $request)
+    {
+        $request->validate([
+            'attribute_id' => 'required|exists:attributes,id',
+            'value' => 'required|string|max:255',
+        ], [
+            'attribute_id.required' => 'Vui lòng chọn thuộc tính.',
+            'attribute_id.exists' => 'Thuộc tính không tồn tại.',
+            'value.required' => 'Giá trị thuộc tính không được để trống.',
+            'value.string' => 'Giá trị thuộc tính phải là chuỗi ký tự.',
+            'value.max' => 'Giá trị thuộc tính không được vượt quá 255 ký tự.',
+        ]);
+        if ($this->attributeCatalogueService->create($request)) {
+            return redirect()->route('attribute.value.index')->with('success', 'Thêm mới bản ghi thành công');
         }
-        return redirect()->route('attribute.value.index')->with('error','Thêm mới bản ghi không thành công. Hãy thử lại');
+        return redirect()->route('attribute.value.index')->with('error', 'Thêm mới bản ghi không thành công. Hãy thử lại');
     }
 
-    public function edit($id){
+    public function edit($id)
+    {
         $attributes = $this->attributeRepository->all();
         $attributeCatalogue = $this->attributeCatalogueRepository->findById($id);
         $config = $this->configData();
@@ -83,14 +98,26 @@ class AttributeValueController extends Controller
         ));
     }
 
-    public function update($id, Request $request){
-        if($this->attributeCatalogueService->update($id, $request)){
-            return redirect()->route('attribute.value.index')->with('success','Cập nhật bản ghi thành công');
+    public function update($id, Request $request)
+    {
+        $request->validate([
+            'attribute_id' => 'required|exists:attributes,id',
+            'value' => 'required|string|max:255',
+        ], [
+            'attribute_id.required' => 'Vui lòng chọn thuộc tính.',
+            'attribute_id.exists' => 'Thuộc tính không tồn tại.',
+            'value.required' => 'Giá trị thuộc tính không được để trống.',
+            'value.string' => 'Giá trị thuộc tính phải là chuỗi ký tự.',
+            'value.max' => 'Giá trị thuộc tính không được vượt quá 255 ký tự.',
+        ]);
+        if ($this->attributeCatalogueService->update($id, $request)) {
+            return redirect()->route('attribute.value.index')->with('success', 'Cập nhật bản ghi thành công');
         }
-        return redirect()->route('attribute.value.index')->with('error','Cập nhật bản ghi không thành công. Hãy thử lại');
+        return redirect()->route('attribute.value.index')->with('error', 'Cập nhật bản ghi không thành công. Hãy thử lại');
     }
 
-    public function delete($id){
+    public function delete($id)
+    {
         $config['seo'] = __('messages.attributeCatalogue');
         $attributeCatalogue = $this->attributeCatalogueRepository->findById($id);
         $template = 'backend.attribute.value.delete';
@@ -101,14 +128,16 @@ class AttributeValueController extends Controller
         ));
     }
 
-    public function destroy(Request $request, $id){
-        if($this->attributeCatalogueService->destroy($id)){
-            return redirect()->route('attribute.value.index')->with('success','Xóa bản ghi thành công');
+    public function destroy(Request $request, $id)
+    {
+        if ($this->attributeCatalogueService->destroy($id)) {
+            return redirect()->route('attribute.value.index')->with('success', 'Xóa bản ghi thành công');
         }
-        return redirect()->route('attribute.value.index')->with('error','Xóa bản ghi không thành công. Hãy thử lại');
+        return redirect()->route('attribute.value.index')->with('error', 'Xóa bản ghi không thành công. Hãy thử lại');
     }
 
-    private function configData(){
+    private function configData()
+    {
         return [
             'js' => [
                 'backend/plugins/ckeditor/ckeditor.js',
@@ -120,7 +149,7 @@ class AttributeValueController extends Controller
             'css' => [
                 'https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css'
             ]
-          
+
         ];
     }
     public function getAttribute(Request $request)

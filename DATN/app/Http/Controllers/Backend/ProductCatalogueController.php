@@ -59,6 +59,17 @@ class ProductCatalogueController extends Controller
     }
 
     public function store(Request $request){
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'img_thumbnail' => 'nullable|string',
+        ], [
+            'name.required' => 'Tên danh mục không được để trống.',
+            'name.string' => 'Tên danh mục phải là một chuỗi ký tự.',
+            'name.max' => 'Tên danh mục không được vượt quá 255 ký tự.',
+            'description.string' => 'Mô tả phải là một chuỗi ký tự.',
+            'img_thumbnail.string' => 'Đường dẫn ảnh phải là một chuỗi ký tự.',
+        ]);
         if($this->productCatalogueService->create($request)){
             return redirect()->route('product.catalogue.index')->with('success','Thêm mới bản ghi thành công');
         }
@@ -79,6 +90,17 @@ class ProductCatalogueController extends Controller
     }
 
     public function update($id, Request $request){
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'img_thumbnail' => 'nullable|string',
+        ], [
+            'name.required' => 'Tên danh mục không được để trống.',
+            'name.string' => 'Tên danh mục phải là một chuỗi ký tự.',
+            'name.max' => 'Tên danh mục không được vượt quá 255 ký tự.',
+            'description.string' => 'Mô tả phải là một chuỗi ký tự.',
+            'img_thumbnail.string' => 'Đường dẫn ảnh phải là một chuỗi ký tự.',
+        ]);
         if($this->productCatalogueService->update($id, $request)){
             return redirect()->route('product.catalogue.index')->with('success','Cập nhật bản ghi thành công');
         }

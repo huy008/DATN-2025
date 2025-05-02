@@ -1,13 +1,5 @@
 @include('backend.dashboard.component.breadcrumb', ['title' => "Khách hàng"])
-@if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif
+@include('backend.dashboard.component.formError')
 @php
     $url = ($config['method'] == 'create') ? route('user.store') : route('user.update', $user->id);
 @endphp
@@ -103,7 +95,7 @@
                                     <label for="" class="control-label text-left">Nhập lại mật khẩu <span class="text-danger">(*)</span></label>
                                     <input 
                                         type="password"
-                                        name="re_password"
+                                        name="password_confirmation"
                                         value=""
                                         class="form-control"
                                         placeholder=""
@@ -113,22 +105,6 @@
                             </div>
                         </div>
                         @endif
-                        <div class="row mb15">
-                            <div class="col-lg-12">
-                                <div class="form-row">
-                                    <label for="" class="control-label text-left">Ảnh đại diện </label>
-                                    <input 
-                                        type="text"
-                                        name="image"
-                                        value="{{ old('image', ($user->image) ?? '') }}"
-                                        class="form-control upload-image"
-                                        placeholder=""
-                                        autocomplete="off"
-                                        data-upload="Images"
-                                    >
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -139,9 +115,3 @@
         </div>
     </div>
 </form>
-
-<script>
-    var province_id = '{{ (isset($user->province_id)) ? $user->province_id : old('province_id') }}'
-    var district_id = '{{ (isset($user->district_id)) ? $user->district_id : old('district_id') }}'
-    var ward_id = '{{ (isset($user->ward_id)) ? $user->ward_id : old('ward_id') }}'
-</script>
