@@ -1,9 +1,9 @@
 <table class="table table-striped table-bordered">
     <thead>
     <tr>
-        <th style="width:50px;">
+        {{-- <th style="width:50px;">
             <input type="checkbox" value="" id="checkAll" class="input-checkbox">
-        </th>
+        </th> --}}
         <th>{{ __('messages.tableName') }}</th>
         <th class="text-center" style="width:100px;">{{ __('messages.tableAction') }} </th>
     </tr>
@@ -12,9 +12,9 @@
         @if(isset($attributeCatalogues) && is_object($attributeCatalogues))
             @foreach($attributeCatalogues as $attributeCatalogue)
             <tr >
-                <td>
+                {{-- <td>
                     <input type="checkbox" value="{{ $attributeCatalogue->id }}" class="input-checkbox checkBoxItem">
-                </td>
+                </td> --}}
                
                 <td>            <div class="uk-flex uk-flex-middle">
                         <div class="main-info">

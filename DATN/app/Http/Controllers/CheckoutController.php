@@ -91,27 +91,43 @@ class CheckoutController extends Controller
             case 'momo':
                 $this->momo_payment($this->calculateTotal());
                 break;
-            case 'home':
-                die(123);
+            case 'cod':
+                return redirect()->route('payment.success')->with([
+                    'message' => 'Đặt hàng thành công. Bạn sẽ thanh toán khi nhận hàng.',
+                    'status' => 'success',
+                ]);
                 break;
         }
     }
 
     public function paymentSuccess(Request $request)
     {
-        // Lấy thông tin từ URL
         $data = $request->all();
 
-        // Kiểm tra mã phản hồi từ cổng thanh toán (vnp_ResponseCode)
-        if ($data['vnp_ResponseCode'] == '00') {
-            $message = 'Thanh toán thành công!';
-            $status = 'success';
+        if (isset($data['vnp_ResponseCode'])) {
+            // Xử lý VNPAY
+            if ($data['vnp_ResponseCode'] == '00') {
+                $message = 'Thanh toán qua VNPAY thành công!';
+                $status = 'success';
+            } else {
+                $message = 'Thanh toán qua VNPAY thất bại! Vui lòng thử lại.';
+                $status = 'error';
+            }
+        } elseif (isset($data['partnerCode']) && $data['partnerCode'] === 'MOMOBKUN20180529') {
+            // Xử lý MoMo
+            if ($data['resultCode'] == '0') {
+                $message = 'Thanh toán qua MoMo thành công!';
+                $status = 'success';
+            } else {
+                $message = 'Thanh toán qua MoMo thất bại! Vui lòng thử lại.';
+                $status = 'error';
+            }
         } else {
-            $message = 'Thanh toán thất bại! Vui lòng thử lại.';
-            $status = 'error';
+            $message = session('message', 'Đặt hàng thành công!');
+            $status = session('status', 'success');
+            $data['totalAmount'] =  $this->calculateTotal();
         }
 
-        // Trả về view với thông tin thanh toán
         return view('payment.success', compact('message', 'status', 'data'));
     }
 
@@ -230,10 +246,10 @@ class CheckoutController extends Controller
         $accessKey = 'klm05TvNBzhg7h7j';
         $secretKey = 'at67qH6mk8w5Y1nAyMoYKMWACiEi2bsa';
         $orderInfo = "Thanh toán qua ATM MoMo";
-        $amount = 100000;
+        $amount = $total;
         $orderId = time() . "";
-        $redirectUrl = "http://127.0.0.1:8000/checkout";
-        $ipnUrl = "http://127.0.0.1:8000/checkout";
+        $redirectUrl = "http://127.0.0.1:8000/payment-success";
+        $ipnUrl = "http://127.0.0.1:8000/payment-success";
         $extraData = "";
 
         $requestId = time() . "";

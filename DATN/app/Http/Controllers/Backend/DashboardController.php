@@ -26,12 +26,13 @@ public function index(Request $request){
     $totalRevenue = $orders->where('status', 'completed')->sum('total_price');
     $successfulOrders = $orders->where('status', 'completed')->count();
     $cancelledOrders = $orders->where('status', 'cancelled')->count();
+ $successfulCancelledOrders = $cancelledOrders + $successfulOrders;
     $totalOrders = $orders->count();
     
     // Tính tỷ lệ đơn hàng
-    $successRate = $totalOrders > 0 ? round(($successfulOrders / $totalOrders) * 100) : 0;
-    // dd($successRate);
-    $cancelRate = $totalOrders > 0 ? round(($cancelledOrders / $totalOrders) * 100) : 0;
+    $successRate = $successfulCancelledOrders > 0 ? round(($successfulOrders / $successfulCancelledOrders) * 100) : 0;
+
+    $cancelRate = $successfulCancelledOrders > 0 ? round(($cancelledOrders / $successfulCancelledOrders) * 100) : 0;
     
     // Tính doanh thu trung bình
     $averageRevenue = $successfulOrders > 0 ? round($totalRevenue / $successfulOrders) : 0;

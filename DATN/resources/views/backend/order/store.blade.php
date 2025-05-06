@@ -19,7 +19,7 @@
                 <div class="panel-head">
                     <div class="panel-title">Thông tin chung</div>
                     <div class="panel-description">
-                        <p>Nhập thông tin chung của quyền</p>
+                        <p>Thông tin của đơn hàng</p>
                         <p>Lưu ý: Những trường đánh dấu <span class="text-danger">(*)</span> là bắt buộc</p>
                     </div>
                 </div>
@@ -35,7 +35,7 @@
                                     readonly
                                         type="text"
                                         name="name"
-                                        value="{{ old('name', ($order->id) ?? '' ) }}"
+                                        value="{{ old('name', ($order->order_number) ?? '' ) }}"
                                         class="form-control"
                                         placeholder=""
                                         autocomplete="off"

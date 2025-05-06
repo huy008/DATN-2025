@@ -25,7 +25,7 @@ class ProductService
 
     public function paginate($request)
     {
-        $perPage = $request->integer('perpage');
+        $perPage = $request->integer('perpage') == 0 ? 10 : $request->integer('perpage');
         $condition = [
             'keyword' => addslashes($request->input('keyword')),
             'category_id' => $request->input('product_catalogue_id')
@@ -142,12 +142,12 @@ class ProductService
                 $result = $this->transformAttributes($attribute);
 
                 foreach ($product->variants as $variant) {
-                    $variant->attributes()->delete();
+                    ProductVariantAttribute::where('variant_id', $variant->id)->delete();
                     $variant->delete();
                 }
                 foreach ($request->variant['price'] as $index => $price) {
                     $variant = $product->variants()->create([
-                        'price' => $price,
+                        'price' => str_replace('.', '', $price),
                         'stock_quantity' => $request->variant['quantity'][$index],
                         'image_url' => $request->variant['album'][$index],
                         'sku' => $request->variant['sku'][$index],

@@ -1,8 +1,8 @@
 <div class="footer">
     <div class="pull-right">
-        10GB of <strong>250GB</strong> Free.
+        10GB of <strong>250GB</strong>.
     </div>
     <div>
-        <strong>Copyright</strong> Example Company &copy; 2014-2017
+        Điện thoại hay &copy; 2025
     </div>
 </div>

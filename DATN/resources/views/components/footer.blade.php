@@ -2,24 +2,23 @@
     <div class="tp-subscribe-shape d-none d-sm-block">
         <img src="https://shofy.botble.com/themes/shofy/images/newsletter/shape-1.png" data-bb-lazy="true"
             class="tp-subscribe-shape-1 entered loaded" loading="lazy"
-            data-src="https://shofy.botble.com/themes/shofy/images/newsletter/shape-1.png"
-            alt="Đăng ký nhận bản tin" data-ll-status="loaded">
+            data-src="https://shofy.botble.com/themes/shofy/images/newsletter/shape-1.png" alt="Đăng ký nhận bản tin"
+            data-ll-status="loaded">
         <img src="https://shofy.botble.com/themes/shofy/images/newsletter/shape-2.png" data-bb-lazy="true"
             class="tp-subscribe-shape-2 entered loaded" loading="lazy"
-            data-src="https://shofy.botble.com/themes/shofy/images/newsletter/shape-2.png"
-            alt="Đăng ký nhận bản tin" data-ll-status="loaded">
+            data-src="https://shofy.botble.com/themes/shofy/images/newsletter/shape-2.png" alt="Đăng ký nhận bản tin"
+            data-ll-status="loaded">
         <img src="https://shofy.botble.com/themes/shofy/images/newsletter/shape-3.png" data-bb-lazy="true"
             class="tp-subscribe-shape-3 entered loaded" loading="lazy"
-            data-src="https://shofy.botble.com/themes/shofy/images/newsletter/shape-3.png"
-            alt="Đăng ký nhận bản tin" data-ll-status="loaded">
+            data-src="https://shofy.botble.com/themes/shofy/images/newsletter/shape-3.png" alt="Đăng ký nhận bản tin"
+            data-ll-status="loaded">
         <img src="https://shofy.botble.com/themes/shofy/images/newsletter/shape-4.png" data-bb-lazy="true"
             class="tp-subscribe-shape-4 entered loaded" loading="lazy"
-            data-src="https://shofy.botble.com/themes/shofy/images/newsletter/shape-4.png"
-            alt="Đăng ký nhận bản tin" data-ll-status="loaded">
+            data-src="https://shofy.botble.com/themes/shofy/images/newsletter/shape-4.png" alt="Đăng ký nhận bản tin"
+            data-ll-status="loaded">
         <div class="tp-subscribe-plane">
             <img class="tp-subscribe-plane-shape"
-                src="https://shofy.botble.com/themes/shofy/images/newsletter/plane.png"
-                alt="Đăng ký nhận bản tin">
+                src="https://shofy.botble.com/themes/shofy/images/newsletter/plane.png" alt="Đăng ký nhận bản tin">
             <svg width="399" height="110" class="d-none d-sm-block" viewBox="0 0 399 110" fill="none"
                 xmlns="http://www.w3.org/2000/svg">
                 <path
@@ -44,9 +43,9 @@
             </div>
             <div class="col-xl-5 col-lg-5">
                 <div class="tp-subscribe-form">
-                    <form method="POST" action="https://shofy.botble.com/newsletter/subscribe"
-                        accept-charset="UTF-8" id="botble-newsletter-forms-fronts-newsletter-form"
-                        class="subscribe-form dirty-check" novalidate="novalidate">
+                    <form method="POST" action="https://shofy.botble.com/newsletter/subscribe" accept-charset="UTF-8"
+                        id="botble-newsletter-forms-fronts-newsletter-form" class="subscribe-form dirty-check"
+                        novalidate="novalidate">
                         <input name="_token" type="hidden" value="fixS1HA6FB9V19i58E4Q9IhApKC9ndtwGaEfIrlW">
                         <div class="tp-subscribe-input">
                             <input class="form-control" placeholder="Nhập email của bạn" id="newsletter-email"
@@ -71,21 +70,21 @@
                         <div class="tp-footer-widget footer-col-1 mb-50">
                             <div class="tp-footer-widget-content">
                                 <div class="tp-footer-logo">
-                                    <a href="#"><img
-                                            src="{{ asset('client/storage/main/general/placeholder.png') }}"
-                                            data-bb-lazy="true" class="page_speed_519589787" loading="lazy"
-                                            data-src="https://shofy.botble.com/storage/main/general/logo.png"
+                                    <a href="#"><img src="{{ asset('images/logoo.jpg') }}" data-bb-lazy="true"
+                                            class="page_speed_519589787" loading="lazy"
+                                            data-src="{{ asset('images/logoo.jpg') }}"
                                             alt="Shofy - Multipurpose eCommerce Laravel Script"></a>
                                 </div>
                                 <p class="tp-footer-desc">
-                                    Shofy là một công cụ mạnh mẽ để xây dựng cửa hàng trực tuyến chuyên nghiệp và hấp dẫn.
+                                    Shofy là một công cụ mạnh mẽ để xây dựng cửa hàng trực tuyến chuyên nghiệp và hấp
+                                    dẫn.
                                 </p>
-                                <div class="tp-footer-social">
+                                {{-- <div class="tp-footer-social">
                                     <a href="#" title="Facebook" target="_blank">...</a>
                                     <a href="#" title="X (Twitter)" target="_blank">...</a>
                                     <a href="#" title="YouTube" target="_blank">...</a>
                                     <a href="#" title="LinkedIn" target="_blank">...</a>
-                                </div>
+                                </div> --}}
                             </div>
                         </div>
                     </div>
@@ -95,51 +94,44 @@
                             <div class="tp-footer-widget-content">
                                 <ul>
                                     <li><a href="#" title="Theo dõi đơn hàng">Theo dõi đơn hàng</a></li>
-                                    <li><a href="#" title="Vận chuyển">Vận chuyển</a></li>
-                                    <li><a href="#" title="Danh sách yêu thích">Danh sách yêu thích</a></li>
                                     <li><a href="#" title="Tài khoản của tôi">Tài khoản của tôi</a></li>
                                     <li><a href="#" title="Lịch sử đặt hàng">Lịch sử đặt hàng</a></li>
-                                    <li><a href="#" title="Trả hàng">Trả hàng</a></li>
                                 </ul>
                             </div>
                         </div>
                     </div>
                     <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
                         <div class="tp-footer-widget footer-col-2">
-                            <h4 class="tp-footer-widget-title">Thông tin</h4>
+                            <h4 class="tp-footer-widget-title">Hỗ trợ khách hàng</h4>
                             <div class="tp-footer-widget-content">
                                 <ul>
-                                    <li><a href="#" title="Câu chuyện của chúng tôi">Câu chuyện của chúng tôi</a></li>
-                                    <li><a href="#" title="Cơ hội nghề nghiệp">Cơ hội nghề nghiệp</a></li>
-                                    <li><a href="#" title="Chính sách bảo mật">Chính sách bảo mật</a></li>
-                                    <li><a href="#" title="Tin tức mới nhất">Tin tức mới nhất</a></li>
-                                    <li><a href="#" title="Liên hệ với chúng tôi">Liên hệ với chúng tôi</a></li>
+                                    <li><a href="#" title="Phương thức thanh toán">Phương thức thanh toán</a>
+                                    </li>
+                                    <li><a href="#" title="Chính sách đổi trả">Chính sách đổi trả</a></li>
+                                    <li><a href="#" title="Giải đáp mua hàng Online">Giải đáp mua hàng
+                                            Online</a></li>
                                 </ul>
                             </div>
                         </div>
                     </div>
                     <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6">
                         <div class="tp-footer-widget footer-col-4 mb-50">
-                            <h4 class="tp-footer-widget-title">Liên hệ với chúng tôi</h4>
+                            <h4 class="tp-footer-widget-title">Hệ thống cửa hàng</h4>
                             <div class="tp-footer-widget-content">
-                                <div class="tp-footer-talk mb-20">
-                                    <span>Có câu hỏi? Gọi cho chúng tôi</span>
-                                    <h4><a href="tel:+67041390762">+670 413 90 762</a></h4>
-                                </div>
-                                <div class="tp-footer-contact">
-                                    <div class="tp-footer-contact-item d-flex align-items-start">
-                                        <div class="tp-footer-contact-icon">...</div>
-                                        <div class="tp-footer-contact-content">
-                                            <p><a href="#">support@shofy.com</a></p>
-                                        </div>
-                                    </div>
-                                    <div class="tp-footer-contact-item d-flex align-items-start">
-                                        <div class="tp-footer-contact-icon">...</div>
-                                        <div class="tp-footer-contact-content">
-                                            <p><a href="#">79 Sleepy Hollow St. Jamaica, New York 1432</a></p>
-                                        </div>
-                                    </div>
-                                </div>
+                                <ul>
+                                    <li><a href="#"
+                                            title="- Cơ sở 1: Số 215 Giáp Nhất, Nhân Chính, Thanh Xuân, Hà Nội">- Cơ sở
+                                            1: Số 215 Giáp Nhất, Nhân Chính, Thanh Xuân, Hà Nội</a></li>
+                                    <li><a href="#" title="- Cơ sở 2: 208 Xã Đàn, Đống Đa, Hà Nội">- Cơ sở 2:
+                                            208 Xã Đàn, Đống Đa, Hà Nội</a></li>
+                                    <li><a href="#"
+                                            title="- Cơ sở 3: 583 Lê Hồng Phong, Phường 10, Quận 10, tp Hồ Chí Minh">-
+                                            Cơ sở 3: 583 Lê Hồng Phong, Phường 10, Quận 10, tp Hồ Chí Minh</a></li>
+                                    <li><a href="#"
+                                            title="- Cơ sở 4: 258 Hoàng Văn Thụ, Phường 4, Quận Tân Bình, tp Hồ Chí Minh">-
+                                            Cơ sở 4: 258 Hoàng Văn Thụ, Phường 4, Quận Tân Bình, tp Hồ Chí Minh</a></li>
+                                    <li><a href="#" title="Hotline: 0399.555.258">Hotline: 0399.555.258</a></li>
+                                </ul>
                             </div>
                         </div>
                     </div>
@@ -157,7 +149,8 @@
                         </div>
                         <div class="col-md-6">
                             <div class="tp-footer-payment text-md-end">
-                                <p><img src="{{ asset('client/storage/main/general/placeholder.png') }}" data-bb-lazy="true" loading="lazy"
+                                <p><img src="{{ asset('client/storage/main/general/placeholder.png') }}"
+                                        data-bb-lazy="true" loading="lazy"
                                         data-src="https://shofy.botble.com/storage/main/general/footer-pay.png"
                                         alt="footer image"></p>
                             </div>

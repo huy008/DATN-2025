@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Đăng nhập quản trị</title>
+    <title>Đăng nhập quản trị viên</title>
 
     <link href="http://127.0.0.1:8000/backend/css/bootstrap.min.css" rel="stylesheet">
     <link href="http://127.0.0.1:8000/backend/font-awesome/css/font-awesome.css" rel="stylesheet">
@@ -18,29 +18,18 @@
     <div class="loginColumns animated fadeInDown">
         <div class="row">
             <div class="col-md-6">
-                <h2 class="font-bold">Chào mừng đến với hệ thống quản trị</h2>
+                <h2 class="font-bold">Hệ thống quản trị</h2>
 
-                <p>
-                    Giao diện quản trị được thiết kế hiện đại và chuyên nghiệp với nhiều tính năng tiện ích.
-                </p>
-
-                <p>
-                    Hệ thống giúp bạn quản lý nội dung một cách dễ dàng và hiệu quả.
-                </p>
-
-                <p>
-                    Nền tảng đáng tin cậy cho các website chuyên nghiệp.
-                </p>
-
-                <p>
-                    <small>Luôn sẵn sàng hỗ trợ và phát triển trong tương lai.</small>
-                </p>
+                <p>Đăng nhập để truy cập khu vực quản trị viên.</p>
+                <p>Quản lý nội dung, đơn hàng và người dùng một cách hiệu quả.</p>
+                <p>Bảo mật cao, hỗ trợ đầy đủ các tính năng cần thiết.</p>
+                <p><small>Chỉ dành cho quản trị viên hệ thống.</small></p>
             </div>
 
             <div class="col-md-6">
                 <div class="ibox-content">
 
-                    <!-- Hiển thị thông báo lỗi -->
+                    <!-- Hiển thị thông báo -->
                     @if(session('error'))
                         <div class="alert alert-danger">
                             {{ session('error') }}
@@ -60,7 +49,7 @@
                                 type="text" 
                                 name="email"
                                 class="form-control" 
-                                placeholder="Email" 
+                                placeholder="Email quản trị viên" 
                                 value="{{ old('email') }}"
                             >
                             @if ($errors->has('email'))
@@ -80,11 +69,11 @@
                             @endif
                         </div>
 
-                        <button type="submit" class="btn btn-primary block full-width m-b">Đăng nhập</button>
+                        <button type="submit" class="btn btn-primary block full-width m-b">Đăng nhập quản trị</button>
 
-                        <a href="#">
+                        {{-- <a href="#">
                             <small>Quên mật khẩu?</small>
-                        </a>
+                        </a> --}}
                     </form>
                 </div>
             </div>

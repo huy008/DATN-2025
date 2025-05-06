@@ -111,7 +111,7 @@
                                                       <div class="input-group">
                                                           <input type=password name=password id="password" value=""
                                                               class="form-control ps-5" data-counter="250"
-                                                              placeholder="Password" data-bb-password><span
+                                                              placeholder="Nhập mật khẩu" data-bb-password><span
                                                               class="input-password-toggle" data-bb-toggle-password><svg
                                                                   class="icon svg-icon-ti-ti-eye"
                                                                   xmlns="http://www.w3.org/2000/svg" width=24 height=24
@@ -161,14 +161,6 @@
                                               </script>
                                               <div class="row g-0 mb-3">
                                                   <div class="col-6">
-                                                      <input type=hidden name=remember value="0"><label
-                                                          class="form-check"><input type=checkbox
-                                                              id="remember_dc3c99bb4e249a95567a2bf7d5f327ed" name=remember
-                                                              class="form-check-input" value="1"><span
-                                                              class="form-check-label">
-                                                              Remember
-                                                              me
-                                                          </span></label>
                                                   </div>
                                                   <div class="col-6 text-end">
                                                       <a href="{{route('password.request')}}"

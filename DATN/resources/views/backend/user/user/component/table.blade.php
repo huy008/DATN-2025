@@ -1,9 +1,9 @@
 <table class="table table-striped table-bordered">
     <thead>
     <tr>
-        <th>
+        {{-- <th>
             <input type="checkbox" value="" id="checkAll" class="input-checkbox">
-        </th>
+        </th> --}}
         <th>Họ Tên</th>
         <th>Email</th>
         <th>Số điện thoại</th>
@@ -15,9 +15,9 @@
         @if(isset($users) && is_object($users))
             @foreach($users as $user)
             <tr >
-                <td>
+                {{-- <td>
                     <input type="checkbox" value="{{ $user->id }}" class="input-checkbox checkBoxItem">
-                </td>
+                </td> --}}
                 <td>
                     {{ $user->name }}
                 </td>

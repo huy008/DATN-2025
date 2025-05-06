@@ -4,7 +4,7 @@
     <div class="col-lg-12">
         <div class="ibox float-e-margins">
             <div class="ibox-title">
-                @include('backend.dashboard.component.toolbox', ['model' => 'ProductCatalogue'])
+                {{-- @include('backend.dashboard.component.toolbox', ['model' => 'ProductCatalogue']) --}}
             </div>
             <div class="ibox-content">
                 @include('backend.product.catalogue.component.filter')

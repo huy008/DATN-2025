@@ -35,9 +35,10 @@ class ForgotPasswordController extends Controller
         if(PasswordResetToken::create($tokenData))
         {
             Mail::to($request->email)->send(new ForgotPassword($user,$token));
+            toastr()->success('Gửi email thành công', 'Thành công', ['timeOut' => 2000]);
             return redirect()->back();
         }
-        toastr()->success('Gửi email thành công', 'Thành công', ['timeOut' => 2000]);
+        toastr()->success('Gửi email thất bại', 'Thất bại', ['timeOut' => 2000]);
 
         return redirect()->back();
     }

@@ -1,9 +1,9 @@
 <table class="table table-striped table-bordered">
     <thead>
         <tr>
-            <th style="width:50px;">
+            {{-- <th style="width:50px;">
                 <input type="checkbox" value="" id="checkAll" class="input-checkbox">
-            </th>
+            </th> --}}
             <th>Ảnh</th>
             <th>Tên danh mục</th>
             <th>Mô tả</th>
@@ -14,9 +14,9 @@
         @if (isset($productCatalogues) && is_object($productCatalogues))
             @foreach ($productCatalogues as $productCatalogue)
                 <tr>
-                    <td>
+                    {{-- <td>
                         <input type="checkbox" value="{{ $productCatalogue->id }}" class="input-checkbox checkBoxItem">
-                    </td>
+                    </td> --}}
                     <td>
                         <div class="uk-flex uk-flex-middle">
                             <div class="image mr5">

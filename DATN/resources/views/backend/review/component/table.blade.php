@@ -1,9 +1,9 @@
 <table class="table table-striped table-breviewed">
     <thead>
         <tr>
-            <th>
+            {{-- <th>
                 <input type="checkbox" value="" id="checkAll" class="input-checkbox">
-            </th>
+            </th> --}}
             <th>Khách hàng</th>
             <th>Tên sản phẩm</th>
             <th>Đánh giá</th>
@@ -16,17 +16,16 @@
         @if (isset($reviews) && is_object($reviews))
             @foreach ($reviews as $review)
                 <tr>
-                    <td>
+                    {{-- <td>
                         <input type="checkbox" value="{{ $review->id }}" class="input-checkbox checkBoxItem">
-                    </td>
+                    </td> --}}
                     <td>
                         {{ $review->user->name }}
                     </td>
                     <td>
                         {{ $review->product->name }}
                     </td>
-                    <td>
-
+                    <td style="width:150px">
                         @for ($i = 1; $i <= 5; $i++)
                             <i class="fa fa-star{{ $i <= $review->rating ? '' : '-o' }} "
                                 style="color: gold; font-size:20px;"></i>

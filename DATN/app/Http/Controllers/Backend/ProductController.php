@@ -131,6 +131,8 @@ class ProductController extends Controller
             '1' => $reviews->where('rating', 1)->count(),
         ];
 
+        $reviews = Review::with('user')->where('product_id', $id)->get();
+
         $productRelated = Product::where('category_id', $product->category_id)->limit(8)->get();
         return view('detail', compact(
             'product',
@@ -150,13 +152,15 @@ class ProductController extends Controller
         $colorId = $request->input('color_id');
         $capacityId = $request->input('capacity_id');
         $productId = $request->input('product_id');
-
         $variant = ProductVariant::where('product_id', $productId)
-            ->whereHas('attributes', function ($query) use ($colorId) {
-                $query->where('attribute_value_id', $colorId);
+            ->whereHas('attributes', function ($query) use ($colorId, $capacityId) {
+                $query->whereIn('attribute_value_id', [$colorId, $capacityId]);
             })
-            ->whereHas('attributes', function ($query) use ($capacityId) {
-                $query->where('attribute_value_id', $capacityId);
+            ->with('attributes')
+            ->get()
+            ->filter(function ($variant) use ($colorId, $capacityId) {
+                $attributeValueIds = $variant->attributes->pluck('attribute_value_id')->toArray();
+                return in_array($colorId, $attributeValueIds) && in_array($capacityId, $attributeValueIds);
             })
             ->first();
 

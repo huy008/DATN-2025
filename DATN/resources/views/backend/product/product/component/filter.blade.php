@@ -9,6 +9,7 @@
                     @endphp
                     <select name="product_catalogue_id" class="form-control setupSelect2 ml10">
                         @foreach($productCategories as $val)
+                        <option  value="">-Danh mục-</option>
                         <option {{ ($productCatalogueId == $val->id)  ? 'selected' : '' }} value="{{ $val->id }}">{{ $val->name }}</option>
                         @endforeach
                     </select>

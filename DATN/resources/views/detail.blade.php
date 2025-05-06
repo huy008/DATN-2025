@@ -109,7 +109,7 @@
                                  </div>
                                  <form method="POST" action="{{ route('cart.add') }}" class="product-form">
                                      @csrf
-                                     <input type="hidden" name="id" value="{{ $product->id }}">
+                                     <input type="hidden" name="id" id="product-id" value="{{ $product->id }}">
                                      <input type="hidden" name="price" value="{{ $product->base_price }}">
 
                                      <div class="product-attributes product-attribute-swatches" id="product-attributes-15">
@@ -256,26 +256,58 @@
                                  <div class="product-review-progress-bar">
                                      <span class="product-review-progress-bar-title">{{ $stars }} Stars</span>
                                      <div class="progress product-review-progress-bar-value">
-                                        <div role="progressbar"
-    aria-valuenow="{{ ($count / $reviewCount) * 100 }}"
-    aria-valuemin="0" aria-valuemax="100"
-    style="width: {{ ($count / $reviewCount) * 100 }}%;"
-    class="progress-bar page_speed_500276036">
-</div>
+                                         <div role="progressbar"
+                                             aria-valuenow="{{ ($reviewCount != 0 ? $count / $reviewCount : 0) * 100 }}"
+                                             aria-valuemin="0" aria-valuemax="100"
+                                             style="width: {{ ($reviewCount != 0 ? $count / $reviewCount : 0) * 100 }}%;"
+                                             class="progress-bar page_speed_500276036">
+                                         </div>
                                      </div>
                                      <span class="product-review-progress-bar-percent">
-                                         {{ number_format(($count / $reviewCount) * 100, 2) }}%
+                                         {{ number_format(($reviewCount != 0 ? $count / $reviewCount : 0) * 100, 2) }}%
                                      </span>
                                  </div>
                              @endforeach
                          </div>
+      
+                         @if ($reviews->count())
+                             <div style="max-height: 300px; overflow-y: auto; padding-right: 10px;">
+                                 @foreach ($reviews as $review)
+                                     @if ($review->publish == 2)
+                                         <div style="padding: 20px 0 0 20px; border-bottom: 1px solid #ddd;">
+                                             <div style="display: flex; align-items: center; gap: 12px;">
+                                                 <img src="{{ asset($review->user->img_thumbnail) ?? asset('images/vnpay.jpg') }}"
+                                                     alt="Avatar"
+                                                     style="width: 36px;height: 36px;border-radius: 50%; object-fit: cover">
+                                                 <strong>{{ $review->user->name }}</strong>
+                                                 <div class="tp-product-details-rating">
+                                                     @php
+                                                         $rating = $review->rating;
+                                                     @endphp
 
+                                                     @for ($i = 0; $i < $rating; $i++)
+                                                         <i class="fa fa-star" style="color: gold; font-size: 15px;"></i>
+                                                     @endfor
 
+                                                     @for ($i = 0; $i < 5 - $rating; $i++)
+                                                         <i class="fa fa-star-o"
+                                                             style="color: gold; font-size: 15px;"></i>
+                                                     @endfor
+                                                 </div>
+                                             </div>
+                                             <p class="mt-1 text-sm text-gray-600">{{ $review->comment }}</p>
+
+                                         </div>
+                                     @endif
+                                 @endforeach
+                             </div>
+                         @else
+                             <p>Chưa có đánh giá nào cho sản phẩm này.</p>
+                         @endif
                      </div>
 
                  </div>
              </div>
-
              <section class="tp-product-category mt-50  pb-15" style="text-align:center">
                  <h1 class="pb-50">Sản phẩm liên quan</h1>
                  <div class="container">
@@ -409,7 +441,7 @@
              function fetchVariant(colorId, capacityId) {
                  // Lấy token CSRF (nếu dùng Laravel)
                  const csrfToken = document.querySelector('meta[name="csrf-token"]').content;
-
+                 const productId = document.getElementById('product-id').value;
                  // Gửi yêu cầu AJAX
                  fetch('/find-variant', {
                          method: 'POST',
@@ -420,7 +452,7 @@
                          body: JSON.stringify({
                              color_id: colorId,
                              capacity_id: capacityId,
-                             product_id: {{ $product->id }} // Truyền ID sản phẩm từ Blade
+                             product_id: productId
                          })
                      })
                      .then(response => response.json())

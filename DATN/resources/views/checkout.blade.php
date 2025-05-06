@@ -73,7 +73,7 @@
              @csrf
              <div class="row" id="main-checkout-product-info" bis_skin_checked="1">
                  <div class="col-lg-5 col-md-6 order-1 order-md-2" bis_skin_checked="1">
-                         <div class="my-3 bg-light" bis_skin_checked="1">
+                     <div class="my-3 bg-light" bis_skin_checked="1">
                          <div class="position-relative p-3" id="cart-item" bis_skin_checked="1">
                              <div class="bg-light py-2" bis_skin_checked="1">
                                  <h4 class="font-weight-bold mb-0">Danh sách sản phẩm : </h4>
@@ -156,8 +156,8 @@
                              <div class="billing-address-form-wrapper" bis_skin_checked="1">
                                  <div class="form-group" bis_skin_checked="1">
                                      <label for="name">Tên</label>
-                                     <input class="form-control" id="name" name=""
-                                         autocomplete="family-name" type="text" value="{{ $user->name }}" disabled>
+                                     <input class="form-control" id="name" name="" autocomplete="family-name"
+                                         type="text" value="{{ $user->name }}" disabled>
                                  </div>
 
                                  <div class="row" bis_skin_checked="1">
@@ -200,12 +200,13 @@
                                          <small classc="text-danger">{{ $message }}</small>
                                      @enderror
                                  </div>
-                                 <div class="form-group mb-3 " bis_skin_checked="1">
+                                 <div class="form-group mb-3">
                                      <div class="payment-method-wrapper">
                                          <h6>Chọn phương thức thanh toán</h6>
                                          <div class="row">
+
                                              <!-- VNPay -->
-                                             <div class="col-md-6">
+                                             <div class="col-md-4">
                                                  <label class="payment-option">
                                                      <input type="radio" name="payment_method" value="vnpay" checked>
                                                      <div class="payment-content">
@@ -216,7 +217,7 @@
                                              </div>
 
                                              <!-- MoMo -->
-                                             <div class="col-md-6">
+                                             <div class="col-md-4">
                                                  <label class="payment-option">
                                                      <input type="radio" name="payment_method" value="momo">
                                                      <div class="payment-content">
@@ -225,10 +226,23 @@
                                                      </div>
                                                  </label>
                                              </div>
+
+                                             <!-- COD -->
+                                             <div class="col-md-4">
+                                                 <label class="payment-option">
+                                                     <input type="radio" name="payment_method" value="cod">
+                                                     <div class="payment-content">
+                                                         <img src="{{ asset('images/cod.png') }}" alt="COD"
+                                                             style="height: 40px;">
+                                                         <span>Thanh toán khi nhận hàng</span>
+                                                     </div>
+                                                 </label>
+                                             </div>
+
                                          </div>
                                      </div>
-
                                  </div>
+
 
                              </div>
                          </div>

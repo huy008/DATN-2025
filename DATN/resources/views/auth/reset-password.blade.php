@@ -49,7 +49,7 @@
                 <input type="password" name="password_confirmation" class="form-control" required>
             </div>
 
-            <button type="submit" class="btn btn-success">Đặt lại mật khẩu</button>
+            <button type="submit" class="btn btn-primary">Đặt lại mật khẩu</button>
         </form>
     </div>
 </div>

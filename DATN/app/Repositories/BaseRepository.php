@@ -23,7 +23,7 @@ class BaseRepository
     public function pagination(
         array $column = ['*'],
         array $condition = [],
-        int $perPage = 1,
+        int $perPage = 10,
         array $extend = [],
         array $orderBy = ['id', 'DESC'],
         array $join = [],

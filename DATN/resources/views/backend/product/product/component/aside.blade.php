@@ -82,7 +82,7 @@
             <div class="col-lg-12">
                 <div class="form-row">
                     <span class="image img-cover image-target"><img src="{{ (old('img_thumbnail', ($product->img_thumbnail) ?? '' ) ? old('img_thumbnail', ($product->img_thumbnail) ?? '')   :  'backend/img/not-found.jpg') }}" alt=""></span>
-                    <input type="hidden" name="image" value="{{ old('image', ($product->image) ?? '' ) }}">
+                    <input type="hidden" name="image" value="{{ old('image', ($product->img_thumbnail) ?? '' ) }}">
                 </div>
             </div>
         </div>

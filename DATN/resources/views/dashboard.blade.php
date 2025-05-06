@@ -310,6 +310,7 @@
                                  <div class="tp-product-category-item text-center mb-40">
                                      <div class="tp-product-category-thumb fix">
                                          <a href="{{ route('category.show', $category->id) }}" title="Headphones"><img
+                                                style="width:180px;height:180px"
                                                  src={{ asset($category->img_thumbnail) }} data-bb-lazy="true"
                                                  loading="lazy" data-src="{{ asset($category->img_thumbnail) }}"
                                                  alt="Headphones"></a>
@@ -517,9 +518,9 @@
                                                                  class="entered loaded">
                                                          </a>
 
-                                                         <div class="tp-product-badge">
+                                                         {{-- <div class="tp-product-badge">
                                                              <span style="background-color: #006554 !important;">New</span>
-                                                         </div>
+                                                         </div> --}}
                                                      </div>
 
                                                      <div class="tp-product-content">

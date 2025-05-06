@@ -460,14 +460,17 @@
           background-color: #c421e5 !important;
       }
 
-      .page_speed_151184969 {
-          background-color: #87554B !important;
+      .page_speed_9 {
+          background-color: #e3f211 !important;
       }
 
-      .page_speed_1493750440 {
-          background-color: #006554 !important;
+      .page_speed_10 {
+          background-color: #02a2fe !important;
       }
 
+            .page_speed_11 {
+          background-color: #ff009d !important;
+      }
       .page_speed_328097537 {
           --bb-rating-size: 70px
       }
@@ -575,4 +578,4 @@
 
   <link media="all" type="text/css" rel="stylesheet"
       href="https://shofy.botble.com/vendor/core/plugins/ecommerce/css/front-theme.css?v=3.8.0">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">

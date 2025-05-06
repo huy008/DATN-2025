@@ -87,7 +87,7 @@ class DiscountController extends Controller
             }
         }
 
-        return redirect()->route('discounts.index')->with('success', 'Discount created successfully');
+        return redirect()->route('discounts.index')->with('success', 'Thêm mới bản ghi thành công');
     }
 
     public function edit(Discount $discount)
@@ -135,7 +135,7 @@ class DiscountController extends Controller
 
         $discount->variants()->sync($variants);
 
-        return redirect()->route('discounts.index')->with('success', 'Discount updated successfully');
+        return redirect()->route('discounts.index')->with('success', 'Cập nhật bản ghi thành công');
     }
 
     public function destroy(Discount $discount)
@@ -145,6 +145,6 @@ class DiscountController extends Controller
         $discount->variants()->detach();
         $discount->delete();
 
-        return redirect()->route('discounts.index')->with('success', 'Discount deleted successfully');
+        return redirect()->route('discounts.index')->with('success', 'Xóa bản ghi thành công');
     }
 }

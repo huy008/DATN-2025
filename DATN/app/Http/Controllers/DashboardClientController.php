@@ -34,7 +34,7 @@ class DashboardClientController extends Controller
             ->orderByDesc('reviews_avg_rating') 
             ->take(8)
             ->get();
-        $categories = Category::withCount('products')->get();
+        $categories = Category::withCount('products')->orderBy('id','desc')->get();
         session(['categories' => $categories]);
         return view('dashboard', compact(
             'products',
