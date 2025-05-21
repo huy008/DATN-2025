@@ -1,4 +1,4 @@
-@include('backend.dashboard.component.breadcrumb', ['title' => "Khuyến mãi"])
+@include('backend.dashboard.component.breadcrumb', ['title' => 'Khuyến mãi'])
 @include('backend.dashboard.component.formError')
 
 @php
@@ -28,7 +28,7 @@
                                     <label for="name">Tên chương trình giảm giá <span
                                             class="text-danger">*</span></label>
                                     <input type="text" class="form-control" id="name" name="name"
-                                        value="{{ old('name', $discount->name ?? '') }}" >
+                                        value="{{ old('name', $discount->name ?? '') }}">
                                 </div>
 
                                 <div class="form-group">
@@ -43,22 +43,20 @@
                                     <div class="form-group col-md-6">
                                         <label for="start_date">Ngày bắt đầu <span class="text-danger">*</span></label>
                                         <input type="date" class="form-control" id="start_date" name="start_date"
-                                            value="{{ old('start_date', isset($discount) ? $discount->start_date->format('Y-m-d') : '') }}"
-                                            >
+                                            value="{{ old('start_date', isset($discount) ? $discount->start_date->format('Y-m-d') : '') }}">
                                     </div>
 
                                     <div class="form-group col-md-6">
                                         <label for="end_date">Ngày kết thúc <span class="text-danger">*</span></label>
                                         <input type="date" class="form-control" id="end_date" name="end_date"
-                                            value="{{ old('end_date', isset($discount) ? $discount->end_date->format('Y-m-d') : '') }}"
-                                            >
+                                            value="{{ old('end_date', isset($discount) ? $discount->end_date->format('Y-m-d') : '') }}">
                                     </div>
                                 </div>
 
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
                                         <label for="type">Loại giảm giá <span class="text-danger">*</span></label>
-                                        <select class="form-control" id="type" name="type" >
+                                        <select class="form-control" id="type" name="type">
                                             <option value="percentage"
                                                 {{ old('type', $discount->type ?? '') === 'percentage' ? 'selected' : '' }}>
                                                 Phần trăm (%)</option>
@@ -73,18 +71,43 @@
                                         <div class="input-group">
                                             <input type="number" class="form-control" id="value" name="value"
                                                 min="0" step="0.01"
-                                                value="{{ old('value', $discount->value ?? '') }}" >
+                                                value="{{ old('value', $discount->value ?? '') }}">
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div> {{-- row --}}
-
-                        {{-- Sản phẩm áp dụng --}}
                         <div class="form-group">
+                            <label>Chọn cách áp dụng sản phẩm</label>
+                            <select class="form-control" id="apply_type" name="apply_type">
+                                <option value="manual"
+                                    {{ old('apply_type', $discount->apply_type ?? '') == 'manual' ? 'selected' : '' }}>
+                                    Chọn thủ công</option>
+                                <option value="all"
+                                    {{ old('apply_type', $discount->apply_type ?? '') == 'all' ? 'selected' : '' }}>
+                                    Toàn bộ sản phẩm</option>
+                                <option value="category"
+                                    {{ old('apply_type', $discount->apply_type ?? '') == 'category' ? 'selected' : '' }}>
+                                    Theo danh mục</option>
+                            </select>
+                        </div>
+                        <div class="form-group" id="category_select_wrapper" style="display: none;">
+                            <label for="category_id">Chọn danh mục sản phẩm</label>
+                            <select class="form-control" id="category_id" name="category_id">
+                                <option value="">-- Chọn danh mục --</option>
+                                @foreach ($categories as $category)
+                                    <option value="{{ $category->id }}"
+                                        {{ old('category_id', $discount->category_id ?? '') == $category->id ? 'selected' : '' }}>
+                                        {{ $category->name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+                        {{-- Sản phẩm áp dụng --}}
+                        <div class="form-group" id="manual_product_select_wrapper">
                             <label for="products">Sản phẩm áp dụng <span class="text-danger">*</span></label>
                             <select class="form-control select2-products" id="products" name="products[]" multiple
-                                 placeholder="Chọn sản phẩm">
+                                placeholder="Chọn sản phẩm">
                                 @foreach ($products as $product)
                                     <option value="{{ $product->id }}"
                                         {{ in_array($product->id, old('products', $selectedProducts ?? [])) ? 'selected' : '' }}>
@@ -119,6 +142,21 @@
             allowClear: true
         });
 
+        function toggleApplyType() {
+            const applyType = $('#apply_type').val();
+            if (applyType === 'all') {
+                $('#manual_product_select_wrapper').hide();
+                $('#category_select_wrapper').hide();
+            } else if (applyType === 'category') {
+                $('#manual_product_select_wrapper').hide();
+                $('#category_select_wrapper').show();
+            } else {
+                $('#manual_product_select_wrapper').show();
+                $('#category_select_wrapper').hide();
+            }
+        }
+        toggleApplyType();
+        $('#apply_type').on('change', toggleApplyType);
         // Khởi tạo ngày tháng cho các trường date
         $('#start_date, #end_date').datepicker({
             format: 'yyyy-mm-dd',

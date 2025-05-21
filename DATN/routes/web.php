@@ -148,7 +148,8 @@ Route::middleware(['admin'])->group(
         Route::get('ajax/attribute/getAttribute', [AttributeValueController::class, 'getAttribute'])->name('ajax.attribute.getAttribute');
 
         Route::get('dashboard/index', [DashboardController::class, 'index'])->name('dashboard.index');
-
+        Route::get('inventory', [DashboardController::class, 'inventory'])->name('dashboard.inventory');
+        Route::put('/admin/variants/{variant}/update-stock', [DashboardController::class, 'updateStock'])->name('admin.variants.updateStock');
         Route::resource('discounts', DiscountController::class);
 
         Route::get('logout', [AdminAuthController::class, 'logout'])->name('auth.logout');

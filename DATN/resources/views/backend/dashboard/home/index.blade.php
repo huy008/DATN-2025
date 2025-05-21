@@ -288,6 +288,14 @@
 
                     <div class="revenue-stats">
                         <div class="revenue-stat">
+                            <div class="stat-label">Đơn hàng thanh toán trực tuyến</div>
+                            <div class="stat-value">{{ number_format($totalRevenueByInter) }} VND</div>
+                        </div>
+                        <div class="revenue-stat">
+                            <div class="stat-label">Đơn hàng thanh toán khi nhận hàng</div>
+                            <div class="stat-value">{{ number_format($totalRevenueByCod) }} VND</div>
+                        </div>
+                        <div class="revenue-stat">
                             <div class="stat-label">Doanh thu trung bình</div>
                             <div class="stat-value">{{ number_format($averageRevenue) }} VND</div>
                         </div>
@@ -334,39 +342,5 @@
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="ibox float-e-margins">
-                    <div class="ibox-title">
-                        <h4>📦 Tổng sản phẩm trong kho: {{ $totalStock }}</h4>
-
-                        <table class="table table-bordered">
-                            <thead>
-                                <tr>
-                                    <th>Sản phẩm</th>
-                                    <th>Số lượng trong kho</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($inventory as $item)
-                                    @if ($item->stock_quantity == 0)
-                                        <tr style="background-color: #f8d7da;">
-                                            <td>{{ $item->name }}</td>
-                                            <td>{{ $item->stock_quantity }}</td>
-                                        </tr>
-                                    @endif
-                                    @endforeach @foreach ($inventory as $item)
-                                        @if ($item->stock_quantity <= 5 && $item->stock_quantity != 0)
-                                            <tr style="background-color: #fff3cd;">
-                                                <td>{{ $item->name }}</td>
-                                                <td>{{ $item->stock_quantity }}</td>
-                                            </tr>
-                                        @endif
-                                    @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
+        
     </div>

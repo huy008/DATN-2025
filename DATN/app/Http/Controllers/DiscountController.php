@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Discount;
 use App\Models\Product;
 use App\Models\ProductVariant;
@@ -43,13 +44,15 @@ class DiscountController extends Controller
     {
         $products = Product::all();
         $variants = ProductVariant::all();
+        $categories = Category::all();
         $template = 'backend.discounts.store';
         $config['method'] = 'create';
         return view('backend.dashboard.layout', compact(
             'template',
             'products',
             'variants',
-            'config'
+            'config',
+            'categories'
         ));
     }
 
@@ -62,8 +65,8 @@ class DiscountController extends Controller
             'end_date' => 'required|date|after:start_date',  // Ngày kết thúc phải là ngày hợp lệ và sau ngày bắt đầu
             'type' => 'required|in:percentage,fixed',  // Loại giảm giá phải là phần trăm hoặc số tiền cố định
             'value' => 'required|numeric|min:0',  // Giá trị giảm giá phải là số và không nhỏ hơn 0
-            'products' => 'required|array|min:1',  // Phải chọn ít nhất một sản phẩm
-            'products.*' => 'exists:products,id',  // Các sản phẩm phải tồn tại trong bảng sản phẩm
+            // 'products' => 'required|array|min:1',  // Phải chọn ít nhất một sản phẩm
+            // 'products.*' => 'exists:products,id',  // Các sản phẩm phải tồn tại trong bảng sản phẩm
         ], [
             'name.required' => 'Tên chương trình giảm giá là bắt buộc.',
             'start_date.required' => 'Ngày bắt đầu là bắt buộc.',
@@ -76,16 +79,25 @@ class DiscountController extends Controller
         // Tạo discount
         $discount = Discount::create($validated);
 
-        // Áp dụng cho các sản phẩm đã chọn (bao gồm cả sản phẩm không có biến thể)
-        if (isset($validated['products'])) {
-            $discount->products()->attach($validated['products']); // Gắn sản phẩm chính vào discount
+        $discount->apply_type = $request->apply_type;
+        $discount->category_id = $request->apply_type === 'category' ? $request->category_id : null;
 
-            // Áp dụng cho tất cả các variants thuộc product
-            $variants = ProductVariant::whereIn('product_id', $validated['products'])->pluck('id')->toArray();
+        // Nếu manual thì attach sản phẩm
+        if ($request->apply_type === 'manual') {
+            $productIds = $request->products;
+            $discount->products()->sync($productIds);
+        } elseif ($request->apply_type === 'category') {
+            $productIds = Product::where('category_id', $request->category_id)->pluck('id');
+            $discount->products()->sync($productIds);
+        } elseif ($request->apply_type === 'all') {
+            $productIds = Product::pluck('id');
+            $discount->products()->sync($productIds);
+        }
+
+            $variants = ProductVariant::whereIn('product_id', $productIds)->pluck('id')->toArray();
             if (!empty($variants)) {
                 $discount->variants()->attach($variants); // Gắn biến thể vào discount
             }
-        }
 
         return redirect()->route('discounts.index')->with('success', 'Thêm mới bản ghi thành công');
     }
@@ -94,11 +106,12 @@ class DiscountController extends Controller
     {
         $products = Product::all();
         $variants = ProductVariant::all();
+        $categories = Category::all();
         $selectedProducts = $discount->products->pluck('id')->toArray();
         $selectedVariants = $discount->variants->pluck('id')->toArray();
         $template = 'backend.discounts.store';
         $config['method'] = 'edit';
-        return view('backend.dashboard.layout', compact('discount', 'template', 'products', 'variants', 'selectedProducts', 'selectedVariants', 'config'));
+        return view('backend.dashboard.layout', compact('discount', 'template', 'products', 'variants', 'selectedProducts', 'selectedVariants', 'config', 'categories'));
     }
 
     public function update(Request $request, Discount $discount)
@@ -124,8 +137,22 @@ class DiscountController extends Controller
         // Cập nhật discount
         $discount->update($validated);
 
-        // Cập nhật sản phẩm (bao gồm cả sản phẩm không có biến thể)
-        $discount->products()->sync($validated['products'] ?? []);
+        $discount->apply_type = $request->apply_type;
+        $discount->category_id = $request->apply_type === 'category' ? $request->category_id : null;
+
+        // Nếu manual thì attach sản phẩm
+        if ($request->apply_type === 'manual') {
+            $discount->products()->sync($request->products);
+        } elseif ($request->apply_type === 'category') {
+            $categoryProducts = Product::where('category_id', $request->category_id)->pluck('id');
+            $discount->products()->sync($categoryProducts);
+        } elseif ($request->apply_type === 'all') {
+            $allProducts = Product::pluck('id');
+            $discount->products()->sync($allProducts);
+        }
+
+        // // Cập nhật sản phẩm (bao gồm cả sản phẩm không có biến thể)
+        // $discount->products()->sync($validated['products'] ?? []);
 
         // Cập nhật biến thể (nếu có)
         $variants = [];

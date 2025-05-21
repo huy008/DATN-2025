@@ -83,7 +83,6 @@ class CheckoutController extends Controller
         } else {
             session()->forget('cart');
         }
-
         switch ($request->payment_method) {
             case 'vnpay':
                 $this->vnqay($this->calculateTotal());
@@ -95,6 +94,7 @@ class CheckoutController extends Controller
                 return redirect()->route('payment.success')->with([
                     'message' => 'Đặt hàng thành công. Bạn sẽ thanh toán khi nhận hàng.',
                     'status' => 'success',
+                    'totalAmount'=> $this->calculateTotal()
                 ]);
                 break;
         }
@@ -125,7 +125,7 @@ class CheckoutController extends Controller
         } else {
             $message = session('message', 'Đặt hàng thành công!');
             $status = session('status', 'success');
-            $data['totalAmount'] =  $this->calculateTotal();
+            $data['totalAmount'] =  session('totalAmount');
         }
 
         return view('payment.success', compact('message', 'status', 'data'));

@@ -484,6 +484,7 @@
                  document.querySelector('.text-success').textContent = variant.stock_quantity + " sản phẩm có sẵn";
 
                  document.querySelector('.tp-cart-input').setAttribute('max', variant.stock_quantity);
+                 document.querySelector('.tp-cart-input').value = 1
 
                  document.querySelector('.variant_id').value = variant.id;
              }
