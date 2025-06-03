@@ -16,6 +16,9 @@ return new class extends Migration
             $table->unsignedBigInteger('variant_id');
             $table->unsignedBigInteger('attribute_id');
             $table->unsignedBigInteger('attribute_value_id');
+            $table->foreign('variant_id')->references('id')->on('product_variants')->onDelete('cascade');
+            $table->foreign('attribute_id')->references('id')->on('attributes')->onDelete('cascade');
+            $table->foreign('attribute_value_id')->references('id')->on('attribute_values')->onDelete('cascade');
             $table->timestamps();
         });
     }

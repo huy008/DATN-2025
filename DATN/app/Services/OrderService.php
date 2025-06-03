@@ -23,7 +23,7 @@ class OrderService
 
     public function paginate($request){
         $condition = [
-            'keyword' => addslashes($request->input('keyword')),
+            'order_number' => addslashes($request->input('keyword')),
         ];
         $perPage = $request->integer('perpage');
         $Orders = $this->orderRepository->pagination(

@@ -42,6 +42,7 @@ class BaseRepository
             ->customGroupBy($extend['groupBy'] ?? null)
             ->customOrderBy($orderBy ?? null)
             ->filterValue($condition['value'] ?? null)
+            ->filterOrderNumber($condition['order_number'] ?? null)
             ->paginate($perPage)
             ->withQueryString()
             ->withPath(env('APP_URL') . $extend['path']);

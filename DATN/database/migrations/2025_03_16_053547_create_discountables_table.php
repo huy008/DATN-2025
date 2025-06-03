@@ -17,6 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('discountable_id'); 
             $table->string('discountable_type'); 
             $table->timestamps();
+            $table->foreign('discount_id')->references('id')->on('discounts')->onDelete('cascade');
         });
     }
 

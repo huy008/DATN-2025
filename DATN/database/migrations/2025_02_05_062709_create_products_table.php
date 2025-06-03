@@ -22,6 +22,7 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->decimal('base_price', 10, 2);
             $table->integer('stock_quantity')->default(0);
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
             $table->timestamps();
         });
     }

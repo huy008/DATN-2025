@@ -20,6 +20,14 @@ trait QueryScopes
         return $query;
     }
 
+    public function scopeFilterOrderNumber($query, $keyword)
+    {
+        if (!empty($keyword)) {
+            $query->where('order_number', 'LIKE', '%' . $keyword . '%');
+        }
+        return $query;
+    }
+
     public function scopeProductName($query, $productName)
     {
         if (!empty($productName)) {
