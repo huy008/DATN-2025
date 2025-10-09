@@ -23,12 +23,12 @@ class AttributeRepository extends BaseRepository
         return $this->model->findOrFail($id);
     }
 
-    // public function searchAttributes(string $keyword = '', array $option = [], int $languageId){
-    //     return $this->model->whereHas('attribute_catalogues', function($query) use ($option){
-    //         $query->where('attribute_catalogue_id', $option['attributeCatalogueId']);
-    //     })->whereHas('attribute_language', function($query) use ($keyword){
-    //         $query->where('name', 'like', '%'.$keyword.'%');
-    //     })->get();
-    // }
+     public function searchAttributes(string $keyword = '', array $option = [], int $languageId){
+         return $this->model->whereHas('attribute_catalogues', function($query) use ($option){
+             $query->where('attribute_catalogue_id', $option['attributeCatalogueId']);
+         })->whereHas('attribute_language', function($query) use ($keyword){
+             $query->where('name', 'like', '%'.$keyword.'%');
+         })->get();
+     }
 
 }
